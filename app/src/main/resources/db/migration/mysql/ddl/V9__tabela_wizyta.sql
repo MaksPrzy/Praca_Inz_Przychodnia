@@ -6,6 +6,7 @@ create table wizyta (
   gabinet_id bigint not null,
   data_wizyty_od datetime not null,
   data_wizyty_do datetime not null,
+  faktyczna_data_wizyty_do datetime,
   status varchar(128) not null,
   rodzaj varchar(12) not null,
   full_text_search text,

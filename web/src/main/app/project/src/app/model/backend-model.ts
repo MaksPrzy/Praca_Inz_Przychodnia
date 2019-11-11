@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 2.16.538 on 2019-10-05 16:38:59.
+// Generated using typescript-generator version 2.16.538 on 2019-11-11 17:22:54.
 
 export interface AbstractGabinetDto {
     nazwa: string;
@@ -100,6 +100,8 @@ export interface AbstractPacjentDto {
     nazwisko: string;
     pesel: string;
     dataUrodzenia: Date;
+    adres: AdresDto;
+    kontakt: KontaktDto;
 }
 
 export interface AdresDto {
@@ -119,39 +121,47 @@ export interface KontaktDto {
 export interface PacjentDetailViewDto extends AbstractPacjentDto {
     id: number;
     numerKartoteki: string;
-    adres: AdresDto;
-    kontakt: KontaktDto;
+}
+
+export interface PacjentEditDto extends AbstractPacjentDto {
+    id: number;
 }
 
 export interface PacjentNewDto extends AbstractPacjentDto {
-    adres: AdresDto;
-    kontakt: KontaktDto;
-}
-
-export interface PacjentViewDto extends AbstractPacjentDto {
-    adres: AdresDto;
-    kontakt: KontaktDto;
-    id: number;
 }
 
 export interface AbstractWizytaDto {
-    pacjent: string;
-    lekarz: string;
-    harmonogramPozycja: string;
-    gabinet: string;
-}
-
-export interface WizytaDetailViewDto extends AbstractWizytaDto {
-    id: number;
+    pacjentId: number;
+    lekarzId: number;
+    specjalizacjaId: number;
+    gabinetId: number;
+    dataWizytyOd: Date;
+    dataWizytyDo: Date;
+    status: string;
+    rodzaj: string;
 }
 
 export interface WizytaEditDto extends AbstractWizytaDto {
     id: number;
 }
 
-export interface WizytaNewDto extends AbstractWizytaDto {
+export interface WizytaViewDto {
+    id: number;
+    pacjent: PacjentDetailViewDto;
+    lekarz: LekarzDetailViewDto;
+    specjalizacja: SpecjalizacjaViewDto;
+    gabinet: GabinetViewDto;
+    dataWizytyOd: Date;
+    dataWizytyDo: Date;
+    status: string;
+    rodzaj: string;
 }
 
-export interface WizytaViewDto extends AbstractWizytaDto {
-    id: number;
+export interface ZakonczWizyteDto {
+    wizytaId: number;
+    kodIcd10: string;
+    uwagi: string;
+}
+
+export interface ZaplanujWizyteDto extends AbstractWizytaDto {
 }

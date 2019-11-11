@@ -62,7 +62,7 @@ public class PacjentServiceImpl implements PacjentService {
 
         Long pacjentId = pacjentEditDto.getId();
         Pacjent pacjent = pacjentRepository.findById(pacjentId).orElseThrow(() -> new PacjentNotFoundException(pacjentId));
-        pacjentMapper.mapToEdit(pacjent.getNumerKartoteki(), pacjentEditDto);
+        pacjentMapper.mapToEdit(pacjentEditDto);
         pacjent = pacjentRepository.save(pacjent);
 
         return pacjentMapper.map(pacjent);

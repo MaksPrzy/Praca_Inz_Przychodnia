@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.przybylo.przychodnia.business.WizytaService;
-import pl.przybylo.przychodnia.dto.wizyta.WizytaEditDto;
 import pl.przybylo.przychodnia.dto.wizyta.WizytaViewDto;
 import pl.przybylo.przychodnia.dto.wizyta.ZakonczWizyteDto;
 import pl.przybylo.przychodnia.dto.wizyta.ZaplanujWizyteDto;
@@ -19,12 +18,12 @@ public class WizytaController {
     private final WizytaService wizytaService;
 
     @GetMapping
-    public List<WizytaViewDto> getWizytaList(@RequestParam("pacjentId") long pacjentId) {
+    public List<WizytaViewDto> getWizytaList(@RequestParam long pacjentId) {
         return wizytaService.getWizytaList(pacjentId);
     }
 
-    @GetMapping
-    public WizytaViewDto getWizyta(@RequestParam("wizytaId") long id) {
+    @GetMapping("/{id}")
+    public WizytaViewDto getWizyta(@PathVariable long id) {
         return wizytaService.getWizyta(id);
     }
 
@@ -36,13 +35,14 @@ public class WizytaController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void ZakonczonaWizyta(@PathVariable("id") Long id, @RequestBody ZakonczWizyteDto zakonczWizyteDto) {
+    public void ZakonczonaWizyta(@PathVariable Long id, @RequestBody ZakonczWizyteDto zakonczWizyteDto) {
         wizytaService.zakoncz(zakonczWizyteDto);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void UsunWizyte(@PathVariable("id") Long id, @RequestBody WizytaViewDto WizytaViewDto) {
+    public void UsunWizyte(@PathVariable Long id, @RequestBody WizytaViewDto WizytaViewDto) {
         wizytaService.delete(id);
     }
+
 }

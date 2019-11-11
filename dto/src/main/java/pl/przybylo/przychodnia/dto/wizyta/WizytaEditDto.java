@@ -1,23 +1,19 @@
 package pl.przybylo.przychodnia.dto.wizyta;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import pl.przybylo.przychodnia.dto.gabinet.GabinetViewDto;
-import pl.przybylo.przychodnia.dto.lekarz.LekarzDetailViewDto;
-import pl.przybylo.przychodnia.dto.lekarz.SpecjalizacjaViewDto;
-import pl.przybylo.przychodnia.dto.pacjent.PacjentDetailViewDto;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 public class WizytaEditDto extends AbstractWizytaDto {
 
-    public WizytaEditDto(Long id, PacjentDetailViewDto pacjent, LekarzDetailViewDto lekarz,
-                         SpecjalizacjaViewDto specjalizacja, GabinetViewDto gabinet,
+    public WizytaEditDto(Long pacjentId, Long lekarzId, Long specjalizacjaId, Long gabinetId,
                          LocalDateTime dataWizytyOd, LocalDateTime dataWizytyDo,
                          String status, String rodzaj) {
-        super(id, pacjent, lekarz, specjalizacja, gabinet, dataWizytyOd, dataWizytyDo, status, rodzaj);
+        super(pacjentId, lekarzId, specjalizacjaId, gabinetId, dataWizytyOd, dataWizytyDo, status, rodzaj);
     }
+
+    private Long id;
 
 }

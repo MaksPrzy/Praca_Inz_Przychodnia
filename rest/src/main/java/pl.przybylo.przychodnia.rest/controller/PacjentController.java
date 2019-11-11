@@ -22,8 +22,8 @@ public class PacjentController {
         return pacjentService.getPacjentList();
     }
 
-    @GetMapping
-    public PacjentDetailViewDto getPacjent(@RequestParam("pacjentId") long id) {
+    @GetMapping("/{id}")
+    public PacjentDetailViewDto getPacjent(@PathVariable Long id) {
         return pacjentService.getPacjent(id);
     }
 
@@ -35,7 +35,7 @@ public class PacjentController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public PacjentDetailViewDto update(@PathVariable("id") Long id, @RequestBody PacjentEditDto pacjentEditDto) {
+    public PacjentDetailViewDto update(@PathVariable Long id, @RequestBody PacjentEditDto pacjentEditDto) {
         return pacjentService.update(pacjentEditDto);
     }
 

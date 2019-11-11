@@ -9,7 +9,8 @@ public class PacjentEditDto extends AbstractPacjentDto {
 
     private Long id;
 
-    public PacjentEditDto(Long id, String imie, String nazwisko, String pesel, LocalDate dataUrodzenia, AdresDto adres, KontaktDto kontakt) {
+    public PacjentEditDto(Long id, String imie, String nazwisko, String pesel,
+                          LocalDate dataUrodzenia, AdresDto adres, KontaktDto kontakt) {
         super(imie, nazwisko, pesel, dataUrodzenia, adres, kontakt);
         this.id = id;
     }

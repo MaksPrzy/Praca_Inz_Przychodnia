@@ -46,7 +46,8 @@ public class Wizyta {
     @Enumerated(EnumType.STRING)
     private Rodzaj rodzaj;
 
-//    private Rozpoznanie rozpoznanie;
+    @Embedded
+    private Rozpoznanie rozpoznanie;
 
     @Column(columnDefinition = "text")
     private String fullTextSearch;
@@ -77,5 +78,4 @@ public class Wizyta {
         return normalize(newArrayList(pacjent.getPesel()), pairOf(pacjent.getImie(), pacjent.getNazwisko()),
                 pairOf(lekarz.getImie(), lekarz.getNazwisko()));
     }
-
 }

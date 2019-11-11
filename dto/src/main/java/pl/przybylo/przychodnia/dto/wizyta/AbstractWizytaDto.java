@@ -13,11 +13,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public abstract class AbstractWizytaDto {
 
-    private Long id;
-    protected PacjentDetailViewDto pacjent;
-    protected LekarzDetailViewDto lekarz;
-    protected SpecjalizacjaViewDto specjalizacja;
-    protected GabinetViewDto gabinet;
+    protected Long pacjentId;
+    protected Long lekarzId;
+    protected Long specjalizacjaId;
+    protected Long gabinetId;
     protected LocalDateTime dataWizytyOd;
     protected LocalDateTime dataWizytyDo;
     protected String status;

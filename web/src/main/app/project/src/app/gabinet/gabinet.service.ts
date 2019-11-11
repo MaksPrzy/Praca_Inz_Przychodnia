@@ -1,8 +1,12 @@
+// @ts-ignore
 import {HttpClient} from "@angular/common/http";
+// @ts-ignore
 import {Observable} from "rxjs";
+// @ts-ignore
 import {Injectable} from "@angular/core";
 import {GabinetNewDto, GabinetViewDto} from "../model/backend-model";
 
+// @ts-ignore
 @Injectable()
 export class GabinetService {
 

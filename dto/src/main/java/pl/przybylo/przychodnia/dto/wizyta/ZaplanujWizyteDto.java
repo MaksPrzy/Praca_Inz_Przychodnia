@@ -1,20 +1,16 @@
 package pl.przybylo.przychodnia.dto.wizyta;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
 @Getter
-public class ZaplanujWizyteDto {
+public class ZaplanujWizyteDto extends AbstractWizytaDto {
 
-    private final Long pacjentId;
-    private final Long lekarzId;
-    private final Long specjalizacjaId;
-    private final Long gabinetId;
-    private final LocalDateTime dataWizytyOd;
-    private final LocalDateTime dataWizytyDo;
-    private final String rodzaj;
+    public ZaplanujWizyteDto(Long pacjentId, Long lekarzId, Long specjalizacjaId,
+                             Long gabinetId, LocalDateTime dataWizytyOd, LocalDateTime dataWizytyDo,
+                             String status, String rodzaj) {
+        super(pacjentId, lekarzId, specjalizacjaId, gabinetId, dataWizytyOd, dataWizytyDo, status, rodzaj);
+    }
 
 }

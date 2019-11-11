@@ -1,5 +1,6 @@
 package pl.przybylo.przychodnia.business;
 
+import org.springframework.stereotype.Service;
 import pl.przybylo.przychodnia.dto.wizyta.WizytaEditDto;
 import pl.przybylo.przychodnia.dto.wizyta.WizytaViewDto;
 import pl.przybylo.przychodnia.dto.wizyta.ZakonczWizyteDto;

@@ -31,7 +31,7 @@
 		<module>dto</module>
 		<module>business</module>
 		<module>rest</module>
-		<module>web</module>
+        <module>web</module>
 	</modules>
 
 	<dependencyManagement>

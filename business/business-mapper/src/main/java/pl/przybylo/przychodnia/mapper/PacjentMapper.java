@@ -33,31 +33,30 @@ public class PacjentMapper {
         );
     }
 
-    public Pacjent mapToEdit(String numerKartoteki, PacjentEditDto pacjentEditDto) {
-        if (isNull(pacjentEditDto)) {
-            return null;
-        }
+    // todo: tak jak w lekarzMapper
+    public void mapToEdit(PacjentEditDto pacjentEditDto) {
+        checkNotNull(pacjentEditDto, "20191111160155");
 
-        return new Pacjent(
-                numerKartoteki,
-                pacjentEditDto.getPesel(),
-                pacjentEditDto.getImie(),
-                pacjentEditDto.getNazwisko(),
-                pacjentEditDto.getDataUrodzenia(),
-                adresMapper.map(pacjentEditDto.getAdres()),
-                kontaktMapper.map(pacjentEditDto.getKontakt())
-        );
+        pacjentEditDto.setImie(pacjentEditDto.getImie());
+        pacjentEditDto.setNazwisko(pacjentEditDto.getNazwisko());
+        pacjentEditDto.setPesel(pacjentEditDto.getPesel());
+        pacjentEditDto.setDataUrodzenia(pacjentEditDto.getDataUrodzenia());
+        adresMapper.map(pacjentEditDto.getAdres());
+        kontaktMapper.map(pacjentEditDto.getKontakt());
     }
 
+
     public PacjentDetailViewDto map(Pacjent pacjent) {
-        checkNotNull(pacjent, "20191015182847");
+        if (isNull(pacjent)) {
+            return null;
+        }
 
         return new PacjentDetailViewDto(
                 pacjent.getId(),
                 pacjent.getNumerKartoteki(),
+                pacjent.getPesel(),
                 pacjent.getImie(),
                 pacjent.getNazwisko(),
-                pacjent.getPesel(),
                 pacjent.getDataUrodzenia(),
                 adresMapper.map(pacjent.getAdres()),
                 kontaktMapper.map(pacjent.getKontakt())

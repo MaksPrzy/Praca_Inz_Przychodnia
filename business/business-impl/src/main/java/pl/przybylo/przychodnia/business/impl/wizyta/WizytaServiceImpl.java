@@ -10,10 +10,12 @@ import pl.przybylo.przychodnia.dto.wizyta.WizytaEditDto;
 import pl.przybylo.przychodnia.dto.wizyta.WizytaViewDto;
 import pl.przybylo.przychodnia.dto.wizyta.ZakonczWizyteDto;
 import pl.przybylo.przychodnia.dto.wizyta.ZaplanujWizyteDto;
-import pl.przybylo.przychodnia.mapper.WizytaMapper;
+import pl.przybylo.przychodnia.mapper.wizyta.WizytaMapper;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import static pl.wavesoftware.eid.utils.EidPreconditions.checkNotNull;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +23,7 @@ public class WizytaServiceImpl implements WizytaService {
 
     private final WizytaRepository wizytaRepository;
     private final WizytaMapper wizytaMapper;
+    private final WizytaValidator wizytaValidator;
 
     @Override
     public List<WizytaViewDto> getWizytaList(long pacjentId) {
@@ -36,14 +39,23 @@ public class WizytaServiceImpl implements WizytaService {
 
     @Override
     public WizytaViewDto update(WizytaEditDto wizytaEditDto) {
-        Wizyta wizyta = getWizytaOrThrowException(wizytaEditDto.getId());
+        checkNotNull(wizytaEditDto, "20191026150607");
+        checkNotNull(wizytaEditDto.getId(), "20191101173728");
 
-        return null;
+        wizytaValidator.checkUpdate(wizytaEditDto);
+
+        Long wizytaId = wizytaEditDto.getId();
+        Wizyta wizyta = wizytaRepository.findById(wizytaId).orElseThrow(() -> new WizytaNotFoundException(wizytaId));
+        wizytaMapper.map(wizyta, wizytaEditDto);
+        wizyta = wizytaRepository.save(wizyta);
+
+        return wizytaMapper.map(wizyta);
     }
 
     @Override
     public WizytaViewDto zaplanuj(ZaplanujWizyteDto zaplanujWizyteDto) {
-        throw new UnsupportedOperationException("nie zrobione!");
+        Wizyta wizyta = wizytaRepository.save(wizytaMapper.map(zaplanujWizyteDto));
+        return wizytaMapper.map(wizyta);
     }
 
     @Override
@@ -56,12 +68,9 @@ public class WizytaServiceImpl implements WizytaService {
     @Override
     public void delete(long id) {
         Wizyta wizyta = getWizytaOrThrowException(id);
-
-//        if (wizyta.) {
-//            throw new CantDeleteActiveHarmonogramException();   //todo wiem ze trzeba sie odniesc do enuma statusu ale jak ?
+//        if () {
+//            wizytaRepository.deleteById(id);
 //        }
-
-        wizytaRepository.deleteById(id);
     }
 
     private Wizyta getWizytaOrThrowException(long id) {
