@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface LekarzService {
 
-    List<LekarzDetailViewDto> getLekarzList();
+    List<LekarzDetailViewDto> getLekarzList(String searchBy);
 
     LekarzDetailViewDto add(LekarzNewDto lekarzNewDto);
 

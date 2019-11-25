@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 2.16.538 on 2019-11-11 17:22:54.
+// Generated using typescript-generator version 2.16.538 on 2019-11-20 19:13:19.
 
 export interface AbstractGabinetDto {
     nazwa: string;

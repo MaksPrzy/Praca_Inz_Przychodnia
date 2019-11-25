@@ -20,6 +20,6 @@ public interface WizytaService {
 
     WizytaViewDto zakoncz(ZakonczWizyteDto zakonczWizyteDto);
 
-    void delete(long id); // tutaj mozna usunac wizyte pod warunkiem, ze wizyta jeszzce sie nie odbyla (jest tylko zaplanowana, z przyszlosci)
+    void delete(long id);
 
 }

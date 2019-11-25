@@ -13,6 +13,8 @@ import pl.przybylo.przychodnia.mapper.LekarzMapper;
 
 import java.util.List;
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static pl.przybylo.przychodnia.commons.normalize.NormalizeUtils.normalize;
 import static pl.wavesoftware.eid.utils.EidPreconditions.checkNotNull;
 
 @Service
@@ -24,9 +26,16 @@ public class LekarzServiceImpl implements LekarzService {
     private final LekarzMapper lekarzMapper;
 
     @Override
-    public List<LekarzDetailViewDto> getLekarzList() {
-      List<Lekarz> lekarzList = lekarzRepository.findAll();
-      return lekarzMapper.map(lekarzList);
+    public List<LekarzDetailViewDto> getLekarzList(String searchBy) {
+        List<Lekarz> lekarzList;
+
+        if (isNotBlank(searchBy)) {
+            lekarzList = lekarzRepository.findByFullTextSearchContains(normalize(searchBy));
+        } else {
+            lekarzList = lekarzRepository.findAll();
+        }
+
+        return lekarzMapper.map(lekarzList);
     }
 
     @Override

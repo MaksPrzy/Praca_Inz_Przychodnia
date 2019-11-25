@@ -3,7 +3,6 @@ package pl.przybylo.przychodnia.business.impl.pacjent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.przybylo.przychodnia.business.PacjentService;
-import pl.przybylo.przychodnia.commons.exceptions.PacjentNotFoundException;
 import pl.przybylo.przychodnia.domain.model.Pacjent;
 import pl.przybylo.przychodnia.domain.repository.PacjentRepository;
 import pl.przybylo.przychodnia.dto.pacjent.PacjentDetailViewDto;
@@ -36,7 +35,7 @@ public class PacjentServiceImpl implements PacjentService {
     public PacjentDetailViewDto getPacjent(Long id) {
         checkNotNull(id, "20191015182921");
 
-        Pacjent pacjent = pacjentRepository.findById(id).orElseThrow(() -> new PacjentNotFoundException(id));
+        Pacjent pacjent = pacjentRepository.findByIdOrThrowException(id);
         return pacjentMapper.map(pacjent);
     }
 
@@ -61,7 +60,7 @@ public class PacjentServiceImpl implements PacjentService {
         pacjentValidator.check(pacjentEditDto);
 
         Long pacjentId = pacjentEditDto.getId();
-        Pacjent pacjent = pacjentRepository.findById(pacjentId).orElseThrow(() -> new PacjentNotFoundException(pacjentId));
+        Pacjent pacjent = pacjentRepository.findByIdOrThrowException(pacjentId);
         pacjentMapper.mapToEdit(pacjentEditDto);
         pacjent = pacjentRepository.save(pacjent);
 

@@ -9,6 +9,8 @@ create table wizyta (
   faktyczna_data_wizyty_do datetime,
   status varchar(128) not null,
   rodzaj varchar(12) not null,
+  kod_icd10 varchar(128),
+  uwagi text,
   full_text_search text,
 
   primary key(id),

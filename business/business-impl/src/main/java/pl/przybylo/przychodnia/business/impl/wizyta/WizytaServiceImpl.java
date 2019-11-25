@@ -3,6 +3,7 @@ package pl.przybylo.przychodnia.business.impl.wizyta;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.przybylo.przychodnia.business.WizytaService;
+import pl.przybylo.przychodnia.commons.exceptions.CantDeleteWizytaException;
 import pl.przybylo.przychodnia.commons.exceptions.WizytaNotFoundException;
 import pl.przybylo.przychodnia.domain.model.wizyta.Wizyta;
 import pl.przybylo.przychodnia.domain.repository.WizytaRepository;
@@ -12,7 +13,6 @@ import pl.przybylo.przychodnia.dto.wizyta.ZakonczWizyteDto;
 import pl.przybylo.przychodnia.dto.wizyta.ZaplanujWizyteDto;
 import pl.przybylo.przychodnia.mapper.wizyta.WizytaMapper;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import static pl.wavesoftware.eid.utils.EidPreconditions.checkNotNull;
@@ -33,7 +33,7 @@ public class WizytaServiceImpl implements WizytaService {
 
     @Override
     public WizytaViewDto getWizyta(long id) {
-        Wizyta wizyta = getWizytaOrThrowException(id);
+        Wizyta wizyta = wizytaRepository.findByIdOrThrowException(id);
         return wizytaMapper.map(wizyta);
     }
 
@@ -60,21 +60,21 @@ public class WizytaServiceImpl implements WizytaService {
 
     @Override
     public WizytaViewDto zakoncz(ZakonczWizyteDto zakonczWizyteDto) {
-        Wizyta wizyta = getWizytaOrThrowException(zakonczWizyteDto.getWizytaId());
-        wizyta.setFaktycznaDataWizytyDo(LocalDateTime.now());
-        return null;
+        Wizyta wizyta = wizytaRepository.findByIdOrThrowException(zakonczWizyteDto.getWizytaId());
+        wizytaMapper.map(wizyta, zakonczWizyteDto);
+        wizyta = wizytaRepository.save(wizyta);
+        return wizytaMapper.map(wizyta);
     }
 
     @Override
     public void delete(long id) {
-        Wizyta wizyta = getWizytaOrThrowException(id);
-//        if () {
-//            wizytaRepository.deleteById(id);
-//        }
-    }
+        Wizyta wizyta = wizytaRepository.findByIdOrThrowException(id);
 
-    private Wizyta getWizytaOrThrowException(long id) {
-        return wizytaRepository.findById(id).orElseThrow(() -> new WizytaNotFoundException(id));
+        if (wizyta.isZaplanowana()) {
+            wizytaRepository.deleteById(id);
+        } else {
+            throw new CantDeleteWizytaException(id);
+        }
     }
 
 }

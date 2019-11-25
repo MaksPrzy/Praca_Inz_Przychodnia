@@ -1,6 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
+import {MatToolbarModule} from '@angular/material/toolbar';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -10,21 +11,31 @@ import {ContentComponent} from "./component/content/content.component";
 import {UserInterfaceModule} from "./user-interface.module";
 import {PageNotFoundComponent} from "./component/page-not-found/page-not-found.component";
 import {GabinetListComponent} from "./gabinet/component/gabinet-list/gabinet-list.component";
-import {GabinetService} from "./gabinet/gabinet.service";
+import {GabinetService} from "./service/gabinet.service";
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {NavbarComponent} from "./component/navbar/navbar.component";
+import {UzytkownikRejestracjaFormComponent} from "./uzytkownik/uzytkownik-rejestracja-form/uzytkownik-rejestracja-form.component";
+import {StartPageComponent} from "./component/start-page/start-page.component";
+import {LekarzService} from "@przychodnia/service/lekarz.service";
 
 @NgModule({
     declarations: [
         AppComponent,
         ContentComponent,
+        NavbarComponent,
         GabinetListComponent,
+        UzytkownikRejestracjaFormComponent,
+        StartPageComponent,
         PageNotFoundComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
+        MatToolbarModule,
+        UserInterfaceModule,
 
-        UserInterfaceModule
+        NoopAnimationsModule
     ],
     providers: [
         MessageService,
@@ -33,7 +44,8 @@ import {GabinetService} from "./gabinet/gabinet.service";
             useClass: AppRequestInterceptor,
             multi: true
         },
-        GabinetService
+        GabinetService,
+        LekarzService
     ],
     bootstrap: [AppComponent]
 })

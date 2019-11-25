@@ -1,12 +1,9 @@
 import { AppPage } from './app.po';
-// @ts-ignore
 import { browser, logging } from 'protractor';
 
-// @ts-ignore
 describe('workspace-project App', () => {
   let page: AppPage;
 
-  // @ts-ignore
     beforeEach(() => {
     page = new AppPage();
   });

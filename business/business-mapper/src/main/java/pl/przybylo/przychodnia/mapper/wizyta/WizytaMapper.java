@@ -27,6 +27,7 @@ import pl.przybylo.przychodnia.mapper.LekarzMapper;
 import pl.przybylo.przychodnia.mapper.PacjentMapper;
 import pl.przybylo.przychodnia.mapper.SpecjalizacjaMapper;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static java.util.Objects.isNull;
@@ -116,6 +117,7 @@ public class WizytaMapper {
 
     public void map(Wizyta wizyta, ZakonczWizyteDto zakonczWizyteDto) {
         wizyta.setRozpoznanie(new Rozpoznanie(zakonczWizyteDto.getKodIcd10(), zakonczWizyteDto.getUwagi()));
+        wizyta.setFaktycznaDataWizytyDo(LocalDateTime.now());
     }
 
     private Pacjent getPacjent(Long pacjentId) {

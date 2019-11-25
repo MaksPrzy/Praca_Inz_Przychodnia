@@ -1,12 +1,8 @@
-// @ts-ignore
 import {HttpClient} from "@angular/common/http";
-// @ts-ignore
 import {Observable} from "rxjs";
-// @ts-ignore
 import {Injectable} from "@angular/core";
-import {GabinetNewDto, GabinetViewDto} from "../model/backend-model";
+import {GabinetEditDto, GabinetNewDto, GabinetViewDto} from "@przychodnia/model/backend-model";
 
-// @ts-ignore
 @Injectable()
 export class GabinetService {
 
@@ -21,4 +17,7 @@ export class GabinetService {
         return <Observable<GabinetViewDto>>this.httpClient.post('/gabinety', gabinetNewDto);
     }
 
+    public update(gabinetViewDto: GabinetEditDto): Observable<GabinetViewDto> {
+        return <Observable<GabinetViewDto>>this.httpClient.post('/gabinety', gabinetViewDto);
+    }
 }

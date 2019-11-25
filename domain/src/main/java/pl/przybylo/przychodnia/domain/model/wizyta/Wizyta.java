@@ -74,8 +74,13 @@ public class Wizyta {
         fullTextSearch = normalizeWizyta();
     }
 
+    public boolean isZaplanowana() {
+        return status == Status.ZAPLANOWANA;
+    }
+
     private String normalizeWizyta() {
         return normalize(newArrayList(pacjent.getPesel()), pairOf(pacjent.getImie(), pacjent.getNazwisko()),
                 pairOf(lekarz.getImie(), lekarz.getNazwisko()));
     }
+
 }

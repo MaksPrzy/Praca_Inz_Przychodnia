@@ -1,10 +1,8 @@
-// @ts-ignore
 import {AfterViewInit, Component} from "@angular/core";
-import {NotificationService} from "../../../service/notification/notification.service";
-import {GabinetService} from "../../gabinet.service";
-import {GabinetNewDto, GabinetViewDto} from "../../../model/backend-model";
+import {GabinetNewDto, GabinetViewDto} from "@przychodnia/model/backend-model";
+import {GabinetService} from "@przychodnia/service/gabinet.service";
+import {NotificationService} from "@przychodnia/service/notification/notification.service";
 
-// @ts-ignore
 @Component({
     selector: 'mp-gabinet-list',
     templateUrl: './gabinet-list.component.html',

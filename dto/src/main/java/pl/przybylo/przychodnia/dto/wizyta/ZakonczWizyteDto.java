@@ -3,8 +3,8 @@ package pl.przybylo.przychodnia.dto.wizyta;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
 @Getter
+@AllArgsConstructor
 public class ZakonczWizyteDto {
 
     private Long wizytaId;

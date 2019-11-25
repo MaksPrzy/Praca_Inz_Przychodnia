@@ -1,4 +1,5 @@
 package pl.przybylo.przychodnia.rest.controller;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,8 @@ public class LekarzController {
     private final LekarzService lekarzService;
 
     @GetMapping
-    public List<LekarzDetailViewDto> getLekarzList() {
-        return lekarzService.getLekarzList();
+    public List<LekarzDetailViewDto> getLekarzList(@RequestParam String searchBy) {
+        return lekarzService.getLekarzList(searchBy);
     }
 
     @PostMapping
