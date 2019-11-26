@@ -4,12 +4,21 @@ import {PageNotFoundComponent} from "./component/page-not-found/page-not-found.c
 import {GabinetListComponent} from "./gabinet/component/gabinet-list/gabinet-list.component";
 import {UzytkownikRejestracjaFormComponent} from "./uzytkownik/uzytkownik-rejestracja-form/uzytkownik-rejestracja-form.component";
 import {StartPageComponent} from "./component/start-page/start-page.component";
+import {UzytkownikLogowanieFormComponent} from "./uzytkownik/uzytkownik-logowanie-form/uzytkownik-logowanie-form.component";
 
 const routes: Routes = [
     // {
     //     path: '',
     //     redirectTo: '',
     //     pathMatch: 'full'
+    // },
+    {
+        path: 'logowanie',
+        component: UzytkownikLogowanieFormComponent
+    },
+    // {
+    //   path: '',
+    //   component: UzytkownikLogowanieFormComponent
     // },
     {
         path: 'home',

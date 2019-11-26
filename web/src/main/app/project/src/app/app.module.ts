@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -17,6 +16,8 @@ import {NavbarComponent} from "./component/navbar/navbar.component";
 import {UzytkownikRejestracjaFormComponent} from "./uzytkownik/uzytkownik-rejestracja-form/uzytkownik-rejestracja-form.component";
 import {StartPageComponent} from "./component/start-page/start-page.component";
 import {LekarzService} from "@przychodnia/service/lekarz.service";
+import {UzytkownikLogowanieFormComponent} from "./uzytkownik/uzytkownik-logowanie-form/uzytkownik-logowanie-form.component";
+
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import {LekarzService} from "@przychodnia/service/lekarz.service";
         NavbarComponent,
         GabinetListComponent,
         UzytkownikRejestracjaFormComponent,
+        UzytkownikLogowanieFormComponent,
         StartPageComponent,
         PageNotFoundComponent
     ],
