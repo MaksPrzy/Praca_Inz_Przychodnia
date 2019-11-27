@@ -36,7 +36,7 @@ public class Lekarz implements Searchable {
     @OneToMany
     @JoinTable(name = "lekarz_specjalizacja",
             joinColumns = {@JoinColumn(name = "lekarz_id")},
-            inverseJoinColumns = {@JoinColumn(name = "specjalizacja_id")})
+            inverseJoinColumns = {@JoinColumn(name = "id")})
     private Set<LekarzSpecjalizacja> specjalizacjaCollection = new HashSet<>();
 
     @OneToMany

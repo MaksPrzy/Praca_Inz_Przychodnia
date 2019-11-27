@@ -1,8 +1,8 @@
 <div class="container h-100">
     <div class="d-flex justify-content-center h-100">
         <div class="searchbar">
-            <input class="search_input" type="text" name="" placeholder="Wyszukaj swojego lekarza">
-            <a [routerLink]="['/wyniki-wyszukiwania']" [queryParams]="{searchBy: 'mila'}" class="search_icon"><i class="fas fa-search"></i></a>
+            <input class="search_input" type="text" name="searchBy" [(ngModel)]="searchBy" placeholder="Wyszukaj swojego lekarza">
+            <a [routerLink]="['/wyniki-wyszukiwania']" [queryParams]="{searchBy: searchBy}" class="search_icon"><i class="fas fa-search"></i></a>
         </div>
     </div>
 </div>
