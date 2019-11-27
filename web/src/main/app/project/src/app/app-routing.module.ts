@@ -5,6 +5,7 @@ import {GabinetListComponent} from "./gabinet/component/gabinet-list/gabinet-lis
 import {UzytkownikRejestracjaFormComponent} from "./uzytkownik/uzytkownik-rejestracja-form/uzytkownik-rejestracja-form.component";
 import {StartPageComponent} from "./component/start-page/start-page.component";
 import {UzytkownikLogowanieFormComponent} from "./uzytkownik/uzytkownik-logowanie-form/uzytkownik-logowanie-form.component";
+import {WynikiWyszukiwaniaComponent} from "./wyniki-wyszukiwania/wyniki-wyszukiwania.component";
 
 const routes: Routes = [
     // {
@@ -31,6 +32,10 @@ const routes: Routes = [
     {
         path: 'gabinety',
         component: GabinetListComponent
+    },
+    {
+        path: 'wyniki-wyszukiwania',
+        component: WynikiWyszukiwaniaComponent
     },
     {
         path: '**',

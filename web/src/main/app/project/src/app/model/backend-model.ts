@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 2.16.538 on 2019-11-20 19:13:19.
+// Generated using typescript-generator version 2.16.538 on 2019-11-27 18:31:48.
 
 export interface AbstractGabinetDto {
     nazwa: string;
@@ -66,6 +66,7 @@ export interface AbstractLekarzDto {
 
 export interface AbstractLekarzSpecjalizacjaDto {
     id: number;
+    nazwa: string;
     rokUzyskaniaDyplomuZeSpecjalizacji: number;
 }
 
@@ -87,7 +88,6 @@ export interface LekarzSpecjalizacjaNewDto extends AbstractLekarzSpecjalizacjaDt
 }
 
 export interface LekarzSpecjalizacjaViewDto extends AbstractLekarzSpecjalizacjaDto {
-    nazwa: string;
 }
 
 export interface SpecjalizacjaViewDto {

@@ -29,17 +29,6 @@ public class SpecjalizacjaMapper {
             return newHashSet();
         }
 
-        // sposob 1
-//        Set<LekarzSpecjalizacja> lekarzSpecjalizacjaSet = newHashSet();
-//
-//        for (AbstractLekarzSpecjalizacjaDto lekarzSpecjalizacjaNewDto : specjalizacjaCollection) {
-//            lekarzSpecjalizacjaSet.add(map(lekarzSpecjalizacjaNewDto));
-//        }
-//
-//        return lekarzSpecjalizacjaSet;
-
-
-        // sposob 2
         return specjalizacjaCollection.stream()
                 .map(s -> map(s))
                 .collect(toSet());

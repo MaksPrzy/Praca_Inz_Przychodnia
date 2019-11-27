@@ -17,6 +17,7 @@ import {UzytkownikRejestracjaFormComponent} from "./uzytkownik/uzytkownik-rejest
 import {StartPageComponent} from "./component/start-page/start-page.component";
 import {LekarzService} from "@przychodnia/service/lekarz.service";
 import {UzytkownikLogowanieFormComponent} from "./uzytkownik/uzytkownik-logowanie-form/uzytkownik-logowanie-form.component";
+import {WynikiWyszukiwaniaComponent} from "./wyniki-wyszukiwania/wyniki-wyszukiwania.component";
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import {UzytkownikLogowanieFormComponent} from "./uzytkownik/uzytkownik-logowani
         UzytkownikRejestracjaFormComponent,
         UzytkownikLogowanieFormComponent,
         StartPageComponent,
+        WynikiWyszukiwaniaComponent,
         PageNotFoundComponent
     ],
     imports: [

@@ -1,15 +1,14 @@
 package pl.przybylo.przychodnia.dto.lekarz;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class LekarzSpecjalizacjaViewDto extends AbstractLekarzSpecjalizacjaDto {
 
-    private String nazwa;
-
     public LekarzSpecjalizacjaViewDto(Long id, String nazwa, int rokUzyskaniaDyplomuZeSpecjalizacji) {
-        super(id, rokUzyskaniaDyplomuZeSpecjalizacji);
-        this.nazwa = nazwa;
+        super(id, nazwa, rokUzyskaniaDyplomuZeSpecjalizacji);
     }
 
 }
