@@ -19,5 +19,6 @@ export class GabinetService {
 
     public update(gabinetViewDto: GabinetEditDto): Observable<GabinetViewDto> {
         return <Observable<GabinetViewDto>>this.httpClient.post('/gabinety', gabinetViewDto);
-    }
+    }l
+
 }

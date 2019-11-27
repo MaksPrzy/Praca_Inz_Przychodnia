@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 public abstract class AbstractLekarzSpecjalizacjaDto {
 
     protected Long id;
+    protected String nazwa;
     protected int rokUzyskaniaDyplomuZeSpecjalizacji;
 
 }
