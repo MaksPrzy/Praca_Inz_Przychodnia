@@ -50,7 +50,7 @@ import {TimeTableFormComponent} from "./time-table/time-table-form.component";
             multi: true
         },
         GabinetService,
-        LekarzService,
+        LekarzService
     ],
     bootstrap: [AppComponent]
 })
