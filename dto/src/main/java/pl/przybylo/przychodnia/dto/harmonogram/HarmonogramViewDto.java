@@ -9,10 +9,12 @@ import java.util.Set;
 public class HarmonogramViewDto extends AbstractHarmonogramDto {
 
     private long id;
+    private long specjalizacjaId;
 
-    public HarmonogramViewDto(long id, LocalDateTime obowiazujeOd, LocalDateTime obowiazujeDo, Set<HarmonogramPozycjaViewDto> pozycjaCollection) {
+    public HarmonogramViewDto(long id, long specjalizacjaId, LocalDateTime obowiazujeOd, LocalDateTime obowiazujeDo, Set<HarmonogramPozycjaViewDto> pozycjaCollection) {
         super(obowiazujeOd, obowiazujeDo, pozycjaCollection);
         this.id = id;
+        this.specjalizacjaId = specjalizacjaId;
     }
 
 }

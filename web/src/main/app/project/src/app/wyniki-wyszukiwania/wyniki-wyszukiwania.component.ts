@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, OnInit} from "@angular/core";
 import {LekarzDetailViewDto} from "@przychodnia/model/backend-model";
-import {NotificationService} from "@przychodnia/service/notification/notification.service";
 import {LekarzService} from "@przychodnia/service/lekarz.service";
 import {ActivatedRoute} from "@angular/router";
 
@@ -15,8 +14,7 @@ export class WynikiWyszukiwaniaComponent implements OnInit, AfterViewInit {
     lekarzCollection: Array<LekarzDetailViewDto>;
 
     constructor(private route: ActivatedRoute,
-                private lekarzService: LekarzService,
-                private notificationService: NotificationService) {
+                private lekarzService: LekarzService) {
     }
 
     ngOnInit(): void {
