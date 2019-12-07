@@ -21,6 +21,8 @@ public class Harmonogram {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long specjalizacjaId;
+
     private LocalDateTime obowiazujeOd;
 
     private LocalDateTime obowiazujeDo;

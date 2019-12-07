@@ -41,6 +41,7 @@ public class HarmonogramMapper {
         }
         return new HarmonogramViewDto(
                 harmonogram.getId(),
+                harmonogram.getSpecjalizacjaId(),
                 harmonogram.getObowiazujeOd(),
                 harmonogram.getObowiazujeDo(),
                 mapToHarmonogramPozycjaViewDto(harmonogram.getPozycjaCollection())
