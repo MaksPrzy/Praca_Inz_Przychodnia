@@ -1,0 +1,21 @@
+package pl.przybylo.przychodnia.domain.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.Embeddable;
+
+@Getter
+@Setter
+@Embeddable
+@NoArgsConstructor
+@AllArgsConstructor
+public class Kontakt {
+
+    private String email;
+    private String telefonKomorkowy;
+    private String telefonStacjonarny;
+
+}

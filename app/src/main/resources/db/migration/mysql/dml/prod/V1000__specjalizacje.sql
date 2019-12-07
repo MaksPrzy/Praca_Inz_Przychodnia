@@ -1,0 +1,14 @@
+insert into specjalizacja(nazwa, full_text_search) values('dermatolog', 'dermatolog');
+insert into specjalizacja(nazwa, full_text_search) values('kardiolog', 'kardiolog');
+insert into specjalizacja(nazwa, full_text_search) values('alergolog', 'alergolog');
+insert into specjalizacja(nazwa, full_text_search) values('pulmonolog', 'pulmonolog');
+insert into specjalizacja(nazwa, full_text_search) values('ginekolog', 'ginekolog');
+insert into specjalizacja(nazwa, full_text_search) values('pediatra', 'pediatra');
+insert into specjalizacja(nazwa, full_text_search) values('stomatolog', 'stomatolog');
+insert into specjalizacja(nazwa, full_text_search) values('chirurg dziecięcy', 'chirurg');
+insert into specjalizacja(nazwa, full_text_search) values('chirurg naczyniowy', 'chirurg');
+insert into specjalizacja(nazwa, full_text_search) values('chirurg ogólny', 'chirurg');
+insert into specjalizacja(nazwa, full_text_search) values('chirurg plastyczny', 'chirurg');
+insert into specjalizacja(nazwa, full_text_search) values('chirurg urazowo ortopedyczny', 'chirurg');
+insert into specjalizacja(nazwa, full_text_search) values('toksykolog', 'toksykolog');
+insert into specjalizacja(nazwa, full_text_search) values('neurolog', 'neurolog');
