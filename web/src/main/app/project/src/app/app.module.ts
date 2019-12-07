@@ -18,7 +18,7 @@ import {StartPageComponent} from "./component/start-page/start-page.component";
 import {LekarzService} from "@przychodnia/service/lekarz.service";
 import {UzytkownikLogowanieFormComponent} from "./uzytkownik/uzytkownik-logowanie-form/uzytkownik-logowanie-form.component";
 import {WynikiWyszukiwaniaComponent} from "./wyniki-wyszukiwania/wyniki-wyszukiwania.component";
-
+import {TimeTableFormComponent} from "./time-table/time-table-form.component";
 
 @NgModule({
     declarations: [
@@ -30,7 +30,8 @@ import {WynikiWyszukiwaniaComponent} from "./wyniki-wyszukiwania/wyniki-wyszukiw
         UzytkownikLogowanieFormComponent,
         StartPageComponent,
         WynikiWyszukiwaniaComponent,
-        PageNotFoundComponent
+        PageNotFoundComponent,
+        TimeTableFormComponent
     ],
     imports: [
         BrowserModule,

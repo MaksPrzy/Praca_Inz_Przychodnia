@@ -45,4 +45,5 @@ export class WynikiWyszukiwaniaComponent implements OnInit, AfterViewInit {
         });
     }
 
+
 }

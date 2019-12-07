@@ -6,6 +6,8 @@ import {UzytkownikRejestracjaFormComponent} from "./uzytkownik/uzytkownik-rejest
 import {StartPageComponent} from "./component/start-page/start-page.component";
 import {UzytkownikLogowanieFormComponent} from "./uzytkownik/uzytkownik-logowanie-form/uzytkownik-logowanie-form.component";
 import {WynikiWyszukiwaniaComponent} from "./wyniki-wyszukiwania/wyniki-wyszukiwania.component";
+import {TimeTableFormComponent} from "./time-table/time-table-form.component";
+
 
 const routes: Routes = [
     // {
@@ -17,10 +19,10 @@ const routes: Routes = [
         path: 'logowanie',
         component: UzytkownikLogowanieFormComponent
     },
-    // {
-    //   path: '',
-    //   component: UzytkownikLogowanieFormComponent
-    // },
+    {
+        path: 'tabela-wizyt',
+        component: TimeTableFormComponent
+    },
     {
         path: 'home',
         component: StartPageComponent

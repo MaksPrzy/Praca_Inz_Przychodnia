@@ -2,11 +2,11 @@ import {AfterViewInit, Component} from "@angular/core";
 import {NotificationService} from "@przychodnia/service/notification/notification.service";
 
 @Component({
-    selector: 'mp-uzytkownik-rejestracja-form',
-    templateUrl: './uzytkownik-rejestracja-form.component.html',
-    styleUrls: ['./uzytkownik-rejestracja-form.component.scss']
+    selector: 'mp-time-table',
+    templateUrl: './time-table-component.html',
+    styleUrls: ['./time-table-component.scss']
 })
-export class UzytkownikRejestracjaFormComponent implements AfterViewInit {
+export class TimeTableFormComponent implements AfterViewInit {
 
     constructor(private notificationService: NotificationService) {
     }

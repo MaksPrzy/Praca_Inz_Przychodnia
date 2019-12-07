@@ -1,7 +1,6 @@
 <br/>
 <br/>
 <br/>
-
 <div class="table-responsive" id="sailorTableArea">
     <table id="sailorTable" class="table table-striped table-bordered" width="100%">
 
@@ -21,12 +20,43 @@
             <td>{{lekarz.numer}}</td>
             <td>
                 <div *ngFor="let specjalizacja of lekarz.specjalizacjaCollection">
-                    {{specjalizacja.nazwa}} [doświadczenie w latach: {{getExperienceInYears(specjalizacja.rokUzyskaniaDyplomuZeSpecjalizacji)}}]
+                    {{specjalizacja.nazwa}} [doświadczenie w
+                    latach: {{getExperienceInYears(specjalizacja.rokUzyskaniaDyplomuZeSpecjalizacji)}}]
                 </div>
             </td>
             <td>
-                UMÓW WIZYTĘ!
+                <div>
+                    UMÓW SIĘ NA WIZYTĘ!
+                </div>
             </td>
         </tr>
     </table>
 </div>
+<!--<h1><span class="blue">&lt;</span>Table<span class="blue">&gt;</span> <span class="yellow">Responsive</pan>-->
+<!--</h1>-->
+<!--<h2>Created with love by <a href="http://pablogarciafernandez.com" target="_blank">Pablo García Fernández</a></h2>-->
+
+<!--<table class="container">-->
+<!--<thead>-->
+<!--<tr>-->
+<!--<th><h1>Imie lekarza</h1></th>-->
+<!--<th><h1>Nazwisko lekarza</h1></th>-->
+<!--<th><h1>Identyfikator</h1></th>-->
+<!--<th><h1>&nbsp;</h1></th>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tbody>-->
+<!--<tr *ngFor="let lekarz of lekarzCollection">-->
+<!--<td>{{lekarz.imie}}</td>-->
+<!--<td>{{lekarz.nazwisko}}</td>-->
+<!--<td>{{lekarz.numer}}</td>-->
+<!--<td>-->
+<!--<div *ngFor="let specjalizacja of lekarz.specjalizacjaCollection">-->
+<!--{{specjalizacja.nazwa}} [doświadczenie w-->
+<!--latach: {{getExperienceInYears(specjalizacja.rokUzyskaniaDyplomuZeSpecjalizacji)}}]-->
+<!--</div>-->
+
+<!--</td>-->
+<!--</tr>-->
+<!--</tbody>-->
+<!--</table>-->

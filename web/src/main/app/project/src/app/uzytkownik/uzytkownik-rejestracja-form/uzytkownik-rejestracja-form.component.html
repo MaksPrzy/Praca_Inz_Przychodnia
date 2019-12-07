@@ -1,92 +1,61 @@
-<div class="container">
+<form action="action_page.php">
+    <div class="container">
+        <h1>Rejestracja</h1>
+        <p>Prosze uzupełnić podane niżej pola w celu rejestracji wizyty.</p>
+        <hr>
 
-    <form class="form-horizontal" role="form">
-        <h2>Rejestracja</h2>
-        <div class="form-group">
-            <div class="form-group">
-                <label for="lastName" class="col-sm-3 control-label">Pesel*</label>
-                <div class="col-sm-9">
-                    <input type="text" id="pessel" placeholder="" class="form-control" autofocus>
-                </div>
-            </div>
-            <label for="firstName" class="col-sm-3 control-label">Imie*</label>
-            <div class="col-sm-9">
-                <input type="text" id="firstName" placeholder="" class="form-control" autofocus autocomplete="off">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="lastName" class="col-sm-3 control-label">Nazwisko*</label>
-            <div class="col-sm-9">
-                <input type="text" id="lastName" placeholder="" class="form-control" autofocus>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="lastName" class="col-sm-3 control-label">Adres zamieszkania*</label>
-            <div class="col-sm-9">
-                <input type="text" id="adress" placeholder="" class="form-control" autofocus>
-            </div>
-        </div>
-             <div class="form-group">
-                 <label for="birthDate" class="col-sm-3 control-label">Data urodzenia*</label>
-                 <div class="col-sm-9">
-                     <input type="date" id="birthDate" class="form-control">
-                 </div>
-        <div class="form-group">
-        <br/>
-            <label for="email" class="col-sm-3 control-label">Email* </label>
-            <div class="col-sm-9">
-                <input type="email" id="email" placeholder="" class="form-control" name="email">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="password1" class="col-sm-3 control-label">Hasło*</label>
-            <div class="col-sm-9">
-                <input type="password" id="password1" placeholder="" class="form-control">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="password2" class="col-sm-3 control-label">Potwierdz hasło*</label>
-            <div class="col-sm-9">
-                <input type="password" id="password2" placeholder="" class="form-control">
-            </div>
+        <div class="col-sm-9">
+            <label for="pesel"><b>PESEL</b></label>
+            <input type="pesel" id="pesel" class="form-control" name="pesel">
         </div>
 
+        <div class="col-sm-9">
+            <label for="imie"><b>Imie</b></label>
+            <input type="imie" id="imie" class="form-control" name="imie">
         </div>
-        <div class="form-group">
-            <label for="phoneNumber" class="col-sm-3 control-label">Numer telefonu </label>
-            <div class="col-sm-9">
-                <input type="phoneNumber" id="phoneNumber" placeholder="" class="form-control">
+
+        <div class="col-sm-9">
+            <label for="nazwisko"><b>Nazwisko</b></label>
+            <input type="nazwisko" id="nazwisko" class="form-control" name="nazwisko">
         </div>
+
+        <div class="col-sm-9">
+            <label for="AdresZamieszkania"><b>Adres zamieszkania</b></label>
+            <input type="AdresZamieszkania" id="adresZamieszkania" class="form-control" name="email">
         </div>
-        <div class="form-group">
-            <label class="control-label col-sm-3">Płeć</label>
-            <div class="col-sm-6">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <label class="radio-inline">
-                            <input type="radio" id="femaleRadio" value="Kobieta">Kobieta
-                        </label>
-                    </div>
-                    <div class="col-sm-4">
-                        <label class="radio-inline">
-                            <input type="radio" id="maleRadio" value="Mężczyzna">Mężczyzna
-                        </label>
-                    </div>
-                </div>
-            </div>
+
+        <div class="col-sm-9">
+            <label for="dataUrodzenia"><b>Data urodzenia</b></label>
+            <input type="date" id="dataUrodzenia" class="form-control">
         </div>
-        <div class="form-group">
-            <div class="col-sm-9 col-sm-offset-3">
-                <span class="help-block">*POLA WYMAGANE</span>
-            </div>
+
+        <div class="col-sm-9">
+            <label for="email"><b>Email</b></label>
+            <input type="email" id="email"class="form-control" name="email">
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Gotowe</button>
-        <br/>
-        <div class="login-register">
-            <a href="logowanie">Zaloguj się</a>
+
+        <div class="col-sm-9">
+            <label for="haslo"><b>Hasło</b></label>
+            <input type="haslo" id="haslo"class="form-control" name="haslo">
         </div>
-    </form>
-    <br/>
-    <br/>
-</div>
+
+        <div class="col-sm-9">
+            <label for="PotwierdzHasło"><b>Potwierdz hasło</b></label>
+            <input type="PotwierdzHasło" id="PotwierdzHasło" class="form-control" name="email">
+        </div>
+
+        <div class="col-sm-9">
+            <label for="Telefon"><b>Telefon</b></label>
+            <input type="Telefon" id="Telefon" class="form-control" name="Telefons">
+        </div>
+
+        <p>Zapoznaj się z naszą polityką prywatności<a href="http://localhost:4200/RODO"> RODO</a>.</p>
+        <button type="submit" class="registerbtn">Umów wizyte!</button>
+    </div>
+
+
+    <div class="container signin">
+        <p>Masz juz konto? <a href="logowanie">Zaloguj się</a>.</p>
+    </div>
+</form>
 

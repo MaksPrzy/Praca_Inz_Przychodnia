@@ -12,6 +12,10 @@ export class UzytkownikLogowanieFormComponent implements AfterViewInit {
     }
 
     ngAfterViewInit(): void {
+
     }
+
+
+
 
 }
