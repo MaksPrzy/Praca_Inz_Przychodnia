@@ -1,4 +1,6 @@
 import {AfterViewInit, Component} from "@angular/core";
+import {LekarzService} from "@przychodnia/service/lekarz.service";
+import {HarmonogramViewDto} from "@przychodnia/model/backend-model";
 
 @Component({
     selector: 'mp-wizyta-planowanie',
@@ -7,10 +9,17 @@ import {AfterViewInit, Component} from "@angular/core";
 })
 export class WizytaPlanowanieComponent implements AfterViewInit {
 
-    constructor() {
+    harmonogram: HarmonogramViewDto;
+
+    constructor(private lekarzService: LekarzService) {
     }
 
     ngAfterViewInit(): void {
+        this.lekarzService.getHarmonogram(2, 4)
+            .subscribe((harmonogramResponse: HarmonogramViewDto) => {
+                this.harmonogram = harmonogramResponse;
+            });
+        console.dir(this.harmonogram);
     }
 
 }

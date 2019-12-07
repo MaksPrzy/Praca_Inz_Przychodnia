@@ -1,6 +1,7 @@
 create table harmonogram (
   id bigint auto_increment,
   lekarz_id bigint not null,
+  specjalizacja_id bigint not null,
   obowiazuje_od date not null,
   obowiazuje_do date not null,
   aktywny boolean not null default false,

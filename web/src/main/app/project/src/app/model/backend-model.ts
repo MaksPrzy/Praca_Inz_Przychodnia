@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 2.16.538 on 2019-12-07 14:35:32.
+// Generated using typescript-generator version 2.16.538 on 2019-12-07 16:03:23.
 
 export interface AbstractGabinetDto {
     nazwa: string;
@@ -55,6 +55,7 @@ export interface HarmonogramPozycjaViewDto extends AbstractHarmonogramPozycjaDto
 
 export interface HarmonogramViewDto extends AbstractHarmonogramDto {
     id: number;
+    specjalizacjaId: number;
 }
 
 export interface AbstractLekarzDto {
