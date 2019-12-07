@@ -18,7 +18,8 @@ import {StartPageComponent} from "./component/start-page/start-page.component";
 import {LekarzService} from "@przychodnia/service/lekarz.service";
 import {UzytkownikLogowanieFormComponent} from "./uzytkownik/uzytkownik-logowanie-form/uzytkownik-logowanie-form.component";
 import {WynikiWyszukiwaniaComponent} from "./wyniki-wyszukiwania/wyniki-wyszukiwania.component";
-import {TimeTableFormComponent} from "./time-table/time-table-form.component";
+import {WizytaListComponent} from "./wizyta/component/wizyta-list/wizyta-list.component";
+import {WizytaPlanowanieComponent} from "./wizyta/component/wizyta-planowanie/wizyta-planowanie.component";
 
 @NgModule({
     declarations: [
@@ -28,10 +29,11 @@ import {TimeTableFormComponent} from "./time-table/time-table-form.component";
         GabinetListComponent,
         UzytkownikRejestracjaFormComponent,
         UzytkownikLogowanieFormComponent,
+        WizytaListComponent,
+        WizytaPlanowanieComponent,
         StartPageComponent,
         WynikiWyszukiwaniaComponent,
-        PageNotFoundComponent,
-        TimeTableFormComponent
+        PageNotFoundComponent
     ],
     imports: [
         BrowserModule,
@@ -39,7 +41,6 @@ import {TimeTableFormComponent} from "./time-table/time-table-form.component";
         HttpClientModule,
         MatToolbarModule,
         UserInterfaceModule,
-
         NoopAnimationsModule
     ],
     providers: [
