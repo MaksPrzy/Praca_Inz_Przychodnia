@@ -28,12 +28,13 @@ public class PacjentMapper {
                 pacjentNewDto.getImie(),
                 pacjentNewDto.getNazwisko(),
                 pacjentNewDto.getDataUrodzenia(),
+                pacjentNewDto.getLogin(),
+                pacjentNewDto.getHaslo(),
                 adresMapper.map(pacjentNewDto.getAdres()),
                 kontaktMapper.map(pacjentNewDto.getKontakt())
         );
     }
 
-    // todo: tak jak w lekarzMapper
     public void mapToEdit(PacjentEditDto pacjentEditDto) {
         checkNotNull(pacjentEditDto, "20191111160155");
 
@@ -58,8 +59,10 @@ public class PacjentMapper {
                 pacjent.getImie(),
                 pacjent.getNazwisko(),
                 pacjent.getDataUrodzenia(),
+                pacjent.getLogin(),
                 adresMapper.map(pacjent.getAdres()),
-                kontaktMapper.map(pacjent.getKontakt())
+                kontaktMapper.map(pacjent.getKontakt()),
+                pacjent.getHaslo()
         );
     }
 

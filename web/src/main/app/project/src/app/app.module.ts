@@ -20,6 +20,7 @@ import {UzytkownikLogowanieFormComponent} from "./uzytkownik/uzytkownik-logowani
 import {WynikiWyszukiwaniaComponent} from "./wyniki-wyszukiwania/wyniki-wyszukiwania.component";
 import {WizytaListComponent} from "./wizyta/component/wizyta-list/wizyta-list.component";
 import {WizytaPlanowanieComponent} from "./wizyta/component/wizyta-planowanie/wizyta-planowanie.component";
+import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
 
 @NgModule({
     declarations: [
@@ -51,7 +52,8 @@ import {WizytaPlanowanieComponent} from "./wizyta/component/wizyta-planowanie/wi
             multi: true
         },
         GabinetService,
-        LekarzService
+        LekarzService,
+        UzytkownikService
     ],
     bootstrap: [AppComponent]
 })

@@ -8,12 +8,14 @@ import java.time.LocalDateTime;
 @Data
 public class WizytaEditDto extends AbstractWizytaDto {
 
-    public WizytaEditDto(Long pacjentId, Long lekarzId, Long specjalizacjaId, Long gabinetId,
-                         LocalDateTime dataWizytyOd, LocalDateTime dataWizytyDo,
-                         String status, String rodzaj) {
-        super(pacjentId, lekarzId, specjalizacjaId, gabinetId, dataWizytyOd, dataWizytyDo, status, rodzaj);
+    public WizytaEditDto(Long id, Long pacjentId, Long lekarzId, Long specjalizacjaId, Long gabinetId,
+                         LocalDateTime dataWizytyOd, LocalDateTime dataWizytyDo, String rodzaj, String status) {
+        super(pacjentId, lekarzId, specjalizacjaId, gabinetId, dataWizytyOd, dataWizytyDo, rodzaj);
+        this.id = id;
+        this.status = status;
     }
 
     private Long id;
+    private String status;
 
 }
