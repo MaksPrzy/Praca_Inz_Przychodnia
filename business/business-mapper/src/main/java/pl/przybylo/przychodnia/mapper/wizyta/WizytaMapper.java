@@ -112,6 +112,7 @@ public class WizytaMapper {
         wizyta.setDataWizytyOd(wizytaEditDto.getDataWizytyOd());
         wizyta.setDataWizytyDo(wizytaEditDto.getDataWizytyDo());
         wizyta.setRodzaj(rodzajMapper.map(wizytaEditDto.getRodzaj()));
+        wizyta.setStatus(statusMapper.map(wizytaEditDto.getStatus()));
     }
 
     public void map(Wizyta wizyta, ZakonczWizyteDto zakonczWizyteDto) {

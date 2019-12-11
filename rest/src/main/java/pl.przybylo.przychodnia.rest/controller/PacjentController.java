@@ -51,33 +51,32 @@ public class PacjentController {
         return wizytaService.getWizytaList(pacjentId);
     }
 
-//    @GetMapping("/{id}/wizyty")
-//    public WizytaViewDto getWizyta(@PathVariable long id) {          wywala błąd !!!!!!!
-//        return wizytaService.getWizyta(id);
-//    }
+    @GetMapping("/{id}/wizyty/{wizytaId}")
+    public WizytaViewDto getWizyta(@PathVariable long id, @PathVariable long wizytaId) {
+        return wizytaService.getWizyta(wizytaId);
+    }
 
     @PostMapping("/{id}/wizyty")
     @ResponseStatus(HttpStatus.CREATED)
-    public void ZaplanowanaWizyta(@PathVariable("id") long id, @RequestBody ZaplanujWizyteDto zaplanujWizyteDto) {
+    public void ZaplanowanaWizyta(@PathVariable long id, @RequestBody ZaplanujWizyteDto zaplanujWizyteDto) {
         wizytaService.zaplanuj(zaplanujWizyteDto);
     }
 
-    @PutMapping("/{id}/wizyty/{wizytyId}")
+    @PutMapping("/{id}/wizyty/{wizytaId}")
     @ResponseStatus(HttpStatus.OK)
-    public void ZakonczonaWizyta(@PathVariable("id") Long id,
-                                 @PathVariable("wizytyId") Long wizytyId,
+    public void ZakonczonaWizyta(@PathVariable Long id,
+                                 @PathVariable Long wizytaId,
                                  @RequestBody ZakonczWizyteDto zakonczWizyteDto) {
         wizytaService.zakoncz(zakonczWizyteDto);
     }
 
-    @DeleteMapping("/{id}/wizyty/{wizytyId}")
+    @DeleteMapping("/{id}/wizyty/{wizytaId}")
     @ResponseStatus(HttpStatus.OK)
-    public void UsunWizyte(@PathVariable ("id") long id,
-                           @PathVariable ("wizytyId") Long wizytyId,
+    public void UsunWizyte(@PathVariable long id,
+                           @PathVariable Long wizytaId,
                            @RequestBody WizytaViewDto WizytaViewDto) {
         wizytaService.delete(id);
     }
-
 
 
 }

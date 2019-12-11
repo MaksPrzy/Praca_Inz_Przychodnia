@@ -1,14 +1,3 @@
-1. Rozszerzyc tabele pacjent o: login, haslo(DONE)
-- create table sql -> modyfikacja(DONE)
-- sample sql -> modyfikacja(DONE)
-- mappery -> modyfikacja(DONE)
-
-2. Usunac WizytaController. Przeniesc metody z WizytaController (DONE)
-do PacjentController. Pozmieniac url, tak jak bylo robione miedzy
-LekarzController a HarmonogramController.
-
-3. Z ZaplanujWizyteDto usunac pole status - jest niepotrzebne. (DONE)
-
 4. Zrobic TokenService, z metoda isLoggedIn, która na razie 
 zawsze zwraca true.
 

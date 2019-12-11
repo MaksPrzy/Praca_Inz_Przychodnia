@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 2.16.538 on 2019-12-07 16:39:00.
+// Generated using typescript-generator version 2.16.538 on 2019-12-11 19:39:59.
 
 export interface AbstractGabinetDto {
     nazwa: string;
@@ -101,6 +101,7 @@ export interface AbstractPacjentDto {
     nazwisko: string;
     pesel: string;
     dataUrodzenia: Date;
+    login: string;
     adres: AdresDto;
     kontakt: KontaktDto;
 }
@@ -126,9 +127,21 @@ export interface PacjentDetailViewDto extends AbstractPacjentDto {
 
 export interface PacjentEditDto extends AbstractPacjentDto {
     id: number;
+    haslo: string;
 }
 
 export interface PacjentNewDto extends AbstractPacjentDto {
+    haslo: string;
+}
+
+export interface ZalogowanoDto {
+    uzytkownik: PacjentDetailViewDto;
+    token: string;
+}
+
+export interface ZalogujDto {
+    username: string;
+    password: string;
 }
 
 export interface AbstractWizytaDto {
@@ -138,12 +151,12 @@ export interface AbstractWizytaDto {
     gabinetId: number;
     dataWizytyOd: Date;
     dataWizytyDo: Date;
-    status: string;
     rodzaj: string;
 }
 
 export interface WizytaEditDto extends AbstractWizytaDto {
     id: number;
+    status: string;
 }
 
 export interface WizytaViewDto {
