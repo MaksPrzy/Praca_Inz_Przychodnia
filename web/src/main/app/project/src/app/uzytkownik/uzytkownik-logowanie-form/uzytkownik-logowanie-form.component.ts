@@ -1,5 +1,7 @@
 import {AfterViewInit, Component} from "@angular/core";
 import {NotificationService} from "@przychodnia/service/notification/notification.service";
+import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
+import {ZalogujDto} from "@przychodnia/model/backend-model";
 
 @Component({
     selector: 'mp-uzytkownik-logowanie-form',
@@ -8,14 +10,16 @@ import {NotificationService} from "@przychodnia/service/notification/notificatio
 })
 export class UzytkownikLogowanieFormComponent implements AfterViewInit {
 
-    constructor(private notificationService: NotificationService) {
+    constructor(private uzytkownikService: UzytkownikService) {
     }
 
     ngAfterViewInit(): void {
+        const zalogujDto: ZalogujDto = {
+            username: 'JAKISLOGIN',
+            password: 'password'
+        };
 
+        this.uzytkownikService.logIn(zalogujDto);
     }
-
-
-
 
 }

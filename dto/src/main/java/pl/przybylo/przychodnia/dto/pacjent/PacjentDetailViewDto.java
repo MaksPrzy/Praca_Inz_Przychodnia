@@ -9,12 +9,15 @@ public class PacjentDetailViewDto extends AbstractPacjentDto {
 
     private Long id;
     private String numerKartoteki;
+    private String haslo;
 
     public PacjentDetailViewDto(Long id, String numerKartoteki, String imie, String nazwisko, String pesel,
-                                LocalDate dataUrodzenia, String login, AdresDto adres, KontaktDto kontakt) {
+                                LocalDate dataUrodzenia, String login, AdresDto adres, KontaktDto kontakt,
+                                String haslo) {
         super(imie, nazwisko, pesel, dataUrodzenia, login, adres, kontakt);
         this.id = id;
         this.numerKartoteki = numerKartoteki;
+        this.haslo = haslo;
     }
 
 }

@@ -61,7 +61,8 @@ public class PacjentMapper {
                 pacjent.getDataUrodzenia(),
                 pacjent.getLogin(),
                 adresMapper.map(pacjent.getAdres()),
-                kontaktMapper.map(pacjent.getKontakt())
+                kontaktMapper.map(pacjent.getKontakt()),
+                pacjent.getHaslo()
         );
     }
 

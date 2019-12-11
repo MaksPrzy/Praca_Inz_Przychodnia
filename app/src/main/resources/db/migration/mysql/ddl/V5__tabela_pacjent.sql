@@ -5,7 +5,7 @@ create table pacjent (
   imie varchar(128) not null,
   nazwisko varchar(128) not null,
   login varchar (128) not null,
-  haslo varchar (16) not null,
+  haslo varchar (512) not null,
   data_urodzenia date not null,
   kod_pocztowy varchar(6),
   miejscowosc varchar(128),
@@ -19,5 +19,6 @@ create table pacjent (
   primary key(id),
 
   constraint pacjent_pesel_uq unique(pesel),
-  constraint pacjent_numer_kartoteki_uq unique(numer_kartoteki)
+  constraint pacjent_numer_kartoteki_uq unique(numer_kartoteki),
+  constraint pacjent_login_uq unique(login)
 );

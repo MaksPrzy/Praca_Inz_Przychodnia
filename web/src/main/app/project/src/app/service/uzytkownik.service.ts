@@ -13,13 +13,8 @@ export class UzytkownikService {
         this.isLoggedIn = false;
     }
 
-    public logIn(): void {
-        const zalogujDto: ZalogujDto = {
-            username: 'JAKISLOGIN',
-            password: 'haslo123'
-        };
-
-        this.httpClient.post('/uzytkownik/zaloguj', zalogujDto)
+    public logIn(zalogujDto: ZalogujDto): void {
+        this.httpClient.post('/uzytkownicy/zaloguj', zalogujDto)
             .subscribe((zalogowanoDto: ZalogowanoDto) => {
                 this.uzytkownik = zalogowanoDto.uzytkownik;
                 this.token = zalogowanoDto.token;
