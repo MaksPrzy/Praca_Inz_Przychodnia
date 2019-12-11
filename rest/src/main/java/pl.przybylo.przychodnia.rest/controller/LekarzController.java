@@ -63,6 +63,7 @@ public class LekarzController {
     }
 
     @DeleteMapping("/{id}/harmonogramy/{harmonogramId}")
+    @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") long id,
                        @PathVariable("harmonogramId") Long harmonogramId,
                        @RequestBody HarmonogramPozycjaViewDto harmonogramPozycjaViewDto) {

@@ -8,9 +8,8 @@ import java.time.LocalDateTime;
 public class ZaplanujWizyteDto extends AbstractWizytaDto {
 
     public ZaplanujWizyteDto(Long pacjentId, Long lekarzId, Long specjalizacjaId,
-                             Long gabinetId, LocalDateTime dataWizytyOd, LocalDateTime dataWizytyDo,
-                             String status, String rodzaj) {
-        super(pacjentId, lekarzId, specjalizacjaId, gabinetId, dataWizytyOd, dataWizytyDo, status, rodzaj);
+                             Long gabinetId, LocalDateTime dataWizytyOd, LocalDateTime dataWizytyDo, String rodzaj) {
+        super(pacjentId, lekarzId, specjalizacjaId, gabinetId, dataWizytyOd, dataWizytyDo, rodzaj);
     }
 
 }

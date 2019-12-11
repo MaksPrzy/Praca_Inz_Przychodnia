@@ -13,6 +13,8 @@ public abstract class AbstractPacjentDto {
     protected String nazwisko;
     protected String pesel;
     protected LocalDate dataUrodzenia;
+    protected String login;
+    protected String haslo;
     protected AdresDto adres;
     protected KontaktDto kontakt;
 

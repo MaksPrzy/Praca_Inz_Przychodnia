@@ -97,10 +97,6 @@ public class WizytaValidator {
             fieldErrorSet.add(of(DATA_ZAKONCZENIA_WIZYTY_DO_FIELD, "Data zakończenia wizyty nie może być wcześniejsza niż data rozpoczęcia wizyty."));
         }
 
-        if (isBlank(wizytaDto.getStatus())) {
-            fieldErrorSet.add(fieldRequired("status wizyty"));
-        }
-
         if (isBlank(wizytaDto.getRodzaj())) {
             fieldErrorSet.add(fieldRequired("rodzaj wizyty"));
         }

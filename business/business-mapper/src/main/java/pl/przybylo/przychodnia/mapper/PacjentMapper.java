@@ -28,6 +28,8 @@ public class PacjentMapper {
                 pacjentNewDto.getImie(),
                 pacjentNewDto.getNazwisko(),
                 pacjentNewDto.getDataUrodzenia(),
+                pacjentNewDto.getLogin(),
+                pacjentNewDto.getHaslo(),
                 adresMapper.map(pacjentNewDto.getAdres()),
                 kontaktMapper.map(pacjentNewDto.getKontakt())
         );
@@ -58,6 +60,8 @@ public class PacjentMapper {
                 pacjent.getImie(),
                 pacjent.getNazwisko(),
                 pacjent.getDataUrodzenia(),
+                pacjent.getLogin(),
+                pacjent.getHaslo(),
                 adresMapper.map(pacjent.getAdres()),
                 kontaktMapper.map(pacjent.getKontakt())
         );

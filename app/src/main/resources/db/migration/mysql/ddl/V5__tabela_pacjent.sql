@@ -4,6 +4,8 @@ create table pacjent (
   pesel varchar(11) not null,
   imie varchar(128) not null,
   nazwisko varchar(128) not null,
+  login varchar (128) not null,
+  haslo varchar (16) not null,
   data_urodzenia date not null,
   kod_pocztowy varchar(6),
   miejscowosc varchar(128),

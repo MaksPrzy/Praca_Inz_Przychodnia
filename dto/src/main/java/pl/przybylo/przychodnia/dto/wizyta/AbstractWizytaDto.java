@@ -19,7 +19,7 @@ public abstract class AbstractWizytaDto {
     protected Long gabinetId;
     protected LocalDateTime dataWizytyOd;
     protected LocalDateTime dataWizytyDo;
-    protected String status;
+//    protected String status;
     protected String rodzaj;
 
 }
