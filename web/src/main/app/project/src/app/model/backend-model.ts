@@ -102,7 +102,6 @@ export interface AbstractPacjentDto {
     pesel: string;
     dataUrodzenia: Date;
     adres: AdresDto;
-    kontakt: KontaktDto;
 }
 
 export interface AdresDto {
@@ -110,13 +109,6 @@ export interface AdresDto {
     miejscowosc: string;
     ulica: string;
     numerDomu: string;
-    numerLokalu: string;
-}
-
-export interface KontaktDto {
-    email: string;
-    telefonKomorkowy: string;
-    telefonStacjonarny: string;
 }
 
 export interface PacjentDetailViewDto extends AbstractPacjentDto {

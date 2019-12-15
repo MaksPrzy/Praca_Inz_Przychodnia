@@ -9,21 +9,20 @@
 input[type=text], input[type=password] {
     width: 100%;
     padding: 1px;
-    margin: 0.5px 0 2px 0;
+    margin:2px 0 10px 0;
     display: inline-block;
     background: #b9dfc2;
 }
 
 input[type=text]:focus, input[type=password]:focus {
-    background-color: #b9dfc2;
+    background: url("https://images.unsplash.com/photo-1524222928538-afb4409a0d70?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80");
     outline: none;
 }
-
 
 /* Set a style for the submit/register button */
 .registerbtn {
     background-color: #e74c3c;
-    color: white;
+    color: black;
     padding: 16px 20px;
     margin: 8px 0;
     border: none;
@@ -36,7 +35,7 @@ input[type=text]:focus, input[type=password]:focus {
     opacity:1;
 }
 
-/* Add a blue text color to links */
+
 a {
     color: darkred;
 }

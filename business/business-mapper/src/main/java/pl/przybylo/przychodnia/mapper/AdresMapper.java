@@ -18,8 +18,7 @@ public class AdresMapper {
                 adresDto.getKodPocztowy(),
                 adresDto.getMiejscowosc(),
                 adresDto.getUlica(),
-                adresDto.getNumerDomu(),
-                adresDto.getNumerLokalu()
+                adresDto.getNumerDomu()
         );
     }
 
@@ -32,8 +31,7 @@ public class AdresMapper {
                 adres.getKodPocztowy(),
                 adres.getMiejscowosc(),
                 adres.getUlica(),
-                adres.getNumerDomu(),
-                adres.getNumerLokalu()
+                adres.getNumerDomu()
         );
     }
 

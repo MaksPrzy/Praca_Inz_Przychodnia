@@ -1,51 +1,52 @@
-<div class="container h-100">
-    <div class="d-flex justify-content-center h-100">
-        <div class="searchbar">
-            <input class="search_input" type="text" name="searchBy" [(ngModel)]="searchBy"
-                   placeholder="Wyszukaj swojego lekarza">
-            <a [routerLink]="['/wyniki-wyszukiwania']" [queryParams]="{searchBy: searchBy}" class="search_icon"><i
-                class="fas fa-search"></i></a>
+<div class="container h-100 hello">
+    <div class="photo">
+        <div style="margin-top: 150px;" class="d-flex justify-content-center h-100">
+            <div class="searchbar">
+                <input class="search_input" type="text" name="searchBy" [(ngModel)]="searchBy "
+                       placeholder="Wyszukaj swojego lekarza">
+                <a [routerLink]="['/wyniki-wyszukiwania']" [queryParams]="{searchBy: searchBy}" class="search_icon"><i
+                    class="fas fa-search"></i></a>
+            </div>
         </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col col-xs-12">
-            <div class="blog-grids">
-                <div class="grid">
-                    <div class="entry-media">
-                        <img src="" alt="">
-                    </div>
-                    <div class="entry-body">
-                        <h3><a target="_blank">Znajdz swojego specjaliste</a></h3>
-                        <p>Wybierz spośród naszych lekarzy i specjalistów.</p>
-                        <br/>
-                        <br/>
-                        <div class="read-more-date">
+        <div class="test container">
+            <div class="row">
+                <div class="blog-grids">
+                    <div class="grid">
+                        <div class="entry-media">
+                            <img src="" alt="">
+                        </div>
+                        <div class="entry-body">
+                            <h3><a target="_blank">Znajdz swojego specjaliste</a></h3>
+                            <p>Wybierz spośród naszych lekarzy i specjalistów.</p>
+                            <br/>
+                            <br/>
+                            <div class="read-more-date">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="grid">
-                    <div class="entry-media">
-                        <img src="" alt="">
-                    </div>
-                    <div class="entry-body">
-                        <h3><a target="_blank">Łatwo umów wizytę</a></h3>
-                        <p>Wybierz odpowiadający Ci termin, podaj swoje dane, potwierdź... i już. Wizyta umówiona!</p>
-                        <br/>
-                        <div class="read-more-date">
+                    <div class="grid">
+                        <div class="entry-media">
+                            <img src="" alt="">
+                        </div>
+                        <div class="entry-body">
+                            <h3><a target="_blank">Łatwo umów wizytę</a></h3>
+                            <p>Wybierz odpowiadający Ci termin, podaj swoje dane, potwierdź... i już. Wizyta
+                                umówiona!</p>
+                            <br/>
+                            <div class="read-more-date">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="grid">
-                    <div class="entry-media">
-                        <img src="" alt="">
-                    </div>
-                    <div class="entry-body">
-                        <h3><a target="_blank">Serwis MAXMED jest bezpieczny i bezpłatny</a></h3>
-                        <p>Korzystanie z serwisu MAXMED jest dla pacjentów zupełnie bezpłatne i bezpieczne.</p>
-                        <div class="read-more-date">
+                    <div class="grid">
+                        <div class="entry-media">
+                            <img src="" alt="">
+                        </div>
+                        <div class="entry-body">
+                            <h3><a target="_blank">Serwis MAXMED jest bezpieczny i bezpłatny</a></h3>
+                            <p>Korzystanie z serwisu MAXMED jest dla pacjentów zupełnie bezpłatne i bezpieczne.</p>
+                            <div class="read-more-date">
+                                <br/>
+                            </div>
                         </div>
                     </div>
                 </div>

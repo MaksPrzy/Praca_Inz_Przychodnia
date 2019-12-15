@@ -15,7 +15,6 @@ import static pl.wavesoftware.eid.utils.EidPreconditions.checkNotNull;
 public class PacjentMapper {
 
     private final AdresMapper adresMapper;
-    private final KontaktMapper kontaktMapper;
 
     public Pacjent map(String numerKartoteki, PacjentNewDto pacjentNewDto) {
         if (isNull(pacjentNewDto)) {
@@ -28,10 +27,10 @@ public class PacjentMapper {
                 pacjentNewDto.getImie(),
                 pacjentNewDto.getNazwisko(),
                 pacjentNewDto.getDataUrodzenia(),
-                pacjentNewDto.getLogin(),
+                pacjentNewDto.getEmail(),
                 pacjentNewDto.getHaslo(),
-                adresMapper.map(pacjentNewDto.getAdres()),
-                kontaktMapper.map(pacjentNewDto.getKontakt())
+                pacjentNewDto.getTelefonKomorkowy(),
+                adresMapper.map(pacjentNewDto.getAdres())
         );
     }
 
@@ -44,7 +43,7 @@ public class PacjentMapper {
         pacjentEditDto.setPesel(pacjentEditDto.getPesel());
         pacjentEditDto.setDataUrodzenia(pacjentEditDto.getDataUrodzenia());
         adresMapper.map(pacjentEditDto.getAdres());
-        kontaktMapper.map(pacjentEditDto.getKontakt());
+
     }
 
 
@@ -60,10 +59,10 @@ public class PacjentMapper {
                 pacjent.getImie(),
                 pacjent.getNazwisko(),
                 pacjent.getDataUrodzenia(),
-                pacjent.getLogin(),
+                pacjent.getEmail(),
                 pacjent.getHaslo(),
-                adresMapper.map(pacjent.getAdres()),
-                kontaktMapper.map(pacjent.getKontakt())
+                pacjent.getTelefonKomorkowy(),
+                adresMapper.map(pacjent.getAdres())
         );
     }
 
