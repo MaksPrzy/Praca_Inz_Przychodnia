@@ -30,7 +30,7 @@ public class UzytkownikDto implements UserDetails {
 
     @Override
     public String getUsername() {
-        return uzytkownik.getLogin();
+        return uzytkownik.getEmail();
     }
 
     @Override

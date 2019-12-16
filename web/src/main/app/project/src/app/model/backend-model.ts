@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 2.16.538 on 2019-12-11 20:47:27.
+// Generated using typescript-generator version 2.16.538 on 2019-12-16 19:54:28.
 
 export interface AbstractGabinetDto {
     nazwa: string;
@@ -101,9 +101,10 @@ export interface AbstractPacjentDto {
     nazwisko: string;
     pesel: string;
     dataUrodzenia: Date;
-    login: string;
+    email: string;
+    haslo: string;
+    telefonKomorkowy: string;
     adres: AdresDto;
-    kontakt: KontaktDto;
 }
 
 export interface AdresDto {
@@ -111,28 +112,18 @@ export interface AdresDto {
     miejscowosc: string;
     ulica: string;
     numerDomu: string;
-    numerLokalu: string;
-}
-
-export interface KontaktDto {
-    email: string;
-    telefonKomorkowy: string;
-    telefonStacjonarny: string;
 }
 
 export interface PacjentDetailViewDto extends AbstractPacjentDto {
     id: number;
     numerKartoteki: string;
-    haslo: string;
 }
 
 export interface PacjentEditDto extends AbstractPacjentDto {
     id: number;
-    haslo: string;
 }
 
 export interface PacjentNewDto extends AbstractPacjentDto {
-    haslo: string;
 }
 
 export interface UzytkownikDto extends UserDetails {
@@ -190,13 +181,13 @@ export interface GrantedAuthority extends Serializable {
 }
 
 export interface UserDetails extends Serializable {
-    enabled: boolean;
     password: string;
+    accountNonLocked: boolean;
+    accountNonExpired: boolean;
+    credentialsNonExpired: boolean;
+    enabled: boolean;
     username: string;
     authorities: GrantedAuthority[];
-    accountNonExpired: boolean;
-    accountNonLocked: boolean;
-    credentialsNonExpired: boolean;
 }
 
 export interface Serializable {

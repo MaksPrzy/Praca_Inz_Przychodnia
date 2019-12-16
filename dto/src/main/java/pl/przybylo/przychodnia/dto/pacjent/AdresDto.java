@@ -13,6 +13,5 @@ public class AdresDto {
     private String miejscowosc;
     private String ulica;
     private String numerDomu;
-    private String numerLokalu;
 
 }

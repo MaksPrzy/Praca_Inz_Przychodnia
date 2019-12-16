@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface PacjentRepository extends JpaRepository<Pacjent, Long>, Repository<Pacjent> {
 
-    Optional<Pacjent> findByLogin(String login);
+    Optional<Pacjent> findByEmail(String email);
 
     default Pacjent findByIdOrThrowException(long id) {
         return findById(id).orElseThrow(() -> new PacjentNotFoundException(id));

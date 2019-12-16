@@ -29,36 +29,35 @@ public class Pacjent implements Searchable {
     private String imie;
     private String nazwisko;
     private LocalDate dataUrodzenia;
-    private String login;
+    private String email;
     private String haslo;
+    private String telefonKomorkowy;
 
     @Embedded
     private Adres adres;
-
-    @Embedded
-    private Kontakt kontakt;
 
     @Column(columnDefinition = "text")
     private String fullTextSearch;
 
     public Pacjent(String numerKartoteki, String pesel, String imie, String nazwisko, LocalDate dataUrodzenia,
-                   String login, String haslo, Adres adres, Kontakt kontakt) {
+                   String email, String haslo, String telefonKomorkowy, Adres adres) {
         checkArgument(isNotBlank(numerKartoteki), "20190606193118");
         checkArgument(isNotBlank(pesel), "20190606193956");
-        checkArgument(isNotBlank(imie),"20190605204625");
-        checkArgument(isNotBlank(nazwisko),"20190605204625");
-        checkArgument(isNotBlank(login),"20191209202514");
-        checkArgument(isNotBlank(haslo),"20191209202537");
+        checkArgument(isNotBlank(imie), "20190605204625");
+        checkArgument(isNotBlank(nazwisko), "20190605204625");
+        checkArgument(isNotBlank(email), "20191209202514");
+        checkArgument(isNotBlank(haslo), "20191209202537");
+        checkArgument(isNotBlank(telefonKomorkowy), "20191215132114");
 
         this.numerKartoteki = numerKartoteki;
         this.pesel = pesel;
         this.imie = imie;
         this.nazwisko = nazwisko;
-        this.login = checkNotNull(login, "20191210204056");
+        this.email = checkNotNull(email, "20191210204056");
         this.haslo = checkNotNull(haslo, "20191210204110");
+        this.telefonKomorkowy = checkNotNull(telefonKomorkowy, "20191215132141");
         this.dataUrodzenia = checkNotNull(dataUrodzenia, "20190606182105");
         this.adres = checkNotNull(adres, "20190606182623");
-        this.kontakt = checkNotNull(kontakt, "20190606182628");
     }
 
     @PrePersist

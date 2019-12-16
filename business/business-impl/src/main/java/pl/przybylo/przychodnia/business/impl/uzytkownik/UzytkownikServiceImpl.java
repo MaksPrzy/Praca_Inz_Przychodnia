@@ -24,10 +24,10 @@ public class UzytkownikServiceImpl implements UzytkownikService, UserDetailsServ
     private final PacjentMapper pacjentMapper;
 
     @Override
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        checkArgument(isNotBlank(login), "20191211201700");
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        checkArgument(isNotBlank(email), "20191211201700");
 
-        Pacjent uzytkownik = pacjentRepository.findByLogin(login).orElseThrow(() -> new BadLoginOrPasswordException());
+        Pacjent uzytkownik = pacjentRepository.findByEmail(email).orElseThrow(() -> new BadLoginOrPasswordException());
         PacjentDetailViewDto pacjentDetailViewDto = pacjentMapper.map(uzytkownik);
 
         return new UzytkownikDto(pacjentDetailViewDto);

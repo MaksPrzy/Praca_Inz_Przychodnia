@@ -1,10 +1,12 @@
-
+.test {
+    position: fixed;
+    bottom: 10px;
+}
 body,html{
     height: 50%;
-    width: 50%;
+    width: 100%;
     margin: 0;
     padding: 0;
-    background: #b9dfc2 !important;
 }
 
 .searchbar{
@@ -17,14 +19,14 @@ body,html{
 }
 
 .search_input{
-    color: white;
-    border: 0;
+    //color: white;
+    border: 100px;
     outline: 0;
     background: none;
     width: 0;
     caret-color:transparent;
     line-height: 40px;
-    transition: width 0.4s linear;
+    transition: width 3s linear;
 }
 
 .searchbar:hover > .search_input{
@@ -35,7 +37,6 @@ body,html{
 }
 
 .searchbar:hover > .search_icon{
-    background: white;
     color: #e74c3c;
 }
 
@@ -126,7 +127,7 @@ body{
 }
 
 .entry-body h3 a:hover {
-    color: #6220d9;
+    color: #000000;
     text-decoration: none;
 }
 

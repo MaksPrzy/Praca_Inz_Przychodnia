@@ -20,8 +20,7 @@
             <td>{{lekarz.numer}}</td>
             <td>
                 <div *ngFor="let specjalizacja of lekarz.specjalizacjaCollection">
-                    {{specjalizacja.nazwa}} [doświadczenie w
-                    latach: {{getExperienceInYears(specjalizacja.rokUzyskaniaDyplomuZeSpecjalizacji)}}]
+                    {{specjalizacja.nazwa}} - doświadczenie: ({{getExperienceInYears(specjalizacja.rokUzyskaniaDyplomuZeSpecjalizacji)}})
                 </div>
             </td>
             <td>
