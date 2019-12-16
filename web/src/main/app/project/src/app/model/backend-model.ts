@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 2.16.538 on 2019-12-16 19:54:28.
+// Generated using typescript-generator version 2.16.538 on 2019-12-16 20:02:20.
 
 export interface AbstractGabinetDto {
     nazwa: string;
@@ -182,12 +182,12 @@ export interface GrantedAuthority extends Serializable {
 
 export interface UserDetails extends Serializable {
     password: string;
-    accountNonLocked: boolean;
-    accountNonExpired: boolean;
-    credentialsNonExpired: boolean;
     enabled: boolean;
     username: string;
     authorities: GrantedAuthority[];
+    accountNonExpired: boolean;
+    accountNonLocked: boolean;
+    credentialsNonExpired: boolean;
 }
 
 export interface Serializable {
