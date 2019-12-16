@@ -24,4 +24,8 @@
             </li>
         </ul>
     </div>
+
+    <div *ngIf="uzytkownik">
+        Zalogowany jako {{uzytkownik.imie}} {{uzytkownik.nazwisko}}
+    </div>
 </nav>

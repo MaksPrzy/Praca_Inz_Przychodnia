@@ -1,5 +1,5 @@
 insert into pacjent (numer_kartoteki, pesel,imie,nazwisko,email,haslo,telefon_komorkowy,data_urodzenia,kod_pocztowy, miejscowosc, ulica, numer_domu,full_text_search)
-values ('ABC123', '97080811190', 'Maksymilian', 'Przybyło','maks@gmail.com','haslo123','533533382','1997-02-25','35-123','Rzeszów','Rejtana','14','maksymilianprzybyloprzybylomaksymilian');
+values ('ABC123', '97080811190', 'Maksymilian', 'Przybyło','maks@gmail.com','$2a$10$ImoYPrkpmiiiz052Vbood.XrelTgeT72eebLVMffd9FXWbtaXKqwq','533533382','1997-02-25','35-123','Rzeszów','Rejtana','14','maksymilianprzybyloprzybylomaksymilian');
 
 insert into pacjent (numer_kartoteki, pesel,imie,nazwisko,email,haslo,telefon_komorkowy,data_urodzenia,kod_pocztowy, miejscowosc, ulica, numer_domu,full_text_search)
 values ('XYZ987', '96585844420', 'Marcin', 'Tyczka','marcin@gmail.com','haslo321' ,'568965895','1958-03-26','35-123', 'Rzeszów','Mickiewicza','5','marcintyczkatyczkamarcin');

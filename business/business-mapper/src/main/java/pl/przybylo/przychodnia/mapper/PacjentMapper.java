@@ -34,7 +34,6 @@ public class PacjentMapper {
         );
     }
 
-    // todo: tak jak w lekarzMapper
     public void mapToEdit(PacjentEditDto pacjentEditDto) {
         checkNotNull(pacjentEditDto, "20191111160155");
 
