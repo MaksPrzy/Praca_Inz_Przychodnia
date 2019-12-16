@@ -1,3 +1,3 @@
-1. app-request.interceptor.ts -> dodanie headera: X-Auth-Token, wstrzyknięcie UzytkownikService.
-
-2. WebSecurityConfiguration -> odkomentować.
+1. AbstractHarmonogramPozycjaDto dodać GabinetViewDto.
+2. AbstractHarmonogramPozycjaDto dodać Rodzaj.
+3. Odpowiednio zmodyfikować mappery.

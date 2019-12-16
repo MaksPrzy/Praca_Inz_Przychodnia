@@ -19,6 +19,4 @@ export class NavbarComponent implements OnInit {
         this.uzytkownik = this.uzytkownikService.uzytkownik;
     }
 
-
-
 }

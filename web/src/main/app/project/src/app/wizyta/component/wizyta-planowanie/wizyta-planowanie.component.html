@@ -1,164 +1,23 @@
 harmonogram as json:
 {{harmonogram | json}}
 
-
 <div class="content">
     <div class="container">
         <div class="row">
             <div class="table-responsive">
                 <table class="timetable table table-striped ">
-                    <thead>
-                    <tr class="text-center">
-                        <th scope="col"></th>
-                        <th scope="col">Poniedziałek</th>
-                        <th scope="col">Wtorek</th>
-                        <th scope="col">Środa</th>
-                        <th scope="col">Czwartek</th>
-                        <th scope="col">Piątek</th>
-                        <th scope="col">Sobota</th>
-                    </tr>
-                    </thead>
-                    <tbody>
                     <tr>
-                        <th scope="row">16.30 - 17.00</th>
-                        <td class="timetable-wizyty">30 MINUTES
-                            <br> 12:35 pm - 01:05 pm
-                        </td>
-                        <td></td>
-                        <td class="timetable-wizyty">30 MINUTES
-                            <br> 12:35 pm - 01:05 pm
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>&nbsp;</td>
+                        <td *ngFor="let day of dayCollection">{{day}}</td>
                     </tr>
-                    <tr>
-                        <th scope="row">07:00 Am - 08:00 Am</th>
-                        <td></td>
-                        <td></td>
-                        <td class="timetable-wizyty">Classes Name</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">08:00 Am - 09:00 Am</th>
-                        <td class="timetable-wizyty">30 MINUTES
-                            <br> 12:35 pm - 01:05 pm
+                    <tr *ngFor="let minute of minuteCollection">
+                        <td>{{getMinutesAsHours(minute)}}</td>
+                        <td *ngFor="let day of dayCollection; let dayIndex = index">
+                            <a href="">{{getDayInfo(dayIndex + 1, minute)?.gabinetId}}</a>
                         </td>
-                        <td class="timetable-wizyty">30 MINUTES
-                            <br> 12:35 pm - 01:05 pm
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
                     </tr>
-                    <tr>
-                        <th scope="row">09:00 Am - 10:00 Am</th>
-                        <td class="timetable-workout">Classes Name</td>
-                        <td class="timetable-workout">Classes Name</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">10:00 Am - 11:00 Am</th>
-                        <td></td>
-                        <td class="timetable-workout">30 MINUTES
-                            <br> 12:35 pm - 01:05 pm
-                        </td>
-                        <td></td>
-                        <td class="timetable-workout">30 MINUTES
-                            <br> 12:35 pm - 01:05 pm
-                        </td>
-                        <td class="timetable-workout">30 MINUTES
-                            <br> 12:35 pm - 01:05 pm
-                        </td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">11:00 Am - 12:00 Am</th>
-                        <td></td>
-                        <td class="timetable-workout">Classes Name</td>
-                        <td></td>
-                        <td class="timetable-workout">Classes Name</td>
-                        <td class="timetable-workout">Classes Name</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">12:00 Am - 01:00 Am</th>
-                        <td class="timetable-workout">30 MINUTES
-                            <br> 12:35 pm - 01:05 pm
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">01:00 Am - 02:00 Am</th>
-                        <td class="timetable-workout">Classes Name</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">02:00 Am - 03:00 Am</th>
-                        <td class="timetable-workout">30 MINUTES
-                            <br> 12:35 pm - 01:05 pm
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="timetable-workout">30 MINUTES
-                            <br> 12:35 pm - 01:05 pm
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">03:00 Am - 04:00 Am</th>
-                        <td class="timetable-workout">Classes Name</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="timetable-workout">Classes Name</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">04:00 Am - 05:00 Am</th>
-                        <td></td>
-                        <td></td>
-                        <td class="timetable-workout">30 MINUTES
-                            <br> 12:35 pm - 01:05 pm
-                        </td>
-                        <td class="timetable-workout">30 MINUTES
-                            <br> 12:35 pm - 01:05 pm
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    </tbody>
                 </table>
             </div>
-            <!-- timetable -->
         </div>
     </div>
 </div>
-
