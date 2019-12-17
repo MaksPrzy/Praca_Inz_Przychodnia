@@ -83,7 +83,7 @@ public class WizytaMapper {
         Pacjent pacjent = getPacjent(zaplanujWizyteDto.getPacjentId());
         Lekarz lekarz = getLekarz(zaplanujWizyteDto.getLekarzId());
         Specjalizacja specjalizacja = getSpecjalizacja(zaplanujWizyteDto.getSpecjalizacjaId());
-        Gabinet gabinet = getGabinet(zaplanujWizyteDto.getGabinetId());
+        Gabinet gabinet = getGabinet(zaplanujWizyteDto.getGabinet());
 
         return new Wizyta(
                 pacjent,
@@ -103,7 +103,7 @@ public class WizytaMapper {
         Pacjent pacjent = getPacjent(wizytaEditDto.getPacjentId());
         Lekarz lekarz = getLekarz(wizytaEditDto.getLekarzId());
         Specjalizacja specjalizacja = getSpecjalizacja(wizytaEditDto.getSpecjalizacjaId());
-        Gabinet gabinet = getGabinet(wizytaEditDto.getGabinetId());
+        Gabinet gabinet = getGabinet(wizytaEditDto.getGabinet());
 
         wizyta.setPacjent(pacjent);
         wizyta.setLekarz(lekarz);
@@ -135,9 +135,9 @@ public class WizytaMapper {
                 .orElseThrow(() -> new SpecjalizacjaNotFoundException(specjalizacjaId));
     }
 
-    private Gabinet getGabinet(Long gabinetId) {
-        return gabinetRepository.findById(gabinetId)
-                .orElseThrow(() -> new GabinetNotFoundException(gabinetId));
+    private Gabinet getGabinet(Long gabinet) {
+        return gabinetRepository.findById(gabinet)
+                .orElseThrow(() -> new GabinetNotFoundException(gabinet));
     }
 
 }

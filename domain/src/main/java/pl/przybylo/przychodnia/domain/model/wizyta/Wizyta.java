@@ -34,6 +34,7 @@ public class Wizyta {
     private Specjalizacja specjalizacja;
 
     @OneToOne
+    @JoinColumn(name = "gabinet_id", nullable = false)
     private Gabinet gabinet;
 
     private LocalDateTime dataWizytyOd;

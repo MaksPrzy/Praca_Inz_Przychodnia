@@ -13,7 +13,7 @@ harmonogram as json:
                     <tr *ngFor="let minute of minuteCollection">
                         <td>{{getMinutesAsHours(minute)}}</td>
                         <td *ngFor="let day of dayCollection; let dayIndex = index">
-                            <a href="">{{getDayInfo(dayIndex + 1, minute)?.gabinetId}}</a>
+                            <a href="">{{getDayInfo(dayIndex + 1, minute)?.gabinet}}</a>
                         </td>
                     </tr>
                 </table>

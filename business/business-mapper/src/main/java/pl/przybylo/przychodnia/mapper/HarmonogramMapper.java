@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import pl.przybylo.przychodnia.domain.model.Harmonogram;
 import pl.przybylo.przychodnia.domain.model.HarmonogramPozycja;
 import pl.przybylo.przychodnia.domain.model.Lekarz;
+import pl.przybylo.przychodnia.dto.gabinet.GabinetViewDto;
 import pl.przybylo.przychodnia.dto.harmonogram.*;
 
 import java.util.List;
@@ -64,7 +65,7 @@ public class HarmonogramMapper {
         }
 
         return new HarmonogramPozycjaViewDto(
-                harmonogramPozycja.getGabinet().getId(),
+                gabinetMapper.map(harmonogramPozycja.getGabinet()),
                 harmonogramPozycja.getDzienTygodnia(),
                 harmonogramPozycja.getGodzinaOd(),
                 harmonogramPozycja.getGodzinaDo(),
@@ -127,7 +128,7 @@ public class HarmonogramMapper {
         }
 
         return new HarmonogramPozycjaEditDto(
-                harmonogramPozycja.getGabinet().getId(),
+                gabinetMapper.map(harmonogramPozycja.getGabinet()),
                 harmonogramPozycja.getDzienTygodnia(),
                 harmonogramPozycja.getGodzinaOd(),
                 harmonogramPozycja.getGodzinaDo(),
@@ -153,7 +154,7 @@ public class HarmonogramMapper {
         return new HarmonogramPozycja(
                 harmonogramPozycjaDto.getGodzinaOd(),
                 harmonogramPozycjaDto.getGodzinaDo(),
-                gabinetMapper.map(harmonogramPozycjaDto.getGabinetId())
+                gabinetMapper.map(harmonogramPozycjaDto.getGabinet())
         );
     }
 

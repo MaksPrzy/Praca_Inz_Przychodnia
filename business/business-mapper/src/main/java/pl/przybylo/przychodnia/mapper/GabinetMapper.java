@@ -35,6 +35,18 @@ public class GabinetMapper {
         );
     }
 
+    public Gabinet map(GabinetViewDto gabinetViewDto) {
+        if (isNull(gabinetViewDto)) {
+            return null;
+        }
+
+        return new Gabinet(
+                gabinetViewDto.getNazwa(),
+                gabinetViewDto.getOpis(),
+                gabinetViewDto.getPietro()
+        );
+    }
+
     public void map(Gabinet gabinet, GabinetEditDto gabinetEditDto) {
         checkNotNull(gabinet, "20190725195248");
         checkNotNull(gabinetEditDto, "20190725195257");
