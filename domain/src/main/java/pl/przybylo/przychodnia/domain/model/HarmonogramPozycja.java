@@ -29,7 +29,8 @@ public class HarmonogramPozycja {
     private int interwalCzasowy; // wyrazony w minutach
 
     @OneToOne
-    private Gabinet gabinet = new Gabinet();
+    @JoinColumn(name = "gabinet_id", nullable = false)
+    private Gabinet gabinet;
 
     public HarmonogramPozycja(LocalTime godzinaOd, LocalTime godzinaDo, Gabinet gabinet) {
         checkNotNull(godzinaOd, "20190609214816");

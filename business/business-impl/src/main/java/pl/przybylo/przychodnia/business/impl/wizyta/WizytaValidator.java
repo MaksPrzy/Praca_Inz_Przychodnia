@@ -78,7 +78,7 @@ public class WizytaValidator {
             fieldErrorSet.add(fieldRequired("specjalizacja"));
         }
 
-        if (isNull(wizytaDto.getGabinetId())) {
+        if (isNull(wizytaDto.getGabinet())) {
             fieldErrorSet.add(fieldRequired("gabinet"));
         }
 
