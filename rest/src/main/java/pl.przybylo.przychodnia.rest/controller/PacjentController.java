@@ -14,6 +14,7 @@ import pl.przybylo.przychodnia.dto.wizyta.ZaplanujWizyteDto;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*") // todo: do usuniecia
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/pacjenci")
@@ -58,21 +59,21 @@ public class PacjentController {
 
     @PostMapping("/{id}/wizyty")
     @ResponseStatus(HttpStatus.CREATED)
-    public void ZaplanowanaWizyta(@PathVariable long id, @RequestBody ZaplanujWizyteDto zaplanujWizyteDto) {
+    public void zaplanuj(@PathVariable long id, @RequestBody ZaplanujWizyteDto zaplanujWizyteDto) {
         wizytaService.zaplanuj(zaplanujWizyteDto);
     }
 
     @PutMapping("/{id}/wizyty/{wizytaId}")
     @ResponseStatus(HttpStatus.OK)
-    public void ZakonczonaWizyta(@PathVariable Long id,
-                                 @PathVariable Long wizytaId,
-                                 @RequestBody ZakonczWizyteDto zakonczWizyteDto) {
+    public void zakoncz(@PathVariable Long id,
+                        @PathVariable Long wizytaId,
+                        @RequestBody ZakonczWizyteDto zakonczWizyteDto) {
         wizytaService.zakoncz(zakonczWizyteDto);
     }
 
     @DeleteMapping("/{id}/wizyty/{wizytaId}")
     @ResponseStatus(HttpStatus.OK)
-    public void UsunWizyte(@PathVariable long id,
+    public void usunWizyte(@PathVariable long id,
                            @PathVariable Long wizytaId,
                            @RequestBody WizytaViewDto WizytaViewDto) {
         wizytaService.delete(id);

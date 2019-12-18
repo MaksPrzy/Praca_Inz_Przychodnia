@@ -14,7 +14,6 @@ import java.time.LocalTime;
 @AllArgsConstructor
 public abstract class AbstractHarmonogramPozycjaDto {
 
-
     protected GabinetViewDto gabinet;
     protected int dzienTygodnia;
     protected LocalTime godzinaOd;

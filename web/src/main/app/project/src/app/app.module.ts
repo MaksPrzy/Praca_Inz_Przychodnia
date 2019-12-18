@@ -21,6 +21,8 @@ import {WynikiWyszukiwaniaComponent} from "./wyniki-wyszukiwania/wyniki-wyszukiw
 import {WizytaListComponent} from "./wizyta/component/wizyta-list/wizyta-list.component";
 import {WizytaPlanowanieComponent} from "./wizyta/component/wizyta-planowanie/wizyta-planowanie.component";
 import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
+import {ReactiveFormsModule} from "@angular/forms";
+import {AuthRequestInterceptor} from "./interceptor/auth-request.interceptor";
 
 @NgModule({
     declarations: [
@@ -42,13 +44,19 @@ import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
         HttpClientModule,
         MatToolbarModule,
         UserInterfaceModule,
-        NoopAnimationsModule
+        NoopAnimationsModule,
+        ReactiveFormsModule
     ],
     providers: [
         MessageService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AppRequestInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthRequestInterceptor,
             multi: true
         },
         GabinetService,

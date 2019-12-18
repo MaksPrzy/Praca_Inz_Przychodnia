@@ -7,8 +7,10 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import static com.google.common.collect.Sets.newHashSet;
 import static pl.wavesoftware.eid.utils.EidPreconditions.checkNotNull;
 
 @Getter
@@ -33,10 +35,10 @@ public class Harmonogram {
 
     private boolean aktywny = false;
 
-    public Harmonogram(LocalDateTime obowiazujeOd, LocalDateTime obowiazujeDo, Set<HarmonogramPozycja> pozycjaCollection) {
+    public Harmonogram(LocalDateTime obowiazujeOd, LocalDateTime obowiazujeDo, List<HarmonogramPozycja> pozycjaCollection) {
         this.obowiazujeOd = checkNotNull(obowiazujeOd, "20190822185016");
         this.obowiazujeDo = checkNotNull(obowiazujeDo, "20190822185122");
-        this.pozycjaCollection = checkNotNull(pozycjaCollection, "20190822185129");
+        this.pozycjaCollection = checkNotNull(newHashSet(pozycjaCollection), "20190822185129");
     }
 
 }

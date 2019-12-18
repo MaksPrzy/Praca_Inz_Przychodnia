@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -12,6 +13,6 @@ public abstract class AbstractHarmonogramDto {
 
     protected LocalDateTime obowiazujeOd;
     protected LocalDateTime obowiazujeDo;
-    protected Set<? extends AbstractHarmonogramPozycjaDto> pozycjaCollection;
+    protected List<? extends AbstractHarmonogramPozycjaDto> pozycjaCollection;
 
 }

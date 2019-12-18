@@ -14,13 +14,16 @@
                 <a class="nav-link" href="RODO">Prywatność danych</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="logowanie">Zaloguj się!</a>
+                <a class="nav-link" href="logowanie" *ngIf="!uzytkownik">Zaloguj się!</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="rejestracja">Zarejestruj się!</a>
+                <a class="nav-link" href="rejestracja" *ngIf="!uzytkownik">Zarejestruj się!</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="wizyty">Sprawdz dostępne wizyty</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="home" *ngIf="uzytkownik" (click)="onLogout()">Wyloguj mnie</a>
             </li>
         </ul>
     </div>

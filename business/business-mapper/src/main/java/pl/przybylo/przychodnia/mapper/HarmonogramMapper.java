@@ -6,17 +6,16 @@ import org.springframework.stereotype.Component;
 import pl.przybylo.przychodnia.domain.model.Harmonogram;
 import pl.przybylo.przychodnia.domain.model.HarmonogramPozycja;
 import pl.przybylo.przychodnia.domain.model.Lekarz;
-import pl.przybylo.przychodnia.dto.gabinet.GabinetViewDto;
 import pl.przybylo.przychodnia.dto.harmonogram.*;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.newHashSet;
 import static java.util.Objects.isNull;
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toSet;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static pl.wavesoftware.eid.utils.EidPreconditions.checkNotNull;
 
@@ -49,14 +48,14 @@ public class HarmonogramMapper {
         );
     }
 
-    private Set<HarmonogramPozycjaViewDto> mapToHarmonogramPozycjaViewDto(Set<HarmonogramPozycja> harmonogramPozycjaSet) {
+    private List<HarmonogramPozycjaViewDto> mapToHarmonogramPozycjaViewDto(Set<HarmonogramPozycja> harmonogramPozycjaSet) {
         if (isEmpty(harmonogramPozycjaSet)) {
-            return newHashSet();
+            return newArrayList();
         }
 
         return harmonogramPozycjaSet.stream()
                 .map(p -> mapToHarmonogramPozycjaViewDto(p))
-                .collect(toSet());
+                .collect(toList());
     }
 
     private HarmonogramPozycjaViewDto mapToHarmonogramPozycjaViewDto(HarmonogramPozycja harmonogramPozycja) {
@@ -91,7 +90,7 @@ public class HarmonogramMapper {
 
         harmonogram.setObowiazujeOd(harmonogramEditDto.getObowiazujeOd());
         harmonogram.setObowiazujeDo(harmonogramEditDto.getObowiazujeDo());
-        harmonogram.setPozycjaCollection(map(harmonogramEditDto.getPozycjaCollection()));
+        harmonogram.setPozycjaCollection(newHashSet(map(harmonogramEditDto.getPozycjaCollection())));
     }
 
 
@@ -112,14 +111,14 @@ public class HarmonogramMapper {
         );
     }
 
-    private Set<HarmonogramPozycjaEditDto> mapHarmonogramPozycja(Set<HarmonogramPozycja> harmonogramPozycjaSet) {
-        if (isEmpty(harmonogramPozycjaSet)) {
-            return newHashSet();
+    private List<HarmonogramPozycjaEditDto> mapHarmonogramPozycja(Set<HarmonogramPozycja> harmonogramPozycjaList) {
+        if (isEmpty(harmonogramPozycjaList)) {
+            return newArrayList();
         }
 
-        return harmonogramPozycjaSet.stream()
+        return harmonogramPozycjaList.stream()
                 .map(p -> map(p))
-                .collect(toSet());
+                .collect(toList());
     }
 
     private HarmonogramPozycjaEditDto map(HarmonogramPozycja harmonogramPozycja) {
@@ -136,14 +135,14 @@ public class HarmonogramMapper {
         );
     }
 
-    private <T extends AbstractHarmonogramPozycjaDto> Set<HarmonogramPozycja> map(Set<T> harmonogramPozycjaDtoCollection) {
+    private <T extends AbstractHarmonogramPozycjaDto> List<HarmonogramPozycja> map(List<T> harmonogramPozycjaDtoCollection) {
         if (isEmpty(harmonogramPozycjaDtoCollection)) {
-            return newHashSet();
+            return newArrayList();
         }
 
         return harmonogramPozycjaDtoCollection.stream()
                 .map(h -> map(h))
-                .collect(toSet());
+                .collect(Collectors.toList());
     }
 
     private <T extends AbstractHarmonogramPozycjaDto> HarmonogramPozycja map(T harmonogramPozycjaDto) {

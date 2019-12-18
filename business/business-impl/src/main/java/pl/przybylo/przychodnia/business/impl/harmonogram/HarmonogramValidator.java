@@ -15,6 +15,7 @@ import pl.przybylo.przychodnia.dto.harmonogram.HarmonogramNewDto;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
 
 import static com.google.common.collect.Sets.newHashSet;
@@ -57,7 +58,7 @@ public class HarmonogramValidator {
     }
 
     private void check(Long lekarzId, LocalDateTime obowiazujeOd, LocalDateTime obowiazujeDo,
-                       Set<? extends AbstractHarmonogramPozycjaDto> pozycjaCollection, boolean shouldCheckDatesImpose) {
+                       List<? extends AbstractHarmonogramPozycjaDto> pozycjaCollection, boolean shouldCheckDatesImpose) {
         Set<FieldError> fieldErrorSet = newHashSet();
 
         if (isNull(lekarzId)) {
@@ -112,7 +113,7 @@ public class HarmonogramValidator {
         }
     }
 
-    private Set<HarmonogramSingleDay> from(Set<? extends AbstractHarmonogramPozycjaDto> harmonogramPozycjaNewDtoSet) {
+    private Set<HarmonogramSingleDay> from(List<? extends AbstractHarmonogramPozycjaDto> harmonogramPozycjaNewDtoSet) {
         return harmonogramPozycjaNewDtoSet.stream()
                 .map(h -> from(h))
                 .collect(toSet());

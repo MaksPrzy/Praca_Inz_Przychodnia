@@ -1,19 +1,19 @@
-<form action="action_page.php">
+<form [formGroup]="loginForm" (submit)="onLogin()">
     <div class="container">
         <h1>Witaj ponownie!</h1>
         <hr>
 
         <div class="col-sm-5">
             <label for="email"><b>Email</b></label>
-            <input type="email" id="email"class="form-control" name="email">
+            <input type="email" id="email" class="form-control" formControlName="email">
         </div>
 
         <div class="col-sm-5">
             <label for="haslo"><b>Hasło</b></label>
-            <input type="haslo" id="haslo"class="form-control" name="haslo" type="password">
+            <input type="haslo" id="haslo" class="form-control" type="password" formControlName="haslo">
         </div>
         <div class="col-sm-5" style="text-align: center">
-        <button type="submit" class="registerbtn">Zaloguj się</button>
+        <button type="submit" class="registerbtn" (click)="onLogin()">Zaloguj się</button>
     </div>
     </div>
 </form>

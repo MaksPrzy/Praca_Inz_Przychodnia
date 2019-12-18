@@ -1,6 +1,5 @@
 package pl.przybylo.przychodnia.rest.controller;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +10,7 @@ import pl.przybylo.przychodnia.dto.gabinet.GabinetViewDto;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*") // todo: do usuniecia
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/gabinety")

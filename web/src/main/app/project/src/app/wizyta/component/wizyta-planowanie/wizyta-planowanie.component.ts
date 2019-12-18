@@ -14,6 +14,7 @@ export class WizytaPlanowanieComponent implements OnInit {
     maxGodzinaDo: number;
     minuteCollection: Array<number> = [];
     dayCollection: Array<string> = ['poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota', 'niedziela'];
+    availableHours: any = {};
 
     constructor(private lekarzService: LekarzService) {
     }
@@ -25,29 +26,36 @@ export class WizytaPlanowanieComponent implements OnInit {
                 this.minGodzinaOd = this.getMinGodzinaOd(this.harmonogram.pozycjaCollection);
                 this.maxGodzinaDo = this.getMaxGodzinaDo(this.harmonogram.pozycjaCollection);
                 this.initMinuteCollection();
+                this.initAvailableHours();
             });
     }
 
-    getDayInfo(dayIndex: number, minute: number): AbstractHarmonogramPozycjaDto {
-        const range: any = {};
-
+    initAvailableHours(): void {
         for (let pozycja of this.harmonogram.pozycjaCollection) {
-            range[pozycja.dzienTygodnia] = {
+            this.availableHours[pozycja.dzienTygodnia] = {
                 minutaOd: this.getHoursAsMinutes(pozycja.godzinaOd),
                 minutaDo: this.getHoursAsMinutes(pozycja.godzinaDo),
                 dayInfo: pozycja
             };
         }
+    }
 
-        if (!range[dayIndex]) {
+    getDayInfo(dayIndex: number, minute: number): AbstractHarmonogramPozycjaDto {
+        if (!this.availableHours[dayIndex]) {
             return;
         }
 
-        const available: boolean = minute >= range[dayIndex]['minutaOd'] && minute <= range[dayIndex]['minutaDo'];
-
-        if (available) {
-            return range[dayIndex]['dayInfo'];
+        if (this.isAvailableHour(dayIndex, minute)) {
+            return this.availableHours[dayIndex]['dayInfo'];
         }
+    }
+
+    isAvailableHour(dayIndex: number, minute: number): boolean {
+        if (!this.availableHours[dayIndex]) {
+            return;
+        }
+
+        return minute >= this.availableHours[dayIndex]['minutaOd'] && minute <= this.availableHours[dayIndex]['minutaDo'];
     }
 
     getMinutesAsHours(minutes: number): string {

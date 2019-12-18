@@ -54,9 +54,9 @@ public class PacjentMapper {
         return new PacjentDetailViewDto(
                 pacjent.getId(),
                 pacjent.getNumerKartoteki(),
-                pacjent.getPesel(),
                 pacjent.getImie(),
                 pacjent.getNazwisko(),
+                pacjent.getPesel(),
                 pacjent.getDataUrodzenia(),
                 pacjent.getEmail(),
                 pacjent.getHaslo(),
