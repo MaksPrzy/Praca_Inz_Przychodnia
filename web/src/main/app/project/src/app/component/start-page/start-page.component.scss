@@ -19,22 +19,23 @@ body,html{
 }
 
 .search_input{
-    //color: white;
+    color: white;
     border: 100px;
     outline: 0;
     background: none;
-    width: 0;
+    width: 300px;
     caret-color:transparent;
     line-height: 40px;
-    transition: width 3s linear;
+    //transition: width 1500s linear;
+
 }
 
-.searchbar:hover > .search_input{
-    padding: 0 10px;
-    width: 300px;
-    caret-color:red;
-    transition: width 0.4s linear;
-}
+//.searchbar:hover > .search_input{
+//    padding: 0 10px;
+//    width: 300px;
+//    caret-color:red;
+//    transition: width 0s linear;
+//}
 
 .searchbar:hover > .search_icon{
     color: #e74c3c;
@@ -87,7 +88,7 @@ body{
 }
 
 .blog-grids .grid {
-    background-color: #b9dfc2;
+    background-color: #fafafa;
     width: calc(33.33% - 30px);
     float: left;
     padding: 15px;
@@ -106,7 +107,12 @@ body{
 .entry-body {
     padding: 27px 10px;
 }
-
+.entry-body{
+    margin: 0;
+        font-family: Roboto, "Helvetica Neue", sans-serif;
+        background-image: url(https://i.pinimg.com/564x/c1/92/1d/c1921dd9f73833e5a16dcd9ed0417e72.jpg);
+        background-size: cover;
+    }
 .entry-body .cat {
     font-family: "Poppins", sans-serif;
     font-size: 12px;
@@ -123,7 +129,7 @@ body{
 }
 
 .entry-body h3 a {
-    color: #41516a;
+    color: #000000;
 }
 
 .entry-body h3 a:hover {
@@ -146,7 +152,7 @@ body{
     font-size: 16px;
     font-size: 1.06667rem;
     font-weight: 600;
-    color: #41516a;
+    color: #fafafa;
     text-transform: uppercase;
 }
 

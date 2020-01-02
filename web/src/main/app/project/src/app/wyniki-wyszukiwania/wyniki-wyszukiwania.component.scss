@@ -4,16 +4,16 @@
     overflow-y: auto;
 }
 #sailorTable{
-    white-space: normal;
+    white-space: pre-line;
 }
 tbody {
     display:block;
-    height:200px;
+    height:370px;
     overflow:auto;
 }
 thead, tbody tr {
     display:table;
-    width:100%;
+    width: 90%;
     table-layout:fixed;
 }
 
