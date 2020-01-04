@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 2.16.538 on 2020-01-02 19:22:38.
+// Generated using typescript-generator version 2.16.538 on 2020-01-04 10:27:22.
 
 export interface AbstractGabinetDto {
     nazwa: string;
@@ -123,7 +123,7 @@ export interface PacjentEditDto extends AbstractPacjentDto {
     id: number;
 }
 
-export interface PacjentNewDto extends AbstractPacjentDto {
+export interface PacjentRejestracjaDto extends AbstractPacjentDto {
 }
 
 export interface UzytkownikDto extends UserDetails {
@@ -132,15 +132,15 @@ export interface UzytkownikDto extends UserDetails {
 
 export interface UzytkownikRejestracjaDto extends UserDetails {
     uzytkownikRejestracja: PacjentDetailViewDto;
+    pesel: string;
+    dataUrodzenia: Date;
+    telefonKomorkowy: string;
     imie: string;
     nazwisko: string;
-    dataUrodzenia: Date;
-    pesel: string;
-    miejscowosc: AdresDto;
     kodPocztowy: AdresDto;
+    miejscowosc: AdresDto;
     ulica: AdresDto;
     numerDomu: AdresDto;
-    telefonKomorkowy: string;
 }
 
 export interface ZalogowanoDto {
@@ -156,20 +156,6 @@ export interface ZalogujDto {
 export interface ZarejestrowanoDto {
     uzytkownikRejestracja: PacjentDetailViewDto;
     token: string;
-}
-
-export interface ZarejestrujDto {
-    pesel: string;
-    imie: string;
-    nazwisko: string;
-    email: string;
-    haslo: string;
-    telefon: string;
-    dataUrodzenia: Date;
-    kodPoczowy: string;
-    miejscowosc: string;
-    ulica: string;
-    numerDomu: string;
 }
 
 export interface AbstractWizytaDto {
@@ -213,13 +199,13 @@ export interface GrantedAuthority extends Serializable {
 }
 
 export interface UserDetails extends Serializable {
-    password: string;
     enabled: boolean;
+    password: string;
     username: string;
     authorities: GrantedAuthority[];
-    credentialsNonExpired: boolean;
-    accountNonLocked: boolean;
     accountNonExpired: boolean;
+    accountNonLocked: boolean;
+    credentialsNonExpired: boolean;
 }
 
 export interface Serializable {

@@ -1,7 +1,9 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {PacjentDetailViewDto, PacjentNewDto, ZalogowanoDto, ZalogujDto} from "@przychodnia/model/backend-model";
+import {PacjentDetailViewDto, PacjentRejestracjaDto, ZalogowanoDto, ZalogujDto} from "@przychodnia/model/backend-model";
 import {Router} from "@angular/router";
+import {Observable} from "rxjs";
+import {Location} from '@angular/common';
 
 @Injectable()
 export class UzytkownikService {
@@ -9,7 +11,7 @@ export class UzytkownikService {
     private readonly UZYTKOWNIK: string = "uzytkownik";
     private readonly TOKEN: string = "token";
 
-    constructor(private router: Router, private httpClient: HttpClient) {
+    constructor(private router: Router, private httpClient: HttpClient, private location: Location) {
     }
 
     public logIn(zalogujDto: ZalogujDto): void {
@@ -22,8 +24,8 @@ export class UzytkownikService {
             });
     }
 
-    public register(newUzytkownik: PacjentNewDto) {
-
+    public registerIn(pacjentRejestracjaDto: PacjentRejestracjaDto): Observable<PacjentDetailViewDto> {
+        return <Observable<PacjentDetailViewDto>>this.httpClient.post('/pacjenci', pacjentRejestracjaDto);
     }
 
     public logOut(): void {

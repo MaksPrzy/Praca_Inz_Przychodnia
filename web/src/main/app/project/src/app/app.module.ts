@@ -23,6 +23,7 @@ import {WizytaPlanowanieComponent} from "./wizyta/component/wizyta-planowanie/wi
 import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
 import {ReactiveFormsModule} from "@angular/forms";
 import {AuthRequestInterceptor} from "./interceptor/auth-request.interceptor";
+import {LocationStrategy, PathLocationStrategy} from "@angular/common";
 
 @NgModule({
     declarations: [
@@ -58,6 +59,10 @@ import {AuthRequestInterceptor} from "./interceptor/auth-request.interceptor";
             provide: HTTP_INTERCEPTORS,
             useClass: AuthRequestInterceptor,
             multi: true
+        },
+        {
+            provide: LocationStrategy,
+            useClass: PathLocationStrategy
         },
         GabinetService,
         LekarzService,
