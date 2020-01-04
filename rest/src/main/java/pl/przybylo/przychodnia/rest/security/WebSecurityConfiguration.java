@@ -70,9 +70,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers("/uzytkownicy/zaloguj").anonymous()
-                .anyRequest().anonymous();
-//                .anyRequest().authenticated();
+                .antMatchers("/uzytkownicy/zaloguj").permitAll()
+                .antMatchers("/lekarze/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/pacjenci/**/wizyty").authenticated();
 
         http.addFilterBefore(authenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }

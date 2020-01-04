@@ -1,14 +1,19 @@
 import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {environment} from "../../environments/environment";
+import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
 
 @Injectable()
-export class AppRequestInterceptor implements HttpInterceptor {
+export class AuthRequestInterceptor implements HttpInterceptor {
+
+    constructor(private uzytkownikService: UzytkownikService) {
+    }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        const token: string = this.uzytkownikService.getToken() || '';
+
         request = request.clone({
-            url: environment.apiBaseUrl + request.url,
+            headers: request.headers.set('X-Auth-Token', token)
         });
 
         return next.handle(request);

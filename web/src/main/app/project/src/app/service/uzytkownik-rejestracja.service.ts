@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {PacjentDetailViewDto, PacjentNewDto, ZalogowanoDto, ZalogujDto} from "@przychodnia/model/backend-model";
+import {PacjentDetailViewDto, PacjentNewDto} from "@przychodnia/model/backend-model";
 import {Router} from "@angular/router";
 
 @Injectable()
-export class UzytkownikService {
+export class UzytkownikRejestracjaService {
 
     private readonly UZYTKOWNIK: string = "uzytkownik";
     private readonly TOKEN: string = "token";
@@ -12,15 +12,15 @@ export class UzytkownikService {
     constructor(private router: Router, private httpClient: HttpClient) {
     }
 
-    public logIn(zalogujDto: ZalogujDto): void {
-        this.httpClient.post('/uzytkownicy/zaloguj', zalogujDto)
-            .subscribe((zalogowanoDto: ZalogowanoDto) => {
-                localStorage.setItem(this.UZYTKOWNIK, JSON.stringify(zalogowanoDto.uzytkownik));
-                localStorage.setItem(this.TOKEN, zalogowanoDto.token);
-
-                this.router.navigate(['/home']);
-            });
-    }
+    // public registerIn(: ZalogujDto): void {
+    //     this.httpClient.post('/rejestracja', )
+    //         .subscribe((: ZalogowanoDto) => {
+    //             localStorage.setItem(this.UZYTKOWNIK, JSON.stringify(zalogowanoDto.uzytkownik));
+    //             localStorage.setItem(this.TOKEN, zalogowanoDto.token);
+    //
+    //             this.router.navigate(['/home']);
+    //         });
+    // }
 
     public register(newUzytkownik: PacjentNewDto) {
 

@@ -8,7 +8,6 @@
         <tr>
             <th>Imie lekarza</th>
             <th>Nazwisko lekarza</th>
-            <th>Identyfikator</th>
             <th>Specjalizacja</th>
             <th>&nbsp;</th>
         </tr>
@@ -17,7 +16,6 @@
         <tr *ngFor="let lekarz of lekarzCollection">
             <td>{{lekarz.imie}}</td>
             <td>{{lekarz.nazwisko}}</td>
-            <td>{{lekarz.numer}}</td>
             <td>
                 <div *ngFor="let specjalizacja of lekarz.specjalizacjaCollection">
                     {{specjalizacja.nazwa}} - doświadczenie: ({{getExperienceInYears(specjalizacja.rokUzyskaniaDyplomuZeSpecjalizacji)}})

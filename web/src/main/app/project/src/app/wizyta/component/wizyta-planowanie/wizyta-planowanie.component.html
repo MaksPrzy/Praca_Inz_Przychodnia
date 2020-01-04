@@ -1,6 +1,3 @@
-harmonogram as json:
-{{harmonogram | json}}
-
 <div class="content">
     <div class="container">
         <div class="row">
@@ -12,8 +9,10 @@ harmonogram as json:
                     </tr>
                     <tr *ngFor="let minute of minuteCollection">
                         <td>{{getMinutesAsHours(minute)}}</td>
-                        <td *ngFor="let day of dayCollection; let dayIndex = index">
-                            <a href="">{{getDayInfo(dayIndex + 1, minute)?.gabinet}}</a>
+                        <td *ngFor="let day of dayCollection; let dayIndex = index"
+                            [ngStyle]="{'background-color': isAvailableHour(dayIndex + 1, minute) ? 'lightgreen' : ''}">
+                            <a href="" *ngIf="isAvailableHour(dayIndex + 1, minute)">umów</a><br/>
+                            {{getDayInfo(dayIndex + 1, minute)?.gabinet.nazwa}}
                         </td>
                     </tr>
                 </table>
