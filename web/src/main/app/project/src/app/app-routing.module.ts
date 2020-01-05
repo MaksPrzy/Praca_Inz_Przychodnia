@@ -8,13 +8,12 @@ import {UzytkownikLogowanieFormComponent} from "./uzytkownik/uzytkownik-logowani
 import {WynikiWyszukiwaniaComponent} from "./wyniki-wyszukiwania/wyniki-wyszukiwania.component";
 import {WizytaPlanowanieComponent} from "./wizyta/component/wizyta-planowanie/wizyta-planowanie.component";
 
-
 const routes: Routes = [
-    // {
-    //     path: '',
-    //     redirectTo: '',
-    //     pathMatch: 'full'
-    // },
+    {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full'
+    },
     {
         path: 'logowanie',
         component: UzytkownikLogowanieFormComponent

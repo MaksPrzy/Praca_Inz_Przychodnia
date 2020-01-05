@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import pl.przybylo.przychodnia.domain.model.Pacjent;
 import pl.przybylo.przychodnia.dto.pacjent.PacjentDetailViewDto;
 import pl.przybylo.przychodnia.dto.pacjent.PacjentEditDto;
-import pl.przybylo.przychodnia.dto.pacjent.PacjentNewDto;
+import pl.przybylo.przychodnia.dto.pacjent.PacjentRejestracjaDto;
 
 import static java.util.Objects.isNull;
 import static pl.wavesoftware.eid.utils.EidPreconditions.checkNotNull;
@@ -16,7 +16,7 @@ public class PacjentMapper {
 
     private final AdresMapper adresMapper;
 
-    public Pacjent map(String numerKartoteki, PacjentNewDto pacjentNewDto) {
+    public Pacjent map(String numerKartoteki, PacjentRejestracjaDto pacjentNewDto) {
         if (isNull(pacjentNewDto)) {
             return null;
         }

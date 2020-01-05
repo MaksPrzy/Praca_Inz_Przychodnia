@@ -7,7 +7,7 @@ import pl.przybylo.przychodnia.domain.model.Pacjent;
 import pl.przybylo.przychodnia.domain.repository.PacjentRepository;
 import pl.przybylo.przychodnia.dto.pacjent.PacjentDetailViewDto;
 import pl.przybylo.przychodnia.dto.pacjent.PacjentEditDto;
-import pl.przybylo.przychodnia.dto.pacjent.PacjentNewDto;
+import pl.przybylo.przychodnia.dto.pacjent.PacjentRejestracjaDto;
 import pl.przybylo.przychodnia.mapper.PacjentMapper;
 
 import java.util.List;
@@ -40,13 +40,13 @@ public class PacjentServiceImpl implements PacjentService {
     }
 
     @Override
-    public PacjentDetailViewDto add(PacjentNewDto pacjentNewDto) {
-        checkNotNull(pacjentNewDto, "20190606195002");
+    public PacjentDetailViewDto registerIn(PacjentRejestracjaDto pacjentRejestracjaDto) {
+        checkNotNull(pacjentRejestracjaDto, "20190606195002");
 
-        pacjentValidator.check(pacjentNewDto);
+        pacjentValidator.check(pacjentRejestracjaDto);
 
-        String numerKartoteki = numerKartotekiGeneratorService.generate(pacjentNewDto);
-        Pacjent pacjent = pacjentMapper.map(numerKartoteki, pacjentNewDto);
+        String numerKartoteki = numerKartotekiGeneratorService.generate(pacjentRejestracjaDto);
+        Pacjent pacjent = pacjentMapper.map(numerKartoteki, pacjentRejestracjaDto);
         Pacjent newPacjent = pacjentRepository.save(pacjent);
 
         return pacjentMapper.map(newPacjent);

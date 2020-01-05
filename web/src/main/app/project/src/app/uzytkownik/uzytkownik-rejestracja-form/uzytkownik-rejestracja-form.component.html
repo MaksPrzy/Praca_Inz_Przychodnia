@@ -1,4 +1,4 @@
-<form action="action_page.php">
+<form [formGroup]="registerForm" (submit)="onRegister()">
     <div class="container">
         <h1>Rejestracja</h1>
         <p>Prosze uzupełnić podane niżej pola w celu rejestracji wizyty.</p>
@@ -6,63 +6,62 @@
 
         <div class="col-sm-5">
             <label for="pesel"><b>PESEL</b></label>
-            <input type="pesel" id="pesel" class="form-control" name="pesel">
+            <input type="pesel" id="pesel" class="form-control" formControlName="pesel">
         </div>
 
         <div class="col-sm-5">
             <label for="imie"><b>Imie</b></label>
-            <input type="imie" id="imie" class="form-control" name="imie">
+            <input type="imie" id="imie" class="form-control" formControlName="imie">
         </div>
 
         <div class="col-sm-5">
             <label for="nazwisko"><b>Nazwisko</b></label>
-            <input type="nazwisko" id="nazwisko" class="form-control" name="nazwisko">
+            <input type="nazwisko" id="nazwisko" class="form-control" formControlName="nazwisko">
         </div>
 
         <div class="col-sm-5">
             <label for="email"><b>Email</b></label>
-            <input type="email" id="email" class="form-control" name="email">
+            <input id="email" class="form-control" formControlName="email">
         </div>
 
         <div class="col-sm-5">
             <label for="haslo"><b>Hasło</b></label>
-            <input type="haslo" id="haslo" class="form-control" name="haslo" type="password">
+            <input id="haslo" class="form-control" formControlName="haslo" type="password">
         </div>
 
-
         <div class="col-sm-5">
-            <label for="Telefon"><b>Telefon</b></label>
-            <input type="Telefon" id="Telefon" class="form-control" name="Telefons">
+            <label for="telefon"><b>Telefon</b></label>
+            <input id="telefon" class="form-control" formControlName="telefon">
         </div>
 
         <div class="col-sm-5">
             <label for="dataUrodzenia"><b>Data urodzenia</b></label>
-            <input type="date" id="dataUrodzenia" class="form-control">
+            <input type="date" id="dataUrodzenia" class="form-control" formControlName="dataUrodzenia">
         </div>
         <div class="col-sm-5">
             <label for="kodPocztowy"><b>Kod Pocztowy</b></label>
-            <input type="kodPocztowy" id="kodPocztowy" class="form-control" name="kodPocztowy">
+            <input id="kodPocztowy" class="form-control" formControlName="kodPocztowy">
         </div>
         <div class="col-sm-5">
-            <label for="Miejscowosc"><b>Miejscowość</b></label>
-            <input type="Miejscowość" id="miejscowosc" class="form-control" name="Miejscowosc">
+            <label for="miejscowosc"><b>Miejscowość</b></label>
+            <input id="miejscowosc" class="form-control" formControlName="miejscowosc">
         </div>
         <div class="col-sm-5">
-            <label for="Ulica"><b>Ulica</b></label>
-            <input type="Ulica" id="Ulica" class="form-control" name="Ulica">
+            <label for="ulica"><b>Ulica</b></label>
+            <input id="ulica" class="form-control" formControlName="ulica">
         </div>
         <div class="col-sm-5">
-            <label for="NumerDomu"><b>Numer domu</b></label>
-            <input type="NumerDomu" id="NumerDomu" class="form-control" name="NumerDomu">
+            <label for="numerDomu"><b>Numer domu</b></label>
+            <input id="numerDomu" class="form-control" formControlName="numerDomu">
         </div>
         <div class="col-sm-5" style="text-align: center">
         <p>Zapoznaj się z naszą polityką prywatności<a href="http://localhost:4200/RODO"> RODO</a>.</p>
-        <button type="submit" class="registerbtn" (click)="onRegister()">Umów wizytę!</button>
+        <button class="registerbtn" (click)="onRegister()">Zarejestruj</button>
         </div>
     </div>
 
     <div class="col-sm-7" style="text-align: center">
-        <p>Masz juz konto? <a href="logowanie">Zaloguj się</a>.</p>
+        <p>Masz juz konto? <a href="logowanie">Zaloguj</a>.</p>
     </div>
 </form>
 

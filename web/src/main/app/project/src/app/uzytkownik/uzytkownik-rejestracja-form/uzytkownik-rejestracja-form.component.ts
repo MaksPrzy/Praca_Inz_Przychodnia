@@ -1,7 +1,8 @@
 import {Component} from "@angular/core";
 import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
-import {PacjentNewDto} from "@przychodnia/model/backend-model";
+import {PacjentDetailViewDto, PacjentRejestracjaDto, ZalogujDto} from "@przychodnia/model/backend-model";
 import {FormControl, FormGroup} from "@angular/forms";
+import {NotificationService} from "@przychodnia/service/notification/notification.service";
 
 @Component({
     selector: 'mp-uzytkownik-rejestracja-form',
@@ -18,27 +19,55 @@ export class UzytkownikRejestracjaFormComponent {
         haslo: new FormControl(),
         telefon: new FormControl(),
         dataUrodzenia: new FormControl(),
-        adres: new FormControl()
+        kodPocztowy: new FormControl(),
+        miejscowosc: new FormControl(),
+        ulica: new FormControl(),
+        numerDomu: new FormControl()
     })
 
-    constructor(private uzytkownikService: UzytkownikService) {
+    constructor(private uzytkownikService: UzytkownikService, private notificationService: NotificationService) {
     }
 
     onRegister(): void {
-        const newUzytkownik: PacjentNewDto = {
-            pesel: this.registerForm.get('pesel').value,
+        const newUzytkownik: PacjentRejestracjaDto = {
             imie: this.registerForm.get('imie').value,
             nazwisko: this.registerForm.get('nazwisko').value,
+            pesel: this.registerForm.get('pesel').value,
+            dataUrodzenia: this.registerForm.get('dataUrodzenia').value,
             email: this.registerForm.get('email').value,
             haslo: this.registerForm.get('haslo').value,
             telefonKomorkowy: this.registerForm.get('telefon').value,
-            dataUrodzenia: this.registerForm.get('data urodzenia').value,
-            adres: (this.registerForm.get('kodPocztowy'),
-                    this.registerForm.get('miejscowosc'),
-                    this.registerForm.get('ulica'),
-                    this.registerForm.get('numerDomu')).value,
-        }
-        this.uzytkownikService.register(newUzytkownik)
+            adres: {
+                kodPocztowy: this.registerForm.get('kodPocztowy').value,
+                miejscowosc: this.registerForm.get('miejscowosc').value,
+                ulica: this.registerForm.get('ulica').value,
+                numerDomu: this.registerForm.get('numerDomu').value
+            }
+        };
+
+        console.log('uzytkownik data');
+        console.dir(newUzytkownik);
+
+        this.uzytkownikService.registerIn(newUzytkownik).subscribe(
+            (pacjentDetailViewDto: PacjentDetailViewDto) => {
+                console.log('done');
+                console.dir(pacjentDetailViewDto);
+                this.notificationService.showInfo('Zostałeś zarejestrowany.');
+            },
+            (error: any) => {
+                console.log('error');
+                console.dir(error);
+            },
+            () => {
+                console.log('onComplete');
+                const zalogujDto: ZalogujDto = {
+                    username: newUzytkownik.email,
+                    password: newUzytkownik.haslo
+                };
+
+                this.uzytkownikService.logIn(zalogujDto);
+            }
+        );
     }
 
 }

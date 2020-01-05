@@ -2,12 +2,13 @@ package pl.przybylo.przychodnia.rest.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pl.przybylo.przychodnia.business.PacjentService;
 import pl.przybylo.przychodnia.business.WizytaService;
 import pl.przybylo.przychodnia.dto.pacjent.PacjentDetailViewDto;
 import pl.przybylo.przychodnia.dto.pacjent.PacjentEditDto;
-import pl.przybylo.przychodnia.dto.pacjent.PacjentNewDto;
+import pl.przybylo.przychodnia.dto.pacjent.PacjentRejestracjaDto;
 import pl.przybylo.przychodnia.dto.wizyta.WizytaViewDto;
 import pl.przybylo.przychodnia.dto.wizyta.ZakonczWizyteDto;
 import pl.przybylo.przychodnia.dto.wizyta.ZaplanujWizyteDto;
@@ -22,6 +23,7 @@ public class PacjentController {
 
     private final PacjentService pacjentService;
     private final WizytaService wizytaService;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping
     public List<PacjentDetailViewDto> getPacjentList() {
@@ -35,8 +37,9 @@ public class PacjentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public PacjentDetailViewDto add(@RequestBody PacjentNewDto pacjentNewDto) {
-        return pacjentService.add(pacjentNewDto);
+    public PacjentDetailViewDto add(@RequestBody PacjentRejestracjaDto pacjentRejestracjaDto) {
+        pacjentRejestracjaDto.setHaslo(passwordEncoder.encode(pacjentRejestracjaDto.getHaslo()));
+        return pacjentService.registerIn(pacjentRejestracjaDto);
     }
 
     @PutMapping("/{id}")

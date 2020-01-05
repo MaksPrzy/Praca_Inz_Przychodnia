@@ -2,12 +2,12 @@ package pl.przybylo.przychodnia.business.impl.pacjent;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
-import pl.przybylo.przychodnia.dto.pacjent.PacjentNewDto;
+import pl.przybylo.przychodnia.dto.pacjent.PacjentRejestracjaDto;
 
 @Service
 public class NumerKartotekiGeneratorService {
 
-    public String generate(PacjentNewDto pacjentNewDto) {
+    public String generate(PacjentRejestracjaDto pacjentNewDto) {
         String imie = pacjentNewDto.getImie();
         String nazwisko = pacjentNewDto.getNazwisko();
         String randomNo = RandomStringUtils.random(5, false, true);

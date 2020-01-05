@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {AfterViewChecked, AfterViewInit, Component, OnInit} from "@angular/core";
 import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
 import {PacjentDetailViewDto} from "@przychodnia/model/backend-model";
 
@@ -7,7 +7,7 @@ import {PacjentDetailViewDto} from "@przychodnia/model/backend-model";
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, AfterViewInit {
 
     uzytkownik: PacjentDetailViewDto;
 
@@ -16,6 +16,12 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        console.log('navbar on init');
+        this.uzytkownik = this.uzytkownikService.getUzytkownik();
+    }
+
+    ngAfterViewInit(): void {
+        console.log('after view init');
         this.uzytkownik = this.uzytkownikService.getUzytkownik();
     }
 

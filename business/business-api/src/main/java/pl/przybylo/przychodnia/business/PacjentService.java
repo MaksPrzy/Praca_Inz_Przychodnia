@@ -2,7 +2,7 @@ package pl.przybylo.przychodnia.business;
 
 import pl.przybylo.przychodnia.dto.pacjent.PacjentDetailViewDto;
 import pl.przybylo.przychodnia.dto.pacjent.PacjentEditDto;
-import pl.przybylo.przychodnia.dto.pacjent.PacjentNewDto;
+import pl.przybylo.przychodnia.dto.pacjent.PacjentRejestracjaDto;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public interface PacjentService {
 
     PacjentDetailViewDto getPacjent(Long id);
 
-    PacjentDetailViewDto add(PacjentNewDto pacjentNewDto);
+    PacjentDetailViewDto registerIn(PacjentRejestracjaDto pacjentNewDto);
 
     PacjentDetailViewDto update(PacjentEditDto pacjentEditDto);
 
