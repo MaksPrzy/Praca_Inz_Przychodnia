@@ -1,6 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {LekarzService} from "@przychodnia/service/lekarz.service";
 import {AbstractHarmonogramPozycjaDto, HarmonogramViewDto} from "@przychodnia/model/backend-model";
+import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'mp-wizyta-planowanie',
@@ -16,7 +18,9 @@ export class WizytaPlanowanieComponent implements OnInit {
     dayCollection: Array<string> = ['poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota', 'niedziela'];
     availableHours: any = {};
 
-    constructor(private lekarzService: LekarzService) {
+    constructor(private router: Router,
+                private lekarzService: LekarzService,
+                private uzytkownikService: UzytkownikService) {
     }
 
     ngOnInit(): void {
@@ -28,6 +32,23 @@ export class WizytaPlanowanieComponent implements OnInit {
                 this.initMinuteCollection();
                 this.initAvailableHours();
             });
+    }
+
+    onZaplanujWizyte(): void {
+        if (this.uzytkownikService.isLoggedIn()) {
+            this.planujWizyteWhenUserLoggedIn();
+        } else {
+            this.planujWizyteWhenUserNotLoggedIn();
+        }
+    }
+
+    private planujWizyteWhenUserLoggedIn() {
+        // todo wywolac backend i zarejestrowac wizyte, przekaza identyfikator wizyty na podsumowanie
+        this.router.navigateByUrl('podsumowanie-wizyty');
+    }
+
+    private planujWizyteWhenUserNotLoggedIn() {
+        this.router.navigate(['logowanie'], {queryParams: {baseUrl: 'planowanie-wizyty'}});
     }
 
     initAvailableHours(): void {

@@ -47,7 +47,8 @@ export class UzytkownikService {
     }
 
     public isLoggedIn(): boolean {
-        return this.getToken().length > 0;
+        const token: string = this.getToken();
+        return token && token.length > 0;
     }
 
 }

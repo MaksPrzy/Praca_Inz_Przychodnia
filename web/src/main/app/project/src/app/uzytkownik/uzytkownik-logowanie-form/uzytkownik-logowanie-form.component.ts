@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
 import {ZalogujDto} from "@przychodnia/model/backend-model";
 import {FormControl, FormGroup} from "@angular/forms";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {NotificationService} from "@przychodnia/service/notification/notification.service";
 
 @Component({
@@ -17,7 +17,9 @@ export class UzytkownikLogowanieFormComponent {
         haslo: new FormControl()
     });
 
-    constructor(private router: Router, private uzytkownikService: UzytkownikService,
+    constructor(private router: Router,
+                private activatedRoute: ActivatedRoute,
+                private uzytkownikService: UzytkownikService,
                 private notificationService: NotificationService) {
     }
 
@@ -30,7 +32,16 @@ export class UzytkownikLogowanieFormComponent {
         this.uzytkownikService.logIn(zalogujDto).subscribe(
             (isLoggedIn: boolean) => {
                 if (isLoggedIn) {
-                    this.router.navigate(['/home']);
+                    this.activatedRoute.queryParamMap
+                        .subscribe(paramMap => {
+                            const baseUrl: string = paramMap.get('baseUrl');
+
+                            if (baseUrl) {
+                                this.router.navigateByUrl(baseUrl);
+                            } else {
+                                this.router.navigateByUrl('home');
+                            }
+                        });
                 }
             },
             (error: any) => {
