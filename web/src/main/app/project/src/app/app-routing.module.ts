@@ -7,6 +7,7 @@ import {StartPageComponent} from "./component/start-page/start-page.component";
 import {UzytkownikLogowanieFormComponent} from "./uzytkownik/uzytkownik-logowanie-form/uzytkownik-logowanie-form.component";
 import {WynikiWyszukiwaniaComponent} from "./wyniki-wyszukiwania/wyniki-wyszukiwania.component";
 import {WizytaPlanowanieComponent} from "./wizyta/component/wizyta-planowanie/wizyta-planowanie.component";
+import {RodoComponent} from "./rodo/rodo.component";
 
 const routes: Routes = [
     {
@@ -37,6 +38,10 @@ const routes: Routes = [
     {
         path: 'wyniki-wyszukiwania',
         component: WynikiWyszukiwaniaComponent
+    },
+    {
+        path: 'rodo',
+        component: RodoComponent
     },
     {
         path: '**',
