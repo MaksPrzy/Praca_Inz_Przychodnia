@@ -1,8 +1,14 @@
 import {Component, OnInit} from "@angular/core";
 import {LekarzService} from "@przychodnia/service/lekarz.service";
-import {AbstractHarmonogramPozycjaDto, HarmonogramViewDto} from "@przychodnia/model/backend-model";
+import {
+    AbstractHarmonogramPozycjaDto, AbstractLekarzSpecjalizacjaDto,
+    HarmonogramViewDto, LekarzDetailViewDto, LekarzSpecjalizacjaViewDto, PacjentDetailViewDto,
+    WizytaViewDto,
+    ZaplanujWizyteDto
+} from "@przychodnia/model/backend-model";
 import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
 import {Router} from "@angular/router";
+import {WizytaService} from "@przychodnia/service/wizyta.service";
 
 @Component({
     selector: 'mp-wizyta-planowanie',
@@ -18,13 +24,32 @@ export class WizytaPlanowanieComponent implements OnInit {
     dayCollection: Array<string> = ['poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota', 'niedziela'];
     availableHours: any = {};
 
+    lekarz: LekarzDetailViewDto;
+    specjalizacja: LekarzSpecjalizacjaViewDto;
+
     constructor(private router: Router,
                 private lekarzService: LekarzService,
-                private uzytkownikService: UzytkownikService) {
+                private uzytkownikService: UzytkownikService,
+                private wizytaService: WizytaService) {
     }
 
     ngOnInit(): void {
-        this.lekarzService.getHarmonogramList(2, 4)
+        // todo wczytac informacje o lekarzu
+        this.specjalizacja = {
+            id: 4,
+            nazwa: 'specjalizacjaLekarzaNazwa',
+            rokUzyskaniaDyplomuZeSpecjalizacji: 2000
+        };
+
+        this.lekarz = {
+            id: 2,
+            imie: 'imieLekarza',
+            nazwisko: 'nazwiskoLekarza',
+            numer: 'numerLekarza',
+            specjalizacjaCollection: []
+        };
+
+        this.lekarzService.getHarmonogramList(this.lekarz.id, this.specjalizacja.id)
             .subscribe((harmonogramCollectionResponse: Array<HarmonogramViewDto>) => {
                 this.harmonogram = harmonogramCollectionResponse.pop();
                 this.minGodzinaOd = this.getMinGodzinaOd(this.harmonogram.pozycjaCollection);
@@ -34,17 +59,35 @@ export class WizytaPlanowanieComponent implements OnInit {
             });
     }
 
-    onZaplanujWizyte(): void {
+    onZaplanujWizyte(dayIndex: number, minute: number): void {
         if (this.uzytkownikService.isLoggedIn()) {
-            this.planujWizyteWhenUserLoggedIn();
+            // todo pobrac daty
+            const dataWizytyOd: Date = new Date();
+            const dataWizytyDo: Date = new Date();
+            const dayInfo: AbstractHarmonogramPozycjaDto = this.getDayInfo(dayIndex, minute);
+
+            this.planujWizyteWhenUserLoggedIn(dataWizytyOd, dataWizytyDo, dayInfo.gabinet.id);
         } else {
             this.planujWizyteWhenUserNotLoggedIn();
         }
     }
 
-    private planujWizyteWhenUserLoggedIn() {
-        // todo wywolac backend i zarejestrowac wizyte, przekaza identyfikator wizyty na podsumowanie
-        this.router.navigateByUrl('podsumowanie-wizyty');
+    private planujWizyteWhenUserLoggedIn(dataWizytyOd: Date, dataWizytyDo: Date, gabinetId: number) {
+        const uzytkownik: PacjentDetailViewDto = this.uzytkownikService.getUzytkownik();
+
+        const zaplanujWizyteDto: ZaplanujWizyteDto = {
+            pacjentId: uzytkownik.id,
+            lekarzId: this.lekarz.id,
+            specjalizacjaId: this.specjalizacja.id,
+            gabinet: gabinetId,
+            dataWizytyOd: dataWizytyOd,
+            dataWizytyDo: dataWizytyDo,
+            rodzaj: 'prywatna'
+        };
+
+        this.wizytaService.zaplanuj(zaplanujWizyteDto).subscribe((wizytaViewDto: WizytaViewDto) => {
+            this.router.navigate(['/podsumowanie-wizyty', wizytaViewDto.id]);
+        });
     }
 
     private planujWizyteWhenUserNotLoggedIn() {

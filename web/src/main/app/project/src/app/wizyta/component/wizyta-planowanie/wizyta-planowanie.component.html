@@ -13,7 +13,7 @@
                             [ngStyle]="{'background-color': isAvailableHour(dayIndex + 1, minute) ? 'light' : ''}">
                             <button type="button" class="btn btn-primary"
                                     *ngIf="isAvailableHour(dayIndex + 1, minute)"
-                                    (click)="onZaplanujWizyte()">
+                                    (click)="onZaplanujWizyte(dayIndex + 1, minute)">
                                 Umów
                             </button>
                         </td>

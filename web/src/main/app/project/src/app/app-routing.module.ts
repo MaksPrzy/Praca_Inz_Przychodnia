@@ -30,7 +30,7 @@ const routes: Routes = [
         component: WizytaListComponent
     },
     {
-        path: 'podsumowanie-wizyty',
+        path: 'podsumowanie-wizyty/:id',
         component: WizytaPodsumowanieComponent
     },
     {

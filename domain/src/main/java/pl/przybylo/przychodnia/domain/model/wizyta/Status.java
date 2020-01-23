@@ -27,4 +27,9 @@ public enum Status {
                 .orElseThrow(() -> new StatusNotFoundException(code));
     }
 
+    @Override
+    public String toString() {
+        return code;
+    }
+
 }

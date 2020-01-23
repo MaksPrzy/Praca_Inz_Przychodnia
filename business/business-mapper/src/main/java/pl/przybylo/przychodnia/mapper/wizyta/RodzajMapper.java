@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import pl.przybylo.przychodnia.domain.model.wizyta.Rodzaj;
 
 import static java.util.Objects.isNull;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 @Component
@@ -17,7 +18,7 @@ public class RodzajMapper {
     }
 
     public Rodzaj map(String rodzaj) {
-        if (isNotBlank(rodzaj)) {
+        if (isBlank(rodzaj)) {
             return null;
         }
         return Rodzaj.findByCode(rodzaj);

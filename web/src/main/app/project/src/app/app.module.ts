@@ -27,6 +27,7 @@ import {LocationStrategy, PathLocationStrategy} from "@angular/common";
 import {FooterComponent} from "./component/footer/footer.component";
 import {RodoComponent} from "./rodo/rodo.component";
 import {WizytaPodsumowanieComponent} from "./wizyta/component/wizyta-podsumowanie/wizyta-podsumowanie.component";
+import {WizytaService} from "@przychodnia/service/wizyta.service";
 
 @NgModule({
     declarations: [
@@ -72,7 +73,8 @@ import {WizytaPodsumowanieComponent} from "./wizyta/component/wizyta-podsumowani
         },
         GabinetService,
         LekarzService,
-        UzytkownikService
+        UzytkownikService,
+        WizytaService
     ],
     bootstrap: [AppComponent]
 })
