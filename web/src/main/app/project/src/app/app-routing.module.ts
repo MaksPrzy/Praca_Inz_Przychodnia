@@ -8,6 +8,8 @@ import {UzytkownikLogowanieFormComponent} from "./uzytkownik/uzytkownik-logowani
 import {WynikiWyszukiwaniaComponent} from "./wyniki-wyszukiwania/wyniki-wyszukiwania.component";
 import {WizytaPlanowanieComponent} from "./wizyta/component/wizyta-planowanie/wizyta-planowanie.component";
 import {RodoComponent} from "./rodo/rodo.component";
+import {WizytaListComponent} from "./wizyta/component/wizyta-list/wizyta-list.component";
+import {WizytaPodsumowanieComponent} from "./wizyta/component/wizyta-podsumowanie/wizyta-podsumowanie.component";
 
 const routes: Routes = [
     {
@@ -22,6 +24,14 @@ const routes: Routes = [
     {
         path: 'planowanie-wizyty',
         component: WizytaPlanowanieComponent
+    },
+    {
+        path: 'moje-wizyty',
+        component: WizytaListComponent
+    },
+    {
+        path: 'podsumowanie-wizyty',
+        component: WizytaPodsumowanieComponent
     },
     {
         path: 'home',
