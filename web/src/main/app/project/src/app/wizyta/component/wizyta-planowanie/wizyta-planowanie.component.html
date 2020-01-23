@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content" style="text-align: center">
     <div class="container">
         <div class="row">
             <div class="table-responsive">
@@ -10,8 +10,8 @@
                     <tr *ngFor="let minute of minuteCollection">
                         <td>{{getMinutesAsHours(minute)}}</td>
                         <td *ngFor="let day of dayCollection; let dayIndex = index"
-                            [ngStyle]="{'background-color': isAvailableHour(dayIndex + 1, minute) ? 'lightgreen' : ''}">
-                            <a href="" *ngIf="isAvailableHour(dayIndex + 1, minute)">umów</a><br/>
+                            [ngStyle]="{'background-color': isAvailableHour(dayIndex + 1, minute) ? 'light' : ''}">
+                            <a href=""  *ngIf="isAvailableHour(dayIndex + 1, minute)" >umów</a><br/>
                             {{getDayInfo(dayIndex + 1, minute)?.gabinet.nazwa}}
                         </td>
                     </tr>
