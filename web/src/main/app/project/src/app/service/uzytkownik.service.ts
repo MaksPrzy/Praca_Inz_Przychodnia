@@ -4,6 +4,7 @@ import {PacjentDetailViewDto, PacjentRejestracjaDto, ZalogowanoDto, ZalogujDto} 
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
 import {Location} from '@angular/common';
+import {map} from "rxjs/operators";
 
 @Injectable()
 export class UzytkownikService {
@@ -14,14 +15,15 @@ export class UzytkownikService {
     constructor(private router: Router, private httpClient: HttpClient, private location: Location) {
     }
 
-    public logIn(zalogujDto: ZalogujDto): void {
-        this.httpClient.post('/uzytkownicy/zaloguj', zalogujDto)
-            .subscribe((zalogowanoDto: ZalogowanoDto) => {
-                localStorage.setItem(this.UZYTKOWNIK, JSON.stringify(zalogowanoDto.uzytkownik));
-                localStorage.setItem(this.TOKEN, zalogowanoDto.token);
-
-                this.router.navigate(['/home']);
-            });
+    public logIn(zalogujDto: ZalogujDto): Observable<boolean> {
+        return this.httpClient.post('/uzytkownicy/zaloguj', zalogujDto)
+            .pipe(
+                map((zalogowanoDto: ZalogowanoDto) => {
+                    localStorage.setItem(this.UZYTKOWNIK, JSON.stringify(zalogowanoDto.uzytkownik));
+                    localStorage.setItem(this.TOKEN, zalogowanoDto.token);
+                    return true;
+                }),
+            );
     }
 
     public registerIn(pacjentRejestracjaDto: PacjentRejestracjaDto): Observable<PacjentDetailViewDto> {
@@ -33,7 +35,11 @@ export class UzytkownikService {
     }
 
     public getUzytkownik(): PacjentDetailViewDto {
-        return JSON.parse(localStorage.getItem(this.UZYTKOWNIK));
+        const value: string = localStorage.getItem(this.UZYTKOWNIK);
+
+        if (value !== null) {
+            return JSON.parse(value);
+        }
     }
 
     public getToken(): string {
@@ -41,7 +47,8 @@ export class UzytkownikService {
     }
 
     public isLoggedIn(): boolean {
-        return this.getToken().length > 0;
+        const token: string = this.getToken();
+        return token && token.length > 0;
     }
 
 }

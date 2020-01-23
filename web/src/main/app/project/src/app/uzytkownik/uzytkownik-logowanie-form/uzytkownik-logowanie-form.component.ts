@@ -2,6 +2,8 @@ import {Component} from "@angular/core";
 import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
 import {ZalogujDto} from "@przychodnia/model/backend-model";
 import {FormControl, FormGroup} from "@angular/forms";
+import {ActivatedRoute, Router} from "@angular/router";
+import {NotificationService} from "@przychodnia/service/notification/notification.service";
 
 @Component({
     selector: 'mp-uzytkownik-logowanie-form',
@@ -15,7 +17,10 @@ export class UzytkownikLogowanieFormComponent {
         haslo: new FormControl()
     });
 
-    constructor(private uzytkownikService: UzytkownikService) {
+    constructor(private router: Router,
+                private activatedRoute: ActivatedRoute,
+                private uzytkownikService: UzytkownikService,
+                private notificationService: NotificationService) {
     }
 
     onLogin(): void {
@@ -24,7 +29,25 @@ export class UzytkownikLogowanieFormComponent {
             password: this.loginForm.get('haslo').value
         };
 
-        this.uzytkownikService.logIn(zalogujDto);
+        this.uzytkownikService.logIn(zalogujDto).subscribe(
+            (isLoggedIn: boolean) => {
+                if (isLoggedIn) {
+                    this.activatedRoute.queryParamMap
+                        .subscribe(paramMap => {
+                            const baseUrl: string = paramMap.get('baseUrl');
+
+                            if (baseUrl) {
+                                this.router.navigateByUrl(baseUrl);
+                            } else {
+                                this.router.navigateByUrl('home');
+                            }
+                        });
+                }
+            },
+            (error: any) => {
+                this.notificationService.showError(error);
+            }
+        );
     }
 
 }

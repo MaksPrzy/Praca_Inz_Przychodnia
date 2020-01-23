@@ -20,5 +20,10 @@ public enum Rodzaj {
         return Stream.of(values()).filter(rodzaj -> rodzaj.getCode().equals(code)).findFirst().
                 orElseThrow(() -> new RodzajNotFoundException(code));
     }
-}
 
+    @Override
+    public String toString() {
+        return code;
+    }
+
+}

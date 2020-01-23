@@ -62,8 +62,8 @@ public class PacjentController {
 
     @PostMapping("/{id}/wizyty")
     @ResponseStatus(HttpStatus.CREATED)
-    public void zaplanuj(@PathVariable long id, @RequestBody ZaplanujWizyteDto zaplanujWizyteDto) {
-        wizytaService.zaplanuj(zaplanujWizyteDto);
+    public WizytaViewDto zaplanuj(@PathVariable long id, @RequestBody ZaplanujWizyteDto zaplanujWizyteDto) {
+        return wizytaService.zaplanuj(zaplanujWizyteDto);
     }
 
     @PutMapping("/{id}/wizyty/{wizytaId}")

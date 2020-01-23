@@ -6,17 +6,19 @@ import {Router} from "@angular/router";
     templateUrl: './start-page.component.html',
     styleUrls: ['./start-page.component.scss']
 })
-export class StartPageComponent implements OnInit{
+export class StartPageComponent implements OnInit {
 
     searchBy: string;
 
-    constructor(private router: Router){};
+    constructor(private router: Router) {
+
+    }
 
     ngOnInit(): void {
     }
 
-    onSearch(){
-        this.router.navigate(['/wyniki-wyszukiwania'], { queryParams: { searchBy: this.searchBy} });
+    onSearch() {
+        this.router.navigate(['wyniki-wyszukiwania'], {queryParams: {searchBy: this.searchBy}});
     }
 
 }

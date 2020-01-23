@@ -4,7 +4,7 @@
         <hr>
 
         <div class="col-sm-5">
-            <label for="email"><b>Email</b></label>
+            <label for="email"><b>E-mail</b></label>
             <input type="email" id="email" class="form-control" formControlName="email">
         </div>
 
@@ -13,8 +13,11 @@
             <input type="haslo" id="haslo" class="form-control" type="password" formControlName="haslo">
         </div>
         <div class="col-sm-5" style="text-align: center">
-        <button type="submit" class="registerbtn" (click)="onLogin()">Zaloguj się</button>
-    </div>
+            <button type="button" class="btn btn-primary" (click)="onLogin()">Zaloguj się</button>
+        </div>
+        <div class="col-sm-5">
+            Jeśli nie masz jeszcze konta kliknij <a href="rejestracja">zarejestruj</a>.
+        </div>
     </div>
 </form>
 
