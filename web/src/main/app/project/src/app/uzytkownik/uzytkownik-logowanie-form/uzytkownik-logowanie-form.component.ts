@@ -26,7 +26,8 @@ export class UzytkownikLogowanieFormComponent {
     onLogin(): void {
         const zalogujDto: ZalogujDto = {
             username: this.loginForm.get('email').value,
-            password: this.loginForm.get('haslo').value
+            password: this.loginForm.get('haslo').value,
+
         };
 
         this.uzytkownikService.logIn(zalogujDto).subscribe(
