@@ -3,7 +3,7 @@ import {ActivatedRoute, ParamMap} from "@angular/router";
 import {WizytaService} from "@przychodnia/service/wizyta.service";
 import {WizytaViewDto} from "@przychodnia/model/backend-model";
 import {switchMap} from "rxjs/operators";
-import {Observable} from "rxjs";
+import {Observable, pipe} from "rxjs";
 
 @Component({
     selector: 'mp-wizyta-podsumowanie',
@@ -12,7 +12,7 @@ import {Observable} from "rxjs";
 })
 export class WizytaPodsumowanieComponent implements OnInit {
 
-    wizyta$: Observable<WizytaViewDto>;
+    wizyta: WizytaViewDto;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private wizytaService: WizytaService) {
@@ -22,11 +22,11 @@ export class WizytaPodsumowanieComponent implements OnInit {
     ngOnInit(): void {
         this.activatedRoute.paramMap
             .subscribe((params: ParamMap) => {
-                console.log('podsumowanie');
-                console.dir(params);
                 const wizytaId: number = parseInt(params.get('id'));
 
-                this.wizyta$ = this.wizytaService.getWizyta(wizytaId);
+                this.wizytaService.getWizyta(wizytaId).subscribe((wizytaResponse: WizytaViewDto) => {
+                    this.wizyta = wizytaResponse;
+                });
             });
     }
 

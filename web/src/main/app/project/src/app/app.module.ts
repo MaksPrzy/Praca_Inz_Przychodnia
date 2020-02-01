@@ -28,6 +28,7 @@ import {FooterComponent} from "./component/footer/footer.component";
 import {RodoComponent} from "./rodo/rodo.component";
 import {WizytaPodsumowanieComponent} from "./wizyta/component/wizyta-podsumowanie/wizyta-podsumowanie.component";
 import {WizytaService} from "@przychodnia/service/wizyta.service";
+import {ToastModule} from "primeng/toast";
 
 @NgModule({
     declarations: [
@@ -53,7 +54,8 @@ import {WizytaService} from "@przychodnia/service/wizyta.service";
         MatToolbarModule,
         UserInterfaceModule,
         NoopAnimationsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        ToastModule
     ],
     providers: [
         MessageService,

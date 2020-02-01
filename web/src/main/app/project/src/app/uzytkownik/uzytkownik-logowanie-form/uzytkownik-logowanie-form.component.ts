@@ -32,6 +32,8 @@ export class UzytkownikLogowanieFormComponent {
         this.uzytkownikService.logIn(zalogujDto).subscribe(
             (isLoggedIn: boolean) => {
                 if (isLoggedIn) {
+                    this.notificationService.showSuccess('Zostałeś zalogowany.');
+
                     this.activatedRoute.queryParamMap
                         .subscribe(paramMap => {
                             const baseUrl: string = paramMap.get('baseUrl');

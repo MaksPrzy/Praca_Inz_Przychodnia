@@ -50,16 +50,12 @@ export class UzytkownikRejestracjaFormComponent {
 
         this.uzytkownikService.registerIn(newUzytkownik).subscribe(
             (pacjentDetailViewDto: PacjentDetailViewDto) => {
-                console.log('done');
-                console.dir(pacjentDetailViewDto);
                 this.notificationService.showInfo('Zostałeś zarejestrowany.');
             },
             (error: any) => {
-                console.log('error');
-                console.dir(error);
+                this.notificationService.showError(error);
             },
             () => {
-                console.log('onComplete');
                 const zalogujDto: ZalogujDto = {
                     username: newUzytkownik.email,
                     password: newUzytkownik.haslo
