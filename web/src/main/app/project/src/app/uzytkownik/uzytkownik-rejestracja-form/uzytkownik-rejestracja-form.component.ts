@@ -3,6 +3,7 @@ import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
 import {PacjentDetailViewDto, PacjentRejestracjaDto, ZalogujDto} from "@przychodnia/model/backend-model";
 import {FormControl, FormGroup} from "@angular/forms";
 import {NotificationService} from "@przychodnia/service/notification/notification.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
     selector: 'mp-uzytkownik-rejestracja-form',
@@ -25,7 +26,7 @@ export class UzytkownikRejestracjaFormComponent {
         numerDomu: new FormControl()
     })
 
-    constructor(private uzytkownikService: UzytkownikService, private notificationService: NotificationService) {
+    constructor(private uzytkownikService: UzytkownikService, private toastService: ToastrService) {
     }
 
     onRegister(): void {
@@ -52,7 +53,7 @@ export class UzytkownikRejestracjaFormComponent {
             (pacjentDetailViewDto: PacjentDetailViewDto) => {
                 console.log('done');
                 console.dir(pacjentDetailViewDto);
-                this.notificationService.showInfo('Zostałeś zarejestrowany.');
+                this.toastService.info('Zostałeś zarejestrowany.');
             },
             (error: any) => {
                 console.log('error');

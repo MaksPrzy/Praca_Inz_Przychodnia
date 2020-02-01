@@ -4,6 +4,7 @@ import {ZalogujDto} from "@przychodnia/model/backend-model";
 import {FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NotificationService} from "@przychodnia/service/notification/notification.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
     selector: 'mp-uzytkownik-logowanie-form',
@@ -20,14 +21,21 @@ export class UzytkownikLogowanieFormComponent {
     constructor(private router: Router,
                 private activatedRoute: ActivatedRoute,
                 private uzytkownikService: UzytkownikService,
-                private notificationService: NotificationService) {
+                private notificationService: NotificationService,
+                private toastr: ToastrService) {
     }
 
     onLogin(): void {
         const zalogujDto: ZalogujDto = {
             username: this.loginForm.get('email').value,
-            password: this.loginForm.get('haslo').value
+            password: this.loginForm.get('haslo').value,
+
         };
+
+        this.showSuccess()
+        {
+            this.toastr.success('Zostałeś zalogowany')
+        }
 
         this.uzytkownikService.logIn(zalogujDto).subscribe(
             (isLoggedIn: boolean) => {
@@ -48,6 +56,10 @@ export class UzytkownikLogowanieFormComponent {
                 this.notificationService.showError(error);
             }
         );
+    }
+
+    private showSuccess() {
+
     }
 
 }

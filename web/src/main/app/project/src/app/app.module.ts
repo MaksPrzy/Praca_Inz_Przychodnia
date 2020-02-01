@@ -11,7 +11,7 @@ import {UserInterfaceModule} from "./user-interface.module";
 import {PageNotFoundComponent} from "./component/page-not-found/page-not-found.component";
 import {GabinetListComponent} from "./gabinet/component/gabinet-list/gabinet-list.component";
 import {GabinetService} from "./service/gabinet.service";
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {NavbarComponent} from "./component/navbar/navbar.component";
 import {UzytkownikRejestracjaFormComponent} from "./uzytkownik/uzytkownik-rejestracja-form/uzytkownik-rejestracja-form.component";
 import {StartPageComponent} from "./component/start-page/start-page.component";
@@ -28,6 +28,7 @@ import {FooterComponent} from "./component/footer/footer.component";
 import {RodoComponent} from "./rodo/rodo.component";
 import {WizytaPodsumowanieComponent} from "./wizyta/component/wizyta-podsumowanie/wizyta-podsumowanie.component";
 import {WizytaService} from "@przychodnia/service/wizyta.service";
+import {ToastrModule, ToastContainerModule} from "ngx-toastr";
 
 @NgModule({
     declarations: [
@@ -53,7 +54,16 @@ import {WizytaService} from "@przychodnia/service/wizyta.service";
         MatToolbarModule,
         UserInterfaceModule,
         NoopAnimationsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot({ positionClass: 'inline' }),
+        ToastContainerModule,
+        ToastrModule.forRoot(),
+        ToastrModule.forRoot({
+            timeOut: 3000,
+            positionClass: 'toast-bottom-right',
+            preventDuplicates: true,
+        }),
     ],
     providers: [
         MessageService,
