@@ -18,14 +18,15 @@
             <td>{{lekarz.nazwisko}}</td>
             <td>
                 <div *ngFor="let specjalizacja of lekarz.specjalizacjaCollection">
-                    {{specjalizacja.nazwa}} - doświadczenie: ({{getExperienceInYears(specjalizacja.rokUzyskaniaDyplomuZeSpecjalizacji)}})
+                    {{specjalizacja.nazwa}} - doświadczenie w latach: ({{getExperienceInYears(specjalizacja.rokUzyskaniaDyplomuZeSpecjalizacji)}})
                 </div>
             </td>
             <td>
-                <div>
+                <div class="test">
                     <a href="planowanie-wizyty">Umów mnie na wizytę</a>
                 </div>
             </td>
         </tr>
     </table>
+
 </div>

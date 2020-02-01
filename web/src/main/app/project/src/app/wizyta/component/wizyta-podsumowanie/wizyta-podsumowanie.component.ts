@@ -1,9 +1,14 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {WizytaService} from "@przychodnia/service/wizyta.service";
-import {WizytaViewDto} from "@przychodnia/model/backend-model";
-import {switchMap} from "rxjs/operators";
+import {
+    AbstractLekarzDto,
+    HarmonogramViewDto,
+    LekarzDetailViewDto,
+    WizytaViewDto
+} from "@przychodnia/model/backend-model";
 import {Observable} from "rxjs";
+import {LekarzService} from "@przychodnia/service/lekarz.service";
 
 @Component({
     selector: 'mp-wizyta-podsumowanie',
@@ -13,9 +18,11 @@ import {Observable} from "rxjs";
 export class WizytaPodsumowanieComponent implements OnInit {
 
     wizyta$: Observable<WizytaViewDto>;
+    harmonogram$: Observable<HarmonogramViewDto>
 
     constructor(private activatedRoute: ActivatedRoute,
-                private wizytaService: WizytaService) {
+                private wizytaService: WizytaService,
+                private lekarzService: LekarzService) {
 
     }
 
@@ -25,8 +32,11 @@ export class WizytaPodsumowanieComponent implements OnInit {
                 console.log('podsumowanie');
                 console.dir(params);
                 const wizytaId: number = parseInt(params.get('id'));
+                const lekarzId: number = parseInt(params.get('imie'));
+                const lekarzSpecjalizacja: number = parseInt(params.get('specjalizacja'));
 
                 this.wizyta$ = this.wizytaService.getWizyta(wizytaId);
+                this.harmonogram$ = this.lekarzService.getHarmonogramList(lekarzId, lekarzSpecjalizacja);
             });
     }
 
