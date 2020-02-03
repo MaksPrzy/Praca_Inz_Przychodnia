@@ -25,7 +25,6 @@
     "core-js": "^2.5.4",
     "hammerjs": "^2.0.8",
     "jquery": "^3.4.1",
-    "ngx-toastr": "^11.3.2",
     "primeicons": "^1.0.0",
     "primeng": "^7.0.0",
     "rxjs": "~6.5.4",

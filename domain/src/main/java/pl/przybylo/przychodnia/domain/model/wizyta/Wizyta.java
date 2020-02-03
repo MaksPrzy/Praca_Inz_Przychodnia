@@ -53,8 +53,13 @@ public class Wizyta {
     @Column(columnDefinition = "text")
     private String fullTextSearch;
 
+    public Wizyta() {
+        this.status = Status.ZAPLANOWANA;
+    }
+
     public Wizyta(Pacjent pacjent, Lekarz lekarz, Specjalizacja specjalizacja, Gabinet gabinet,
                   LocalDateTime dataWizytyOd, LocalDateTime dataWizytyDo, Rodzaj rodzaj) {
+        this();
         this.pacjent = checkNotNull(pacjent, "20191015180101");
         this.lekarz = checkNotNull(lekarz, "20191015180128");
         this.specjalizacja = checkNotNull(specjalizacja, "20191015180135");
@@ -62,7 +67,6 @@ public class Wizyta {
         this.dataWizytyOd = checkNotNull(dataWizytyOd, "20191015180148");
         this.dataWizytyDo = checkNotNull(dataWizytyDo, "20191015180154");
         this.rodzaj = checkNotNull(rodzaj, "20191015180210");
-        this.status = Status.ZAPLANOWANA;
     }
 
     @PrePersist

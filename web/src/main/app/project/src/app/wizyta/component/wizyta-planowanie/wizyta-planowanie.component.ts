@@ -1,14 +1,18 @@
 import {Component, OnInit} from "@angular/core";
 import {LekarzService} from "@przychodnia/service/lekarz.service";
 import {
-    AbstractHarmonogramPozycjaDto, AbstractLekarzSpecjalizacjaDto,
-    HarmonogramViewDto, LekarzDetailViewDto, LekarzSpecjalizacjaViewDto, PacjentDetailViewDto,
+    AbstractHarmonogramPozycjaDto,
+    HarmonogramViewDto,
+    LekarzDetailViewDto,
+    LekarzSpecjalizacjaViewDto,
+    PacjentDetailViewDto,
     WizytaViewDto,
     ZaplanujWizyteDto
 } from "@przychodnia/model/backend-model";
 import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
 import {Router} from "@angular/router";
 import {WizytaService} from "@przychodnia/service/wizyta.service";
+import {NotificationService} from "@przychodnia/service/notification/notification.service";
 
 @Component({
     selector: 'mp-wizyta-planowanie',
@@ -24,13 +28,20 @@ export class WizytaPlanowanieComponent implements OnInit {
     dayCollection: Array<string> = ['poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota', 'niedziela'];
     availableHours: any = {};
 
+    currentWeek: Date;
+    weekDateFrom: Date;
+    changeWeekToPrevLinkVisible: boolean;
+    weekDateTo: Date;
+    changeWeekToNextLinkVisible: boolean;
+
     lekarz: LekarzDetailViewDto;
     specjalizacja: LekarzSpecjalizacjaViewDto;
 
     constructor(private router: Router,
                 private lekarzService: LekarzService,
                 private uzytkownikService: UzytkownikService,
-                private wizytaService: WizytaService) {
+                private wizytaService: WizytaService,
+                private notificationService: NotificationService) {
     }
 
     ngOnInit(): void {
@@ -50,13 +61,22 @@ export class WizytaPlanowanieComponent implements OnInit {
         };
 
         this.lekarzService.getHarmonogramList(this.lekarz.id, this.specjalizacja.id)
-            .subscribe((harmonogramCollectionResponse: Array<HarmonogramViewDto>) => {
-                this.harmonogram = harmonogramCollectionResponse.pop();
-                this.minGodzinaOd = this.getMinGodzinaOd(this.harmonogram.pozycjaCollection);
-                this.maxGodzinaDo = this.getMaxGodzinaDo(this.harmonogram.pozycjaCollection);
-                this.initMinuteCollection();
-                this.initAvailableHours();
-            });
+            .subscribe(
+                (harmonogramCollectionResponse: Array<HarmonogramViewDto>) => {
+                    this.harmonogram = harmonogramCollectionResponse.pop();
+                    this.minGodzinaOd = this.getMinGodzinaOd(this.harmonogram.pozycjaCollection);
+                    this.maxGodzinaDo = this.getMaxGodzinaDo(this.harmonogram.pozycjaCollection);
+                },
+                (error: any) => {
+                    this.notificationService.showError(error)
+                },
+                () => {
+                    this.initMinuteCollection();
+                    this.initAvailableHours();
+                    this.initWeekDates();
+                    this.initChangeWeekLinksVisibility();
+                }
+            );
     }
 
     onZaplanujWizyte(dayIndex: number, minute: number): void {
@@ -86,6 +106,7 @@ export class WizytaPlanowanieComponent implements OnInit {
         };
 
         this.wizytaService.zaplanuj(zaplanujWizyteDto).subscribe((wizytaViewDto: WizytaViewDto) => {
+            this.notificationService.showSuccess('Twoja wizyta została zaplanowana.');
             this.router.navigate(['/podsumowanie-wizyty', wizytaViewDto.id]);
         });
     }
@@ -102,6 +123,17 @@ export class WizytaPlanowanieComponent implements OnInit {
                 dayInfo: pozycja
             };
         }
+    }
+
+    initWeekDates(): void {
+        this.currentWeek = new Date();
+        this.weekDateFrom = this.getPreviousMonday(this.currentWeek);
+        this.weekDateTo = this.getNextSunday(this.currentWeek);
+    }
+
+    initChangeWeekLinksVisibility(): void {
+        this.changeWeekToPrevLinkVisible = new Date(this.currentWeek).getTime() >= new Date(this.harmonogram.obowiazujeOd).getTime();
+        this.changeWeekToNextLinkVisible = new Date(this.currentWeek).getTime() <= new Date(this.harmonogram.obowiazujeDo).getTime();
     }
 
     getDayInfo(dayIndex: number, minute: number): AbstractHarmonogramPozycjaDto {
@@ -127,6 +159,14 @@ export class WizytaPlanowanieComponent implements OnInit {
         const mins: number = (minutes - (hours * 60));
 
         return hours + ':' + ((mins < 10) ? '0' + mins : mins);
+    }
+
+    onChangeWeek(prevWeek: boolean): void {
+        const days: number = 7 * (prevWeek ? -1 : 1);
+        this.weekDateFrom = this.addDays(this.weekDateFrom, days);
+        this.weekDateTo = this.addDays(this.weekDateTo, days);
+        this.currentWeek = new Date(this.weekDateFrom);
+        this.initChangeWeekLinksVisibility();
     }
 
     private initMinuteCollection(): void {
@@ -175,6 +215,38 @@ export class WizytaPlanowanieComponent implements OnInit {
         } catch (e) {
             return 0;
         }
+    }
+
+    private getPreviousMonday(date: Date): Date {
+        var day = date.getDay() - 1;
+        var prevMonday;
+
+        if (date.getDay() == 0) {
+            prevMonday = new Date().setDate(date.getDate() - 7);
+        } else {
+            prevMonday = new Date().setDate(date.getDate() - day);
+        }
+
+        return prevMonday;
+    }
+
+    private getNextSunday(date: Date): Date {
+        var day = date.getDay();
+        var nextSunday;
+
+        if (date.getDay() == 7) {
+            nextSunday = new Date().setDate(date.getDate() + 7);
+        } else {
+            nextSunday = new Date().setDate(date.getDate() + (7 - day));
+        }
+
+        return nextSunday;
+    }
+
+    private addDays(date, days): Date {
+        let result: Date = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
     }
 
 }

@@ -2,10 +2,12 @@
     <div class="photo">
         <div style="margin-top: 150px;" class="d-flex justify-content-center h-100">
             <div class="searchbar">
-                <input autofocus class="search_input" type="text" name="searchBy" [(ngModel)]="searchBy"
-                       placeholder="Wyszukaj swojego lekarza">
-                <a (click)="onSearch()" class="search_icon"><i
-                    class="fas fa-search"></i></a>
+                <form (submit)="onSearch()">
+                    <input autofocus class="search_input" type="text" name="searchBy" [(ngModel)]="searchBy"
+                           placeholder="Wyszukaj swojego lekarza">
+                    <a (click)="onSearch()" class="search_icon"><i
+                        class="fas fa-search"></i></a>
+                </form>
             </div>
         </div>
         <div class="test container">

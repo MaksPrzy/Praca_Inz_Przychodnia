@@ -1,11 +1,24 @@
 <div class="content" style="text-align: center">
     <div class="container">
+        <div class="row">&nbsp;</div>
+        <div class="row" *ngIf="harmonogram">
+            Harmonogram obowiązuje od dnia {{harmonogram?.obowiazujeOd | date:'dd-MM-yyyy'}} do dnia {{harmonogram?.obowiazujeDo | date:'dd-MM-yyyy'}}.
+        </div>
+        <div class="row">
+            Harmonogram na tydzień od dnia {{weekDateFrom | date:'dd-MM-yyyy'}} do dnia {{weekDateTo | date: 'dd-MM-yyyy'}}.
+        </div>
+        <div class="row">&nbsp;</div>
         <div class="row">
             <div class="table-responsive">
                 <table class="timetable table table-striped ">
                     <tr>
-                        <td>&nbsp;</td>
+                        <td>
+                            <a class="change-week-link" (click)="onChangeWeek(true)" *ngIf="changeWeekToPrevLinkVisible"><< tydzień wstecz</a>
+                        </td>
                         <td *ngFor="let day of dayCollection">{{day}}</td>
+                        <td>
+                            <a class="change-week-link" (click)="onChangeWeek(false)" *ngIf="changeWeekToNextLinkVisible">tydzień dalej >></a>
+                        </td>
                     </tr>
                     <tr *ngFor="let minute of minuteCollection">
                         <td>{{getMinutesAsHours(minute)}}</td>
@@ -17,6 +30,7 @@
                                 Umów
                             </button>
                         </td>
+                        <td>&nbsp;</td>
                     </tr>
                   </table>
             </div>

@@ -1,0 +1,26 @@
+.table td, .table th {
+    padding: .20rem;
+}
+
+.btn-primary {
+    background-color: green;
+    height: 20px;
+}
+
+.btn {
+    font-size: 12px;
+    font-weight: bold;
+    line-height: normal;
+    vertical-align: middle;
+    text-align: center;
+}
+
+a.change-week-link {
+    font-weight: bold;
+}
+
+a.change-week-link:hover {
+    color: navy;
+    cursor: pointer;
+    text-decoration: underline;
+}
