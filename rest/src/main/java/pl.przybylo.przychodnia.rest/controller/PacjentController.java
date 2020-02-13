@@ -50,8 +50,8 @@ public class PacjentController {
 
     //OBSŁUGA WIZYT
 
-    @GetMapping("/{id}/wizyty")
-    public List<WizytaViewDto> getWizytaList(@RequestParam long pacjentId) {
+    @GetMapping("/{pacjentId}/wizyty")
+    public List<WizytaViewDto> getWizytaList(@PathVariable(value = "pacjentId") Long pacjentId) {
         return wizytaService.getWizytaList(pacjentId);
     }
 

@@ -2,8 +2,6 @@ import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {WizytaService} from "@przychodnia/service/wizyta.service";
 import {WizytaViewDto} from "@przychodnia/model/backend-model";
-import {switchMap} from "rxjs/operators";
-import {Observable, pipe} from "rxjs";
 
 @Component({
     selector: 'mp-wizyta-podsumowanie',
@@ -25,9 +23,12 @@ export class WizytaPodsumowanieComponent implements OnInit {
                 const wizytaId: number = parseInt(params.get('id'));
 
                 this.wizytaService.getWizyta(wizytaId).subscribe((wizytaResponse: WizytaViewDto) => {
+                    console.log(wizytaResponse);
                     this.wizyta = wizytaResponse;
                 });
             });
     }
 
 }
+
+

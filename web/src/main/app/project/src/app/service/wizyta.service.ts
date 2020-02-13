@@ -18,7 +18,15 @@ export class WizytaService {
         const uzytkownik: PacjentDetailViewDto = this.uzytkownikService.getUzytkownik();
         return <Observable<WizytaViewDto>> this.httpClient.get(`/pacjenci/${uzytkownik.id}/wizyty/${id}`);
     }
-    
+
+    public getWszystkieWizyty(pacjentid: number): Observable<any> {
+        return this.httpClient.get<any>("/pacjenci/" + pacjentid + "/wizyty");
+    }
+
+//     return this.http.post<CreatePost>(environment.apiEndpoint + "posts", post,
+// { headers: {'Authorization': 'Bearer ' + this.oauth.getToken(), 'Content-Type':  'application/json'}});
+//
+
     public zaplanuj(zaplanujWizyteDto: ZaplanujWizyteDto): Observable<WizytaViewDto> {
         const uzytkownik: PacjentDetailViewDto = this.uzytkownikService.getUzytkownik();
         return <Observable<WizytaViewDto>>this.httpClient.post(`/pacjenci/${uzytkownik.id}/wizyty`, zaplanujWizyteDto);
