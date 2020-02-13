@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit} from "@angular/core";
 import {LekarzDetailViewDto} from "@przychodnia/model/backend-model";
 import {LekarzService} from "@przychodnia/service/lekarz.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
     selector: 'mp-wyniki-wyszukiwania',
@@ -14,6 +14,7 @@ export class WynikiWyszukiwaniaComponent implements OnInit, AfterViewInit {
     lekarzCollection: Array<LekarzDetailViewDto>;
 
     constructor(private route: ActivatedRoute,
+                private router: Router,
                 private lekarzService: LekarzService) {
     }
 
@@ -35,6 +36,10 @@ export class WynikiWyszukiwaniaComponent implements OnInit, AfterViewInit {
         }
 
         return null;
+    }
+
+    onUmowWizyte(lekarzId: number): void {
+        this.router.navigate(['/planowanie-wizyty', lekarzId]);
     }
 
     private search(): void {

@@ -13,7 +13,11 @@ export class LekarzService {
         return <Observable<Array<LekarzDetailViewDto>>>this.httpClient.get('/lekarze?searchBy=' + searchBy);
     }
 
-    public getHarmonogramList(lekarzId: number, specjalizacjaId: number): Observable<Array<HarmonogramViewDto>> {
+    public getLekarz(id: number): Observable<LekarzDetailViewDto> {
+        return <Observable<LekarzDetailViewDto>>this.httpClient.get(`/lekarze/${id}`);
+    }
+
+    public getHarmonogramList(lekarzId: number): Observable<Array<HarmonogramViewDto>> {
         return <Observable<Array<HarmonogramViewDto>>>this.httpClient.get(`/lekarze/${lekarzId}/harmonogramy`);
     }
 

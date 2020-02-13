@@ -10,7 +10,7 @@ import {
     ZaplanujWizyteDto
 } from "@przychodnia/model/backend-model";
 import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {WizytaService} from "@przychodnia/service/wizyta.service";
 import {NotificationService} from "@przychodnia/service/notification/notification.service";
 
@@ -38,6 +38,7 @@ export class WizytaPlanowanieComponent implements OnInit {
     specjalizacja: LekarzSpecjalizacjaViewDto;
 
     constructor(private router: Router,
+                private activatedRoute: ActivatedRoute,
                 private lekarzService: LekarzService,
                 private uzytkownikService: UzytkownikService,
                 private wizytaService: WizytaService,
@@ -45,46 +46,47 @@ export class WizytaPlanowanieComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // todo wczytac informacje o lekarzu
-        this.specjalizacja = {
-            id: 4,
-            nazwa: 'specjalizacjaLekarzaNazwa',
-            rokUzyskaniaDyplomuZeSpecjalizacji: 2000
-        };
+        this.activatedRoute.paramMap
+            .subscribe((params: ParamMap) => {
+                const lekarzId: number = parseInt(params.get('lekarzId'));
 
-        this.lekarz = {
-            id: 2,
-            imie: 'imieLekarza',
-            nazwisko: 'nazwiskoLekarza',
-            numer: 'numerLekarza',
-            specjalizacjaCollection: []
-        };
+                this.lekarzService.getLekarz(lekarzId).subscribe((lekarzResponse: LekarzDetailViewDto) => {
+                    this.lekarz = lekarzResponse;
+                    this.specjalizacja = lekarzResponse.specjalizacjaCollection.pop();
 
-        this.lekarzService.getHarmonogramList(this.lekarz.id, this.specjalizacja.id)
-            .subscribe(
-                (harmonogramCollectionResponse: Array<HarmonogramViewDto>) => {
-                    this.harmonogram = harmonogramCollectionResponse.pop();
-                    this.minGodzinaOd = this.getMinGodzinaOd(this.harmonogram.pozycjaCollection);
-                    this.maxGodzinaDo = this.getMaxGodzinaDo(this.harmonogram.pozycjaCollection);
-                },
-                (error: any) => {
-                    this.notificationService.showError(error)
-                },
-                () => {
-                    this.initMinuteCollection();
-                    this.initAvailableHours();
-                    this.initWeekDates();
-                    this.initChangeWeekLinksVisibility();
-                }
-            );
+                    this.lekarzService.getHarmonogramList(this.lekarz.id)
+                        .subscribe(
+                            (harmonogramCollectionResponse: Array<HarmonogramViewDto>) => {
+                                this.harmonogram = harmonogramCollectionResponse.pop();
+                                this.minGodzinaOd = this.getMinGodzinaOd(this.harmonogram.pozycjaCollection);
+                                this.maxGodzinaDo = this.getMaxGodzinaDo(this.harmonogram.pozycjaCollection);
+                            },
+                            (error: any) => {
+                                this.notificationService.showError(error)
+                            },
+                            () => {
+                                this.initMinuteCollection();
+                                this.initAvailableHours();
+                                this.initWeekDates();
+                                this.initChangeWeekLinksVisibility();
+                            }
+                        );
+                })
+            });
     }
 
     onZaplanujWizyte(dayIndex: number, minute: number): void {
         if (this.uzytkownikService.isLoggedIn()) {
             // todo pobrac daty
-            const dataWizytyOd: Date = new Date();
-            const dataWizytyDo: Date = new Date();
+            const dataWizytyOd: Date = this.addDays(this.weekDateFrom, dayIndex - 1);
+            const dataWizytyDo: Date = dataWizytyOd;
             const dayInfo: AbstractHarmonogramPozycjaDto = this.getDayInfo(dayIndex, minute);
+
+            console.log('dayInfo');
+            console.dir(dayInfo);
+
+            console.log('dayIndex: ' + dayIndex + ', minute: ' + minute);
+            console.log('dataWizytyOd: ' + dataWizytyOd + ', dataWizytyDo: ' + dataWizytyDo);
 
             this.planujWizyteWhenUserLoggedIn(dataWizytyOd, dataWizytyDo, dayInfo.gabinet.id);
         } else {
@@ -151,7 +153,12 @@ export class WizytaPlanowanieComponent implements OnInit {
             return;
         }
 
-        return minute >= this.availableHours[dayIndex]['minutaOd'] && minute <= this.availableHours[dayIndex]['minutaDo'];
+        let available: boolean = minute >= this.availableHours[dayIndex]['minutaOd'] && minute <= this.availableHours[dayIndex]['minutaDo'];
+
+        // todo dopisac zeby sprawdzalo z backendem czy zarezerwowany termin wizyty
+        // available = available && //
+
+        return available;
     }
 
     getMinutesAsHours(minutes: number): string {

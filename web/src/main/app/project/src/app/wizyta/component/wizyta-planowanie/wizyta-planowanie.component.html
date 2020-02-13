@@ -1,6 +1,9 @@
 <div class="content" style="text-align: center">
     <div class="container">
         <div class="row">&nbsp;</div>
+        <div class="row" *ngIf="lekarz">
+            <h2>{{lekarz.imie}} {{lekarz.nazwisko}} ({{specjalizacja.nazwa}})</h2>
+        </div>
         <div class="row" *ngIf="harmonogram">
             Harmonogram obowiązuje od dnia {{harmonogram?.obowiazujeOd | date:'dd-MM-yyyy'}} do dnia {{harmonogram?.obowiazujeDo | date:'dd-MM-yyyy'}}.
         </div>

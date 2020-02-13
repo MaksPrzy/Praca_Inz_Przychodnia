@@ -29,6 +29,11 @@ public class LekarzController {
         return lekarzService.getLekarzList(searchBy);
     }
 
+    @GetMapping("/{id}")
+    public LekarzDetailViewDto getLekarz(@PathVariable Long id) {
+        return lekarzService.getLekarz(id);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public LekarzDetailViewDto add(@RequestBody LekarzNewDto lekarzNewDto) {
@@ -37,20 +42,20 @@ public class LekarzController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public LekarzDetailViewDto update(@PathVariable("id") Long id, @RequestBody LekarzEditDto lekarzEditDto) {
+    public LekarzDetailViewDto update(@PathVariable Long id, @RequestBody LekarzEditDto lekarzEditDto) {
         return lekarzService.update(lekarzEditDto);
     }
 
     // obsluga harmonogramow
     // np. /api/lekarze/9/harmonogramy
     @GetMapping("/{id}/harmonogramy")
-    public List<HarmonogramViewDto> getHarmonogramList(@PathVariable("id") long id) {
+    public List<HarmonogramViewDto> getHarmonogramList(@PathVariable long id) {
         return harmonogramService.getHarmonogramList(id);
     }
 
     @PostMapping("/{id}/harmonogramy")
     @ResponseStatus(HttpStatus.CREATED)
-    public HarmonogramViewDto add(@PathVariable("id") long id, @RequestBody HarmonogramNewDto harmonogramNewDto) {
+    public HarmonogramViewDto add(@PathVariable long id, @RequestBody HarmonogramNewDto harmonogramNewDto) {
         return harmonogramService.add(harmonogramNewDto);
     }
 

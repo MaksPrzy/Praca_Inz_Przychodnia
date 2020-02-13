@@ -10,6 +10,8 @@ public interface LekarzService {
 
     List<LekarzDetailViewDto> getLekarzList(String searchBy);
 
+    LekarzDetailViewDto getLekarz(Long lekarzId);
+
     LekarzDetailViewDto add(LekarzNewDto lekarzNewDto);
 
     LekarzDetailViewDto update(LekarzEditDto lekarzEditDto);

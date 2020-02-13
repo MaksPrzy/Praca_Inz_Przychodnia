@@ -7,14 +7,13 @@ import pl.przybylo.przychodnia.commons.exceptions.CantDeleteWizytaException;
 import pl.przybylo.przychodnia.commons.exceptions.WizytaNotFoundException;
 import pl.przybylo.przychodnia.domain.model.wizyta.Wizyta;
 import pl.przybylo.przychodnia.domain.repository.WizytaRepository;
-import pl.przybylo.przychodnia.dto.wizyta.WizytaEditDto;
-import pl.przybylo.przychodnia.dto.wizyta.WizytaViewDto;
-import pl.przybylo.przychodnia.dto.wizyta.ZakonczWizyteDto;
-import pl.przybylo.przychodnia.dto.wizyta.ZaplanujWizyteDto;
+import pl.przybylo.przychodnia.dto.wizyta.*;
 import pl.przybylo.przychodnia.mapper.wizyta.WizytaMapper;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static pl.wavesoftware.eid.utils.EidPreconditions.checkNotNull;
 
 @Service
@@ -75,6 +74,16 @@ public class WizytaServiceImpl implements WizytaService {
         } else {
             throw new CantDeleteWizytaException(id);
         }
+    }
+
+    @Override
+    public List<HarmonogramZaplanowanaWizytaDto> getZaplanowanaWizytaNaTydzienList(LocalDate dateFrom, LocalDate dateTo, long lekarzId, long specjalizacjaId) {
+        checkNotNull(dateFrom, "20200213200608");
+        checkNotNull(dateTo, "20200213200613");
+
+        // todo
+
+        return newArrayList();
     }
 
 }

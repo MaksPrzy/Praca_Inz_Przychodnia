@@ -11,29 +11,23 @@ import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
 })
 export class WizytaListComponent implements OnInit {
 
-    wizyta: WizytaViewDto
-    pacjent: PacjentDetailViewDto
+    wizytaCollection: Array<WizytaViewDto>;
     uzytkownik: PacjentDetailViewDto
 
-
-    constructor(private activatedRoute:  ActivatedRoute,
+    constructor(private activatedRoute: ActivatedRoute,
                 private wizytaService: WizytaService,
-                private uzytkownikService: UzytkownikService){
+                private uzytkownikService: UzytkownikService) {
     }
 
     ngOnInit(): void {
         this.uzytkownik = this.uzytkownikService.getUzytkownik();
-        console.log(this.uzytkownik);
+
         this.activatedRoute.paramMap
             .subscribe((params: ParamMap) => {
-                this.wizytaService.getWszystkieWizyty(this.uzytkownik.id).subscribe(data => {
-                    console.log(data);
-                    // this.wizyta = pacjentResponse;
+                this.wizytaService.getWizytaList(this.uzytkownik.id).subscribe((wizytaCollectionResponse: Array<WizytaViewDto>) => {
+                    this.wizytaCollection = wizytaCollectionResponse;
                 });
             });
-    }
-
-    private loadWizytaCollection(): void {
     }
 
 }

@@ -1,14 +1,32 @@
-<!--<div class="container mt-5 mb-5">-->
-    <!--<div class="name"><h4>Historia wizyt</h4></div>-->
-
-    <!--<table id="sailorTable" class="table table-striped table-bordered" width="80%">-->
-        <!--<thead>-->
-        <!--<tr>-->
-            <!--<th>Specjalista: {{wizyta.lekarz.imie}} {{wizyta.lekarz.nazwisko}}</th>-->
-            <!--<th>Numer wizyty: {{wizyta.id}}</th>-->
-            <!--<th>Data wizyty: {{wizyta.dataWizytyOd}} </th>-->
-        <!--</tr>-->
-        <!--</thead>-->
-    <!--</table>-->
-
-<!--</div>-->
+<div class="container mt-5 mb-5">
+    <div class="name"><h4>Moje wizyty</h4></div>
+    <table id="sailorTable" class="table table-striped table-bordered" width="80%">
+        <thead>
+        <tr>
+            <th>Data i miejsce wizyty</th>
+            <th>Lekarz</th>
+            <th>Status</th>
+            <th>Rodzaj</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let wizyta of wizytaCollection">
+                <td>
+                    dnia {{wizyta.dataWizytyOd | date:'dd-MM-yyyy'}}, w godzinach<br>
+                    od {{wizyta.dataWizytyOd | date:'HH:mm'}} do {{wizyta.dataWizytyDo | date:'HH:mm'}} w<br>
+                    {{wizyta.gabinet.nazwa}}
+                </td>
+                <td>
+                    {{wizyta.lekarz.imie}} {{wizyta.lekarz.nazwisko}}<br>
+                    ({{wizyta.specjalizacja.nazwa}})
+                </td>
+                <td>
+                    {{wizyta.status}}
+                </td>
+                <td>
+                    {{wizyta.rodzaj}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
