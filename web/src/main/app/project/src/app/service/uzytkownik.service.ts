@@ -19,6 +19,7 @@ export class UzytkownikService {
         return this.httpClient.post('/uzytkownicy/zaloguj', zalogujDto)
             .pipe(
                 map((zalogowanoDto: ZalogowanoDto) => {
+                    localStorage.setItem("idUzytkownika",JSON.stringify(zalogowanoDto.uzytkownik.id));
                     localStorage.setItem(this.UZYTKOWNIK, JSON.stringify(zalogowanoDto.uzytkownik));
                     localStorage.setItem(this.TOKEN, zalogowanoDto.token);
                     return true;

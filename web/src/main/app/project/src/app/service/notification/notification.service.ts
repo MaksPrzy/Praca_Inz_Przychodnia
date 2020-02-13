@@ -16,7 +16,7 @@ export class NotificationService {
     private readonly DEFAULT_TOAST_LIFE: number = 3000;
 
     private readonly DEFAULT_TOAST_KEY: string = 'defaultToast';
-    private readonly DEFAULT_TOAST_TITLE: string = 'Komunikat';
+    private readonly DEFAULT_TOAST_TITLE: string = '';
 
     private readonly ERROR_WARNING_TOAST_KEY: string = 'errorWarningToast';
     private readonly ERROR_WARNING_TOAST_WARN_TITLE: string = 'Ostrzeżenie';

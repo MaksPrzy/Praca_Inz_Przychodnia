@@ -144,6 +144,7 @@ export interface UzytkownikRejestracjaDto extends UserDetails {
 }
 
 export interface ZalogowanoDto {
+    id: number;
     uzytkownik: PacjentDetailViewDto;
     token: string;
 }

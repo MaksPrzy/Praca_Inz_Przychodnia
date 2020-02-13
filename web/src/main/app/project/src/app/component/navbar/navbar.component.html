@@ -1,33 +1,35 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <img height="100px" width="120px" src="https://cdn6.f-cdn.com/contestentries/1204029/26806774/5a2f4d9275afd_thumb900.jpg"><a class="navbar-brand">&nbsp;&nbsp;MAXMED</a>
+    <img height="100px" width="150px"
+         src="https://cdn6.f-cdn.com/contestentries/1204029/26806774/5a2f4d9275afd_thumb900.jpg"><a
+    class="navbar-brand">&nbsp;&nbsp;MAXMED</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="home">Strona główna<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="moje-wizyty" *ngIf="uzytkownik">Moje wizyty</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="rodo">Prywatność danych</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="logowanie" *ngIf="!uzytkownik">Zaloguj się!</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="rejestracja" *ngIf="!uzytkownik">Zarejestruj się!</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="home" *ngIf="uzytkownik" (click)="onLogout()">Wyloguj mnie</a>
-            </li>
-        </ul>
+    <div class="font-color">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="home">Strona główna<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="moje-wizyty" *ngIf="uzytkownik">Moje wizyty</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="rodo">Prywatność danych</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logowanie" *ngIf="!uzytkownik">Zaloguj się!</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="rejestracja" *ngIf="!uzytkownik">Zarejestruj się!</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="home" *ngIf="uzytkownik" (click)="onLogout()">Wyloguj mnie</a>
+                </li>
+            </ul>
+        </div>
     </div>
-
     <div *ngIf="uzytkownik">
         Zalogowany jako {{uzytkownik.imie}} {{uzytkownik.nazwisko}}
     </div>

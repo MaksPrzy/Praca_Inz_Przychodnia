@@ -1,5 +1,5 @@
 #sailorTableArea{
-    max-height: 300px;
+    max-height: 400px;
     overflow-x: auto;
     overflow-y: auto;
 }
@@ -8,16 +8,16 @@
 }
 tbody {
     display:block;
-    height:370px;
-    overflow:auto;
+    height:270px;
+    overflow: fragments;
 }
 thead, tbody tr {
     display:table;
-    width: 90%;
+    width: 70%;
     table-layout:fixed;
 }
 test{
-    content: 'center';
+    content: 'open-quote';
 }
 
 
