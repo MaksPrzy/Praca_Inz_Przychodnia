@@ -1,11 +1,8 @@
 package pl.przybylo.przychodnia.business;
 
-import org.springframework.stereotype.Service;
-import pl.przybylo.przychodnia.dto.wizyta.WizytaEditDto;
-import pl.przybylo.przychodnia.dto.wizyta.WizytaViewDto;
-import pl.przybylo.przychodnia.dto.wizyta.ZakonczWizyteDto;
-import pl.przybylo.przychodnia.dto.wizyta.ZaplanujWizyteDto;
+import pl.przybylo.przychodnia.dto.wizyta.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface WizytaService {
@@ -21,5 +18,7 @@ public interface WizytaService {
     WizytaViewDto zakoncz(ZakonczWizyteDto zakonczWizyteDto);
 
     void delete(long id);
+
+    List<HarmonogramZaplanowanaWizytaDto> getZaplanowanaWizytaNaTydzienList(LocalDate dateFrom, LocalDate dateTo, long lekarzId, long specjalizacjaId);
 
 }

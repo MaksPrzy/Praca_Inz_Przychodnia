@@ -12,7 +12,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let lekarz of lekarzCollection">
-            <td>{{lekarz.imie}}    {{lekarz.nazwisko}}</td>
+            <td>{{lekarz.imie}} {{lekarz.nazwisko}}</td>
             <td>
                 <div *ngFor="let specjalizacja of lekarz.specjalizacjaCollection">
                     {{specjalizacja.nazwa}} - doświadczenie w latach: ({{getExperienceInYears(specjalizacja.rokUzyskaniaDyplomuZeSpecjalizacji)}})
@@ -20,7 +20,10 @@
             </td>
             <td>
                 <div class="test">
-                    <a href="planowanie-wizyty">UMÓW WIZYTE</a>
+                    <button type="button" class="btn btn-primary"
+                            (click)="onUmowWizyte(lekarz.id)">
+                        Umów wizytę
+                    </button>
                 </div>
             </td>
         </tr>

@@ -22,7 +22,7 @@ const routes: Routes = [
         component: UzytkownikLogowanieFormComponent
     },
     {
-        path: 'planowanie-wizyty',
+        path: 'planowanie-wizyty/:lekarzId',
         component: WizytaPlanowanieComponent
     },
     {

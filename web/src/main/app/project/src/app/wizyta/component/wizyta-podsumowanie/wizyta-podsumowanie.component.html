@@ -6,7 +6,7 @@
         <tr>
             <th>Specjalista: {{wizyta.lekarz.imie}} {{wizyta.lekarz.nazwisko}}</th>
             <th>Numer wizyty: {{wizyta.id}}</th>
-            <th>Data wizyty: {{wizyta.dataWizytyOd}} </th>
+            <th>Data wizyty: {{wizyta.dataWizytyOd | date:'dd-MM-yyyy HH:mm'}} w {{wizyta.gabinet.nazwa}}</th>
         </tr>
         </thead>
         <a class="nav-link" href="moje-wizyty">Przejdź do moich wizyt</a>

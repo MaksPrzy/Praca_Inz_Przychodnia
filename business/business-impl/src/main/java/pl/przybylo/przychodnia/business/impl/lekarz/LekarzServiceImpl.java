@@ -39,6 +39,14 @@ public class LekarzServiceImpl implements LekarzService {
     }
 
     @Override
+    public LekarzDetailViewDto getLekarz(Long lekarzId) {
+        checkNotNull(lekarzId, "20200213193433");
+
+        Lekarz lekarz = findLekarzByIdOrThrowException(lekarzId);
+        return lekarzMapper.map(lekarz);
+    }
+
+    @Override
     public LekarzDetailViewDto add(LekarzNewDto lekarzNewDto) {
         checkNotNull(lekarzNewDto, "20190712170210");
 
@@ -55,12 +63,15 @@ public class LekarzServiceImpl implements LekarzService {
 
         lekarzValidator.check(lekarzEditDto);
 
-        Long lekarzId = lekarzEditDto.getId();
-        Lekarz lekarz = lekarzRepository.findById(lekarzId).orElseThrow(() -> new LekarzNotFoundException(lekarzId));
+        Lekarz lekarz = findLekarzByIdOrThrowException(lekarzEditDto.getId());
         lekarzMapper.map(lekarz, lekarzEditDto);
         lekarz = lekarzRepository.save(lekarz);
 
         return lekarzMapper.map(lekarz);
+    }
+
+    private Lekarz findLekarzByIdOrThrowException(Long lekarzId) {
+        return lekarzRepository.findById(lekarzId).orElseThrow(() -> new LekarzNotFoundException(lekarzId));
     }
 
 }
