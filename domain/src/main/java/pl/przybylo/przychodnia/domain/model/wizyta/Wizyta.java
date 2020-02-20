@@ -83,6 +83,10 @@ public class Wizyta {
         return status == Status.ZAPLANOWANA;
     }
 
+    public boolean isZakonczona() {
+        return status == Status.ZAKONCZONA;
+    }
+
     private String normalizeWizyta() {
         return normalize(newArrayList(pacjent.getPesel()), pairOf(pacjent.getImie(), pacjent.getNazwisko()),
                 pairOf(lekarz.getImie(), lekarz.getNazwisko()));

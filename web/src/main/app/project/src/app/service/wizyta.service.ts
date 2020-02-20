@@ -1,6 +1,11 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {PacjentDetailViewDto, WizytaViewDto, ZaplanujWizyteDto} from "@przychodnia/model/backend-model";
+import {
+    HarmonogramZaplanowanaWizytaDto, HarmonogramZaplanowanaWizytaRequestDto,
+    PacjentDetailViewDto,
+    WizytaViewDto,
+    ZaplanujWizyteDto
+} from "@przychodnia/model/backend-model";
 import {Observable} from "rxjs";
 import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
 
@@ -28,6 +33,15 @@ export class WizytaService {
         return <Observable<WizytaViewDto>>this.httpClient.post(`/pacjenci/${uzytkownik.id}/wizyty`, zaplanujWizyteDto);
     }
 
-    // public getZaplanowanaWizytaNaTydzienList():
+    public getZaplanowanaWizytaNaTydzienList(dateFrom: Date, dateTo: Date, lekarzId: number, specjalizacjaId: number): Observable<Array<HarmonogramZaplanowanaWizytaDto>> {
+        const requestDto: HarmonogramZaplanowanaWizytaRequestDto = <HarmonogramZaplanowanaWizytaRequestDto>{
+            dateFrom: dateFrom,
+            dateTo: dateTo,
+            lekarzId: lekarzId,
+            specjalizacjaId: specjalizacjaId
+        };
+
+        return <Observable<Array<HarmonogramZaplanowanaWizytaDto>>>this.httpClient.post(`/planowanie`, requestDto);
+    }
 
 }

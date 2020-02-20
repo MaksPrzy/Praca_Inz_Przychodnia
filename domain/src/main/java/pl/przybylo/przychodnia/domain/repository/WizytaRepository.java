@@ -10,8 +10,11 @@ public interface WizytaRepository extends JpaRepository<Wizyta, Long>, Repositor
 
     List<Wizyta> findByPacjentId(Long pacjentId);
 
+    List<Wizyta> findByLekarzIdAndSpecjalizacjaId(Long lekarzId, Long specjalizacjaId);
+
     default Wizyta findByIdOrThrowException(long id) {
         return findById(id).orElseThrow(() -> new WizytaNotFoundException(id));
     }
 
 }
+
