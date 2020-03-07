@@ -23,6 +23,7 @@ import {NotificationService} from "@przychodnia/service/notification/notificatio
 export class WizytaPlanowanieComponent implements OnInit {
 
     harmonogram: HarmonogramViewDto;
+    interval: number = 0;
     minGodzinaOd: number;
     maxGodzinaDo: number;
     minuteCollection: Array<number> = [];
@@ -94,8 +95,19 @@ export class WizytaPlanowanieComponent implements OnInit {
 
     onZaplanujWizyte(dayIndex: number, minute: number): void {
         if (this.uzytkownikService.isLoggedIn()) {
-            const dataWizytyOd: Date = this.addDays(this.weekDateFrom, dayIndex - 1);
-            const dataWizytyDo: Date = dataWizytyOd;
+            const dataWizytyHour = this.getHour(minute);
+            const dataWizytyMinutes = this.getMinutesForHour(minute);
+
+            let dataWizytyOd: Date = this.addDays(this.weekDateFrom, dayIndex - 1);
+            dataWizytyOd.setHours(dataWizytyHour);
+            dataWizytyOd.setMinutes(dataWizytyMinutes);
+            dataWizytyOd.setSeconds(0);
+
+            let dataWizytyDo: Date = this.addDays(this.weekDateFrom, dayIndex - 1);
+            dataWizytyDo.setHours(dataWizytyHour);
+            dataWizytyDo.setMinutes(dataWizytyMinutes + this.interval);
+            dataWizytyDo.setSeconds(0);
+
             const dayInfo: AbstractHarmonogramPozycjaDto = this.getDayInfo(dayIndex, minute);
 
             this.planujWizyteWhenUserLoggedIn(dataWizytyOd, dataWizytyDo, dayInfo.gabinet.id);
@@ -181,10 +193,18 @@ export class WizytaPlanowanieComponent implements OnInit {
 
 
     getMinutesAsHours(minutes: number): string {
-        const hours: number = Math.floor(minutes / 60);
-        const mins: number = (minutes - (hours * 60));
+        const hours: number = this.getHour(minutes);
+        const mins: number = this.getMinutesForHour(minutes);
 
         return hours + ':' + ((mins < 10) ? '0' + mins : mins);
+    }
+
+    private getHour(minutes: number): number {
+        return Math.floor(minutes / 60);
+    }
+
+    private getMinutesForHour(minutes: number): number {
+        return minutes - (this.getHour(minutes) * 60);
     }
 
     onChangeWeek(prevWeek: boolean): void {
@@ -199,12 +219,12 @@ export class WizytaPlanowanieComponent implements OnInit {
 
     private initMinuteCollection(): void {
         if (this.harmonogram && this.minGodzinaOd && this.maxGodzinaDo) {
-            const interval = this.harmonogram.pozycjaCollection[0].interwalCzasowyWMinutach;
+            this.interval = this.harmonogram.pozycjaCollection[0].interwalCzasowyWMinutach;
             let from: number = this.minGodzinaOd;
 
             while (from <= this.maxGodzinaDo) {
                 this.minuteCollection.push(from);
-                from = from + interval;
+                from = from + this.interval;
             }
         }
     }

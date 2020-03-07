@@ -23,7 +23,6 @@ export class WizytaPodsumowanieComponent implements OnInit {
                 const wizytaId: number = parseInt(params.get('id'));
 
                 this.wizytaService.getWizyta(wizytaId).subscribe((wizytaResponse: WizytaViewDto) => {
-                    console.log(wizytaResponse);
                     this.wizyta = wizytaResponse;
                 });
             });
