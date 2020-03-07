@@ -11,11 +11,10 @@ import {
     ZaplanujWizyteDto
 } from "@przychodnia/model/backend-model";
 import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
-import {ActivatedRoute, ParamMap, Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {WizytaService} from "@przychodnia/service/wizyta.service";
 import {NotificationService} from "@przychodnia/service/notification/notification.service";
-import {catchError, map, switchMap, tap} from "rxjs/operators";
-import {EMPTY} from "rxjs";
+import {map, switchMap} from "rxjs/operators";
 
 @Component({
     selector: 'mp-wizyta-planowanie',
@@ -88,7 +87,7 @@ export class WizytaPlanowanieComponent implements OnInit {
     }
 
     onZaplanujWizyte(dayIndex: number, minute: number): void {
-        if (this.uzytkownikService.isLoggedIn()) {
+        if (this.uzytkownikService.loggedIn) {
             const dataWizytyHour = this.getHour(minute + 60);
             const dataWizytyMinutes = this.getMinutesForHour(minute);
 
@@ -111,7 +110,7 @@ export class WizytaPlanowanieComponent implements OnInit {
     }
 
     private planujWizyteWhenUserLoggedIn(dataWizytyOd: Date, dataWizytyDo: Date, gabinetId: number) {
-        const uzytkownik: PacjentDetailViewDto = this.uzytkownikService.getUzytkownik();
+        const uzytkownik: PacjentDetailViewDto = this.uzytkownikService.user;
 
         const zaplanujWizyteDto: ZaplanujWizyteDto = {
             pacjentId: uzytkownik.id,

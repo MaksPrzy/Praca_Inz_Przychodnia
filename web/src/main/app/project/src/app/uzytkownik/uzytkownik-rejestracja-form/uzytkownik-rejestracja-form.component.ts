@@ -45,9 +45,6 @@ export class UzytkownikRejestracjaFormComponent {
             }
         };
 
-        console.log('uzytkownik data');
-        console.dir(newUzytkownik);
-
         this.uzytkownikService.registerIn(newUzytkownik).subscribe(
             (pacjentDetailViewDto: PacjentDetailViewDto) => {
                 this.notificationService.showInfo('Zostałeś zarejestrowany.');

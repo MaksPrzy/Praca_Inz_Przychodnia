@@ -12,15 +12,12 @@ import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
 @Injectable()
 export class WizytaService {
 
-    private readonly UZYTKOWNIK: string = "uzytkownik";
-    private readonly TOKEN: string = "token";
-
     constructor(private httpClient: HttpClient,
                 private uzytkownikService: UzytkownikService) {
     }
 
     public getWizyta(id: number): Observable<WizytaViewDto> {
-        const uzytkownik: PacjentDetailViewDto = this.uzytkownikService.getUzytkownik();
+        const uzytkownik: PacjentDetailViewDto = this.uzytkownikService.user;
         return <Observable<WizytaViewDto>> this.httpClient.get(`/pacjenci/${uzytkownik.id}/wizyty/${id}`);
     }
 
@@ -29,7 +26,7 @@ export class WizytaService {
     }
 
     public zaplanuj(zaplanujWizyteDto: ZaplanujWizyteDto): Observable<WizytaViewDto> {
-        const uzytkownik: PacjentDetailViewDto = this.uzytkownikService.getUzytkownik();
+        const uzytkownik: PacjentDetailViewDto = this.uzytkownikService.user;
         return <Observable<WizytaViewDto>>this.httpClient.post(`/pacjenci/${uzytkownik.id}/wizyty`, zaplanujWizyteDto);
     }
 
