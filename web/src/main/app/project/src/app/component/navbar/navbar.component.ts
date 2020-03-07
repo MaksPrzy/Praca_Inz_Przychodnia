@@ -16,12 +16,10 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-        console.log('navbar on init');
         this.uzytkownik = this.uzytkownikService.getUzytkownik();
     }
 
     ngAfterViewInit(): void {
-        console.log('after view init');
         this.uzytkownik = this.uzytkownikService.getUzytkownik();
     }
 

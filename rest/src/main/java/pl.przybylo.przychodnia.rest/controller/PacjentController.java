@@ -1,6 +1,7 @@
 package pl.przybylo.przychodnia.rest.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import pl.przybylo.przychodnia.dto.wizyta.ZaplanujWizyteDto;
 
 import java.util.List;
 
+@Slf4j
 @CrossOrigin(origins = "*") // todo: do usuniecia
 @RestController
 @RequiredArgsConstructor
@@ -63,6 +65,9 @@ public class PacjentController {
     @PostMapping("/{id}/wizyty")
     @ResponseStatus(HttpStatus.CREATED)
     public WizytaViewDto zaplanuj(@PathVariable long id, @RequestBody ZaplanujWizyteDto zaplanujWizyteDto) {
+        log.info("\n\n");
+        log.info("data wizyty: {}", zaplanujWizyteDto.getDataWizytyOd());
+        log.info("\n\n");
         return wizytaService.zaplanuj(zaplanujWizyteDto);
     }
 

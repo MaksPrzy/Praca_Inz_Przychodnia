@@ -10,7 +10,7 @@
         </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let wizyta of wizytaCollection">
+            <tr *ngFor="let wizyta of wizytaCollection$ | async">
                 <td>
                     dnia {{wizyta.dataWizytyOd | date:'dd-MM-yyyy'}}, w godzinach<br>
                     od {{wizyta.dataWizytyOd | date:'HH:mm'}} do {{wizyta.dataWizytyDo | date:'HH:mm'}} w<br>

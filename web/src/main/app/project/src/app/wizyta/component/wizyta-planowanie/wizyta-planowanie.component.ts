@@ -14,6 +14,8 @@ import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {WizytaService} from "@przychodnia/service/wizyta.service";
 import {NotificationService} from "@przychodnia/service/notification/notification.service";
+import {catchError, map, switchMap, tap} from "rxjs/operators";
+import {EMPTY} from "rxjs";
 
 @Component({
     selector: 'mp-wizyta-planowanie',
@@ -50,52 +52,44 @@ export class WizytaPlanowanieComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.activatedRoute.paramMap
-            .subscribe((params: ParamMap) => {
-                const lekarzId: number = parseInt(params.get('lekarzId'));
-
-                this.lekarzService.getLekarz(lekarzId).subscribe((lekarzResponse: LekarzDetailViewDto) => {
-                    this.lekarz = lekarzResponse;
-                    this.specjalizacja = lekarzResponse.specjalizacjaCollection.pop();
-
-                    this.lekarzService.getHarmonogramList(this.lekarz.id)
-                        .subscribe(
-                            (harmonogramCollectionResponse: Array<HarmonogramViewDto>) => {
-                                this.harmonogram = harmonogramCollectionResponse.pop();
-                                this.minGodzinaOd = this.getMinGodzinaOd(this.harmonogram.pozycjaCollection);
-                                this.maxGodzinaDo = this.getMaxGodzinaDo(this.harmonogram.pozycjaCollection);
-                            },
-                            (error: any) => {
-                                this.notificationService.showError(error)
-                            },
-                            () => {
-                                this.initMinuteCollection();
-                                this.initAvailableHours();
-                                this.initWeekDates();
-                                this.initChangeWeekLinksVisibility();
-                                this.loadZaplanowaneWizytyNaTydzien();
-                            }
-                        );
-                })
-            });
+        this.activatedRoute.paramMap.pipe(
+            map(params => parseInt(params.get('lekarzId'))),
+            switchMap(lekarzId => this.lekarzService.getLekarz(lekarzId)),
+            switchMap(lekarzResponse => {
+                this.lekarz = lekarzResponse;
+                this.specjalizacja = lekarzResponse.specjalizacjaCollection.pop();
+                return this.lekarzService.getHarmonogramList(lekarzResponse.id)
+            }),
+            switchMap(harmonogramCollectionResponse => {
+                this.harmonogram = harmonogramCollectionResponse.pop();
+                this.minGodzinaOd = this.getMinGodzinaOd(this.harmonogram.pozycjaCollection);
+                this.maxGodzinaDo = this.getMaxGodzinaDo(this.harmonogram.pozycjaCollection);
+                this.initMinuteCollection();
+                this.initAvailableHours();
+                this.currentWeek = new Date();
+                this.weekDateFrom = this.getPreviousMonday(this.currentWeek);
+                this.weekDateTo = this.getNextSunday(this.currentWeek);
+                return this.wizytaService.getZaplanowanaWizytaNaTydzienList(this.weekDateFrom, this.weekDateTo, this.lekarz.id, this.specjalizacja.id);
+            })
+        ).subscribe(
+            zaplanowanaWizytaResponse => {
+                this.zaplanowaneWizytyNaTydzien = zaplanowanaWizytaResponse;
+                this.initChangeWeekLinksVisibility();
+            },
+            err => this.notificationService.showError(err)
+        );
     }
 
     loadZaplanowaneWizytyNaTydzien(): void {
-        console.log('load...');
-        console.log(this.weekDateFrom);
-        console.log(this.weekDateTo);
-
         this.wizytaService.getZaplanowanaWizytaNaTydzienList(this.weekDateFrom, this.weekDateTo, this.lekarz.id, this.specjalizacja.id)
             .subscribe((zaplanowanaWizytaResponseDto: Array<HarmonogramZaplanowanaWizytaDto>) => {
                 this.zaplanowaneWizytyNaTydzien = zaplanowanaWizytaResponseDto;
-                console.log('loadZaplanowaneWizytyNaTydzien');
-                console.dir(this.zaplanowaneWizytyNaTydzien);
             })
     }
 
     onZaplanujWizyte(dayIndex: number, minute: number): void {
         if (this.uzytkownikService.isLoggedIn()) {
-            const dataWizytyHour = this.getHour(minute);
+            const dataWizytyHour = this.getHour(minute + 60);
             const dataWizytyMinutes = this.getMinutesForHour(minute);
 
             let dataWizytyOd: Date = this.addDays(this.weekDateFrom, dayIndex - 1);
@@ -147,12 +141,6 @@ export class WizytaPlanowanieComponent implements OnInit {
                 dayInfo: pozycja
             };
         }
-    }
-
-    initWeekDates(): void {
-        this.currentWeek = new Date();
-        this.weekDateFrom = this.getPreviousMonday(this.currentWeek);
-        this.weekDateTo = this.getNextSunday(this.currentWeek);
     }
 
     initChangeWeekLinksVisibility(): void {
@@ -266,8 +254,8 @@ export class WizytaPlanowanieComponent implements OnInit {
     }
 
     private getPreviousMonday(date: Date): Date {
-        var day = date.getDay() - 1;
-        var prevMonday;
+        let day = date.getDay() - 1;
+        let prevMonday;
 
         if (date.getDay() == 0) {
             prevMonday = new Date().setDate(date.getDate() - 7);
@@ -275,12 +263,12 @@ export class WizytaPlanowanieComponent implements OnInit {
             prevMonday = new Date().setDate(date.getDate() - day);
         }
 
-        return prevMonday;
+        return new Date(prevMonday);
     }
 
     private getNextSunday(date: Date): Date {
-        var day = date.getDay();
-        var nextSunday;
+        let day = date.getDay();
+        let nextSunday;
 
         if (date.getDay() == 7) {
             nextSunday = new Date().setDate(date.getDate() + 7);
@@ -288,7 +276,7 @@ export class WizytaPlanowanieComponent implements OnInit {
             nextSunday = new Date().setDate(date.getDate() + (7 - day));
         }
 
-        return nextSunday;
+        return new Date(nextSunday);
     }
 
     private addDays(date, days): Date {
