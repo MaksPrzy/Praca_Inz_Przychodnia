@@ -3,6 +3,7 @@ import {LekarzService} from "@przychodnia/service/lekarz.service";
 import {
     AbstractHarmonogramPozycjaDto,
     HarmonogramViewDto,
+    HarmonogramZaplanowanaWizytaDto,
     LekarzDetailViewDto,
     LekarzSpecjalizacjaViewDto,
     PacjentDetailViewDto,
@@ -10,9 +11,10 @@ import {
     ZaplanujWizyteDto
 } from "@przychodnia/model/backend-model";
 import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
-import {ActivatedRoute, ParamMap, Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {WizytaService} from "@przychodnia/service/wizyta.service";
 import {NotificationService} from "@przychodnia/service/notification/notification.service";
+import {map, switchMap} from "rxjs/operators";
 
 @Component({
     selector: 'mp-wizyta-planowanie',
@@ -22,6 +24,7 @@ import {NotificationService} from "@przychodnia/service/notification/notificatio
 export class WizytaPlanowanieComponent implements OnInit {
 
     harmonogram: HarmonogramViewDto;
+    interval: number = 0;
     minGodzinaOd: number;
     maxGodzinaDo: number;
     minuteCollection: Array<number> = [];
@@ -37,6 +40,8 @@ export class WizytaPlanowanieComponent implements OnInit {
     lekarz: LekarzDetailViewDto;
     specjalizacja: LekarzSpecjalizacjaViewDto;
 
+    zaplanowaneWizytyNaTydzien: Array<HarmonogramZaplanowanaWizytaDto>;
+
     constructor(private router: Router,
                 private activatedRoute: ActivatedRoute,
                 private lekarzService: LekarzService,
@@ -46,47 +51,57 @@ export class WizytaPlanowanieComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.activatedRoute.paramMap
-            .subscribe((params: ParamMap) => {
-                const lekarzId: number = parseInt(params.get('lekarzId'));
+        this.activatedRoute.paramMap.pipe(
+            map(params => parseInt(params.get('lekarzId'))),
+            switchMap(lekarzId => this.lekarzService.getLekarz(lekarzId)),
+            switchMap(lekarzResponse => {
+                this.lekarz = lekarzResponse;
+                this.specjalizacja = lekarzResponse.specjalizacjaCollection.pop();
+                return this.lekarzService.getHarmonogramList(lekarzResponse.id)
+            }),
+            switchMap(harmonogramCollectionResponse => {
+                this.harmonogram = harmonogramCollectionResponse.pop();
+                this.minGodzinaOd = this.getMinGodzinaOd(this.harmonogram.pozycjaCollection);
+                this.maxGodzinaDo = this.getMaxGodzinaDo(this.harmonogram.pozycjaCollection);
+                this.initMinuteCollection();
+                this.initAvailableHours();
+                this.currentWeek = new Date();
+                this.weekDateFrom = this.getPreviousMonday(this.currentWeek);
+                this.weekDateTo = this.getNextSunday(this.currentWeek);
+                return this.wizytaService.getZaplanowanaWizytaNaTydzienList(this.weekDateFrom, this.weekDateTo, this.lekarz.id, this.specjalizacja.id);
+            })
+        ).subscribe(
+            zaplanowanaWizytaResponse => {
+                this.zaplanowaneWizytyNaTydzien = zaplanowanaWizytaResponse;
+                this.initChangeWeekLinksVisibility();
+            },
+            err => this.notificationService.showError(err)
+        );
+    }
 
-                this.lekarzService.getLekarz(lekarzId).subscribe((lekarzResponse: LekarzDetailViewDto) => {
-                    this.lekarz = lekarzResponse;
-                    this.specjalizacja = lekarzResponse.specjalizacjaCollection.pop();
-
-                    this.lekarzService.getHarmonogramList(this.lekarz.id)
-                        .subscribe(
-                            (harmonogramCollectionResponse: Array<HarmonogramViewDto>) => {
-                                this.harmonogram = harmonogramCollectionResponse.pop();
-                                this.minGodzinaOd = this.getMinGodzinaOd(this.harmonogram.pozycjaCollection);
-                                this.maxGodzinaDo = this.getMaxGodzinaDo(this.harmonogram.pozycjaCollection);
-                            },
-                            (error: any) => {
-                                this.notificationService.showError(error)
-                            },
-                            () => {
-                                this.initMinuteCollection();
-                                this.initAvailableHours();
-                                this.initWeekDates();
-                                this.initChangeWeekLinksVisibility();
-                            }
-                        );
-                })
-            });
+    loadZaplanowaneWizytyNaTydzien(): void {
+        this.wizytaService.getZaplanowanaWizytaNaTydzienList(this.weekDateFrom, this.weekDateTo, this.lekarz.id, this.specjalizacja.id)
+            .subscribe((zaplanowanaWizytaResponseDto: Array<HarmonogramZaplanowanaWizytaDto>) => {
+                this.zaplanowaneWizytyNaTydzien = zaplanowanaWizytaResponseDto;
+            })
     }
 
     onZaplanujWizyte(dayIndex: number, minute: number): void {
-        if (this.uzytkownikService.isLoggedIn()) {
-            // todo pobrac daty
-            const dataWizytyOd: Date = this.addDays(this.weekDateFrom, dayIndex - 1);
-            const dataWizytyDo: Date = dataWizytyOd;
+        if (this.uzytkownikService.loggedIn) {
+            const dataWizytyHour = this.getHour(minute + 60);
+            const dataWizytyMinutes = this.getMinutesForHour(minute);
+
+            let dataWizytyOd: Date = this.addDays(this.weekDateFrom, dayIndex - 1);
+            dataWizytyOd.setHours(dataWizytyHour);
+            dataWizytyOd.setMinutes(dataWizytyMinutes);
+            dataWizytyOd.setSeconds(0);
+
+            let dataWizytyDo: Date = this.addDays(this.weekDateFrom, dayIndex - 1);
+            dataWizytyDo.setHours(dataWizytyHour);
+            dataWizytyDo.setMinutes(dataWizytyMinutes + this.interval);
+            dataWizytyDo.setSeconds(0);
+
             const dayInfo: AbstractHarmonogramPozycjaDto = this.getDayInfo(dayIndex, minute);
-
-            console.log('dayInfo');
-            console.dir(dayInfo);
-
-            console.log('dayIndex: ' + dayIndex + ', minute: ' + minute);
-            console.log('dataWizytyOd: ' + dataWizytyOd + ', dataWizytyDo: ' + dataWizytyDo);
 
             this.planujWizyteWhenUserLoggedIn(dataWizytyOd, dataWizytyDo, dayInfo.gabinet.id);
         } else {
@@ -95,7 +110,7 @@ export class WizytaPlanowanieComponent implements OnInit {
     }
 
     private planujWizyteWhenUserLoggedIn(dataWizytyOd: Date, dataWizytyDo: Date, gabinetId: number) {
-        const uzytkownik: PacjentDetailViewDto = this.uzytkownikService.getUzytkownik();
+        const uzytkownik: PacjentDetailViewDto = this.uzytkownikService.user;
 
         const zaplanujWizyteDto: ZaplanujWizyteDto = {
             pacjentId: uzytkownik.id,
@@ -127,12 +142,6 @@ export class WizytaPlanowanieComponent implements OnInit {
         }
     }
 
-    initWeekDates(): void {
-        this.currentWeek = new Date();
-        this.weekDateFrom = this.getPreviousMonday(this.currentWeek);
-        this.weekDateTo = this.getNextSunday(this.currentWeek);
-    }
-
     initChangeWeekLinksVisibility(): void {
         this.changeWeekToPrevLinkVisible = new Date(this.currentWeek).getTime() >= new Date(this.harmonogram.obowiazujeOd).getTime();
         this.changeWeekToNextLinkVisible = new Date(this.currentWeek).getTime() <= new Date(this.harmonogram.obowiazujeDo).getTime();
@@ -153,19 +162,36 @@ export class WizytaPlanowanieComponent implements OnInit {
             return;
         }
 
+        // pobiera z harmonogramu pracy lekarza / specjalizacji
         let available: boolean = minute >= this.availableHours[dayIndex]['minutaOd'] && minute <= this.availableHours[dayIndex]['minutaDo'];
 
-        // todo dopisac zeby sprawdzalo z backendem czy zarezerwowany termin wizyty
-        // available = available && //
+        if (this.zaplanowaneWizytyNaTydzien) {
+            // sprawdzenie czy inny pacjent nie wybral terminu
+            const zajetyTermin: boolean = this.zaplanowaneWizytyNaTydzien
+                .filter(w => w.dayIndex === dayIndex)
+                .filter(w => minute >= w.minuteFrom)
+                .filter(w => minute < w.minuteTo).length > 0;
+
+            available = available && !zajetyTermin;
+        }
 
         return available;
     }
 
+
     getMinutesAsHours(minutes: number): string {
-        const hours: number = Math.floor(minutes / 60);
-        const mins: number = (minutes - (hours * 60));
+        const hours: number = this.getHour(minutes);
+        const mins: number = this.getMinutesForHour(minutes);
 
         return hours + ':' + ((mins < 10) ? '0' + mins : mins);
+    }
+
+    private getHour(minutes: number): number {
+        return Math.floor(minutes / 60);
+    }
+
+    private getMinutesForHour(minutes: number): number {
+        return minutes - (this.getHour(minutes) * 60);
     }
 
     onChangeWeek(prevWeek: boolean): void {
@@ -173,17 +199,19 @@ export class WizytaPlanowanieComponent implements OnInit {
         this.weekDateFrom = this.addDays(this.weekDateFrom, days);
         this.weekDateTo = this.addDays(this.weekDateTo, days);
         this.currentWeek = new Date(this.weekDateFrom);
+
+        this.loadZaplanowaneWizytyNaTydzien();
         this.initChangeWeekLinksVisibility();
     }
 
     private initMinuteCollection(): void {
         if (this.harmonogram && this.minGodzinaOd && this.maxGodzinaDo) {
-            const interval = this.harmonogram.pozycjaCollection[0].interwalCzasowyWMinutach;
+            this.interval = this.harmonogram.pozycjaCollection[0].interwalCzasowyWMinutach;
             let from: number = this.minGodzinaOd;
 
             while (from <= this.maxGodzinaDo) {
                 this.minuteCollection.push(from);
-                from = from + interval;
+                from = from + this.interval;
             }
         }
     }
@@ -225,8 +253,8 @@ export class WizytaPlanowanieComponent implements OnInit {
     }
 
     private getPreviousMonday(date: Date): Date {
-        var day = date.getDay() - 1;
-        var prevMonday;
+        let day = date.getDay() - 1;
+        let prevMonday;
 
         if (date.getDay() == 0) {
             prevMonday = new Date().setDate(date.getDate() - 7);
@@ -234,12 +262,12 @@ export class WizytaPlanowanieComponent implements OnInit {
             prevMonday = new Date().setDate(date.getDate() - day);
         }
 
-        return prevMonday;
+        return new Date(prevMonday);
     }
 
     private getNextSunday(date: Date): Date {
-        var day = date.getDay();
-        var nextSunday;
+        let day = date.getDay();
+        let nextSunday;
 
         if (date.getDay() == 7) {
             nextSunday = new Date().setDate(date.getDate() + 7);
@@ -247,7 +275,7 @@ export class WizytaPlanowanieComponent implements OnInit {
             nextSunday = new Date().setDate(date.getDate() + (7 - day));
         }
 
-        return nextSunday;
+        return new Date(nextSunday);
     }
 
     private addDays(date, days): Date {

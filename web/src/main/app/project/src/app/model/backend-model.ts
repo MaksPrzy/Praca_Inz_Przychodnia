@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 2.16.538 on 2020-01-26 21:19:20.
+// Generated using typescript-generator version 2.16.538 on 2020-03-07 21:21:32.
 
 export interface AbstractGabinetDto {
     nazwa: string;
@@ -133,18 +133,17 @@ export interface UzytkownikDto extends UserDetails {
 export interface UzytkownikRejestracjaDto extends UserDetails {
     uzytkownikRejestracja: PacjentDetailViewDto;
     telefonKomorkowy: string;
-    imie: string;
-    nazwisko: string;
+    numerDomu: AdresDto;
+    miejscowosc: AdresDto;
     ulica: AdresDto;
     kodPocztowy: AdresDto;
-    miejscowosc: AdresDto;
-    dataUrodzenia: Date;
-    numerDomu: AdresDto;
+    nazwisko: string;
     pesel: string;
+    dataUrodzenia: Date;
+    imie: string;
 }
 
 export interface ZalogowanoDto {
-    id: number;
     uzytkownik: PacjentDetailViewDto;
     token: string;
 }
@@ -167,6 +166,19 @@ export interface AbstractWizytaDto {
     dataWizytyOd: Date;
     dataWizytyDo: Date;
     rodzaj: string;
+}
+
+export interface HarmonogramZaplanowanaWizytaDto {
+    dayIndex: number;
+    minuteFrom: number;
+    minuteTo: number;
+}
+
+export interface HarmonogramZaplanowanaWizytaRequestDto {
+    dateFrom: Date;
+    dateTo: Date;
+    lekarzId: number;
+    specjalizacjaId: number;
 }
 
 export interface WizytaEditDto extends AbstractWizytaDto {
@@ -200,13 +212,13 @@ export interface GrantedAuthority extends Serializable {
 }
 
 export interface UserDetails extends Serializable {
-    password: string;
     enabled: boolean;
-    accountNonLocked: boolean;
+    password: string;
     accountNonExpired: boolean;
+    accountNonLocked: boolean;
     credentialsNonExpired: boolean;
-    username: string;
     authorities: GrantedAuthority[];
+    username: string;
 }
 
 export interface Serializable {

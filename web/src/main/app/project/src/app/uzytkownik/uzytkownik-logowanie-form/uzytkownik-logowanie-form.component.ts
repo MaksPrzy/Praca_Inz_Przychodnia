@@ -4,6 +4,7 @@ import {ZalogujDto} from "@przychodnia/model/backend-model";
 import {FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NotificationService} from "@przychodnia/service/notification/notification.service";
+import {map, switchMap} from "rxjs/operators";
 
 @Component({
     selector: 'mp-uzytkownik-logowanie-form',
@@ -27,30 +28,19 @@ export class UzytkownikLogowanieFormComponent {
         const zalogujDto: ZalogujDto = {
             username: this.loginForm.get('email').value,
             password: this.loginForm.get('haslo').value,
-
         };
 
-        this.uzytkownikService.logIn(zalogujDto).subscribe(
-            (isLoggedIn: boolean) => {
-                if (isLoggedIn) {
-                    this.notificationService.showSuccess('Zostałeś zalogowany.');
-
-                    this.activatedRoute.queryParamMap
-                        .subscribe(paramMap => {
-                            const baseUrl: string = paramMap.get('baseUrl');
-
-                            if (baseUrl) {
-                                this.router.navigateByUrl(baseUrl);
-                            } else {
-                                this.router.navigateByUrl('home');
-                            }
-                        });
-                }
-            },
-            (error: any) => {
-                this.notificationService.showError(error);
-            }
-        );
+        this.uzytkownikService.logIn(zalogujDto)
+            .pipe(
+                switchMap(() => this.activatedRoute.queryParamMap),
+                map(paramMap => paramMap.get('baseUrl')),
+            )
+            .subscribe(
+                baseUrl => {
+                    return baseUrl ? this.router.navigateByUrl(baseUrl) : this.router.navigateByUrl('home');
+                },
+                err => this.notificationService.showError(err)
+            );
     }
 
 }

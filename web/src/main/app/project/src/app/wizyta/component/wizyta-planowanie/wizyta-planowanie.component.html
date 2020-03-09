@@ -25,8 +25,7 @@
                     </tr>
                     <tr *ngFor="let minute of minuteCollection">
                         <td>{{getMinutesAsHours(minute)}}</td>
-                        <td *ngFor="let day of dayCollection; let dayIndex = index"
-                            [ngStyle]="{'background-color': isAvailableHour(dayIndex + 1, minute) ? 'light' : ''}">
+                        <td *ngFor="let day of dayCollection; let dayIndex = index">
                             <button type="button" class="btn btn-primary"
                                     *ngIf="isAvailableHour(dayIndex + 1, minute)"
                                     (click)="onZaplanujWizyte(dayIndex + 1, minute)">

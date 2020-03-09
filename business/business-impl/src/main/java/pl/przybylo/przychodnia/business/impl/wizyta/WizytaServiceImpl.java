@@ -11,9 +11,11 @@ import pl.przybylo.przychodnia.dto.wizyta.*;
 import pl.przybylo.przychodnia.mapper.wizyta.WizytaMapper;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static pl.wavesoftware.eid.utils.EidPreconditions.checkNotNull;
 
 @Service
@@ -77,13 +79,21 @@ public class WizytaServiceImpl implements WizytaService {
     }
 
     @Override
-    public List<HarmonogramZaplanowanaWizytaDto> getZaplanowanaWizytaNaTydzienList(LocalDate dateFrom, LocalDate dateTo, long lekarzId, long specjalizacjaId) {
-        checkNotNull(dateFrom, "20200213200608");
-        checkNotNull(dateTo, "20200213200613");
+    public List<HarmonogramZaplanowanaWizytaDto> getZaplanowanaWizytaNaTydzienList(LocalDate poczatekTygodnia, LocalDate koniecTygodnia,
+                                                                                   long lekarzId, long specjalizacjaId) {
+        checkNotNull(poczatekTygodnia, "20200213200608");
+        checkNotNull(koniecTygodnia, "20200213200613");
 
-        // todo
+        LocalDateTime dataWizytyOd = poczatekTygodnia.atStartOfDay();
+        LocalDateTime dataWizytyDo = koniecTygodnia.atTime(LocalTime.MAX);
 
-        return newArrayList();
+        List<Wizyta> wizytaList = wizytaRepository.findByLekarzIdAndSpecjalizacjaId(lekarzId, specjalizacjaId).stream()
+                .filter(wizyta -> !wizyta.isZakonczona())
+                .filter(wizyta -> wizyta.getDataWizytyOd().isAfter(dataWizytyOd))
+                .filter(wizyta -> wizyta.getDataWizytyDo().isBefore(dataWizytyDo))
+                .collect(Collectors.toList());
+
+        return wizytaMapper.mapToHarmonogramZaplanowaWizytaDtoList(wizytaList);
     }
 
 }

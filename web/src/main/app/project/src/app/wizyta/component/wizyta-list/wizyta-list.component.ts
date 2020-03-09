@@ -1,8 +1,8 @@
 import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute, ParamMap} from "@angular/router";
 import {WizytaService} from "@przychodnia/service/wizyta.service";
-import {PacjentDetailViewDto, WizytaViewDto} from "@przychodnia/model/backend-model";
+import {WizytaViewDto} from "@przychodnia/model/backend-model";
 import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
+import {Observable} from "rxjs";
 
 @Component({
     selector: 'mp-wizyta-list',
@@ -11,23 +11,16 @@ import {UzytkownikService} from "@przychodnia/service/uzytkownik.service";
 })
 export class WizytaListComponent implements OnInit {
 
-    wizytaCollection: Array<WizytaViewDto>;
-    uzytkownik: PacjentDetailViewDto
+    wizytaCollection$: Observable<Array<WizytaViewDto>>;
 
-    constructor(private activatedRoute: ActivatedRoute,
-                private wizytaService: WizytaService,
+    constructor(private wizytaService: WizytaService,
                 private uzytkownikService: UzytkownikService) {
     }
 
     ngOnInit(): void {
-        this.uzytkownik = this.uzytkownikService.getUzytkownik();
-
-        this.activatedRoute.paramMap
-            .subscribe((params: ParamMap) => {
-                this.wizytaService.getWizytaList(this.uzytkownik.id).subscribe((wizytaCollectionResponse: Array<WizytaViewDto>) => {
-                    this.wizytaCollection = wizytaCollectionResponse;
-                });
-            });
+        this.wizytaCollection$ = this.wizytaService.getWizytaList(
+            this.uzytkownikService.user.id
+        );
     }
 
 }

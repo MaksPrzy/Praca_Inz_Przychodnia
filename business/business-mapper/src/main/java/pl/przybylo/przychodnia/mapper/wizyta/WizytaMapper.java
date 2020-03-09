@@ -1,9 +1,8 @@
 package pl.przybylo.przychodnia.mapper.wizyta;
 
-import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 import pl.przybylo.przychodnia.commons.exceptions.GabinetNotFoundException;
 import pl.przybylo.przychodnia.commons.exceptions.LekarzNotFoundException;
 import pl.przybylo.przychodnia.commons.exceptions.PacjentNotFoundException;
@@ -18,18 +17,18 @@ import pl.przybylo.przychodnia.domain.repository.GabinetRepository;
 import pl.przybylo.przychodnia.domain.repository.LekarzRepository;
 import pl.przybylo.przychodnia.domain.repository.PacjentRepository;
 import pl.przybylo.przychodnia.domain.repository.SpecjalizacjaRepository;
-import pl.przybylo.przychodnia.dto.wizyta.WizytaEditDto;
-import pl.przybylo.przychodnia.dto.wizyta.WizytaViewDto;
-import pl.przybylo.przychodnia.dto.wizyta.ZakonczWizyteDto;
-import pl.przybylo.przychodnia.dto.wizyta.ZaplanujWizyteDto;
+import pl.przybylo.przychodnia.dto.wizyta.*;
 import pl.przybylo.przychodnia.mapper.GabinetMapper;
 import pl.przybylo.przychodnia.mapper.LekarzMapper;
 import pl.przybylo.przychodnia.mapper.PacjentMapper;
 import pl.przybylo.przychodnia.mapper.SpecjalizacjaMapper;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
+import java.util.function.Function;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static java.util.Objects.isNull;
 import static java.util.stream.Collectors.toList;
 import static pl.wavesoftware.eid.utils.EidPreconditions.checkNotNull;
@@ -51,7 +50,7 @@ public class WizytaMapper {
 
     public List<WizytaViewDto> map(List<Wizyta> wizytaList) {
         if (CollectionUtils.isEmpty(wizytaList)) {
-            return Lists.newArrayList();
+            return newArrayList();
         }
 
         return wizytaList.stream()
@@ -118,6 +117,31 @@ public class WizytaMapper {
     public void map(Wizyta wizyta, ZakonczWizyteDto zakonczWizyteDto) {
         wizyta.setRozpoznanie(new Rozpoznanie(zakonczWizyteDto.getKodIcd10(), zakonczWizyteDto.getUwagi()));
         wizyta.setFaktycznaDataWizytyDo(LocalDateTime.now());
+    }
+
+    public List<HarmonogramZaplanowanaWizytaDto> mapToHarmonogramZaplanowaWizytaDtoList(List<Wizyta> wizytaList) {
+        if (CollectionUtils.isEmpty(wizytaList)) {
+            return newArrayList();
+        }
+
+        return wizytaList.stream()
+                .map(this::mapToHarmonogramZaplanowaWizytaDto)
+                .collect(toList());
+    }
+
+    private HarmonogramZaplanowanaWizytaDto mapToHarmonogramZaplanowaWizytaDto(Wizyta wizyta) {
+        if (isNull(wizyta)) {
+            return null;
+        }
+
+        LocalDateTime dataWizytyOd = wizyta.getDataWizytyOd();
+        LocalDateTime dataWizytyDo = wizyta.getDataWizytyDo();
+
+        Function<LocalTime, Integer> toMinutes = time -> time.getHour() * 60 + time.getMinute();
+        int minutesFrom = toMinutes.apply(dataWizytyOd.toLocalTime());
+        int minutesTo = toMinutes.apply(dataWizytyDo.toLocalTime());
+
+        return new HarmonogramZaplanowanaWizytaDto(dataWizytyOd.getDayOfWeek().getValue(), minutesFrom, minutesTo);
     }
 
     private Pacjent getPacjent(Long pacjentId) {
